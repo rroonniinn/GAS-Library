@@ -1,0 +1,57 @@
+{
+	"env": {
+		"browser": true,
+		"googleappsscript/googleappsscript": true
+	},
+	"plugins": [
+		"googleappsscript"
+	],
+	"extends": [
+		"wesbos"
+	],
+	"rules": {
+		"no-tabs": "off",
+		"indent": ["error", "tab"],
+		"no-nested-ternary": "off",
+		"no-plusplus": ["warn", {
+			"allowForLoopAfterthoughts": true
+		}],
+		"max-lines": ["warn", {
+			"max": 200
+		}],
+		"max-len": ["warn", {
+			"code": 75,
+			"comments": 75,
+			"tabWidth": 4,
+			"ignoreUrls": true,
+			"ignoreComments": false,
+			"ignoreStrings": true,
+			"ignoreTemplateLiterals": true
+		}],
+		"max-lines-per-function": ["warn", {
+			"max": 50,
+			"skipBlankLines": true
+		}],
+		"no-unused-vars": ["warn", {
+			"varsIgnorePattern": "^[A-Z]|^_|onOpen"
+		}],
+		"complexity": ["warn", 5],
+		"max-nested-callbacks": ["warn", 2],
+		"max-depth": ["warn", 3],
+		"no-param-reassign": "warn",
+		"max-params": ["warn", 2],
+		"no-irregular-whitespace": ["error", {
+			"skipComments": true
+		}],
+		"prettier/prettier": [
+			"error",
+			{
+				"trailingComma": "es5",
+				"singleQuote": true,
+				"printWidth": 75,
+				"tabWidth": 4,
+				"useTabs": true
+			}
+		]
+	}
+}

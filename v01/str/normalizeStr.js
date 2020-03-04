@@ -8,6 +8,7 @@ const norm = str => str.replace(/ /g, '').toLowerCase();
  * @returns {string} String bez spacji napisany małymi literami
  */
 
-const normalizeStr = val => (typeof val !== 'string' ? norm(String(val)) : norm(val));
+const normalizeStr = val =>
+	typeof val !== 'string' ? norm(String(val)) : norm(val);
 
 export { normalizeStr };

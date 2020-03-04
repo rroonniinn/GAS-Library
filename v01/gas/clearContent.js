@@ -8,6 +8,7 @@ import { getSheet } from './getSheet';
  * @param {String} range Zakres danych do usunięcia
  * @param {String} fileId Opcjonalnie id pliku. Jeśli nie podane,
  * aplikuje się lokalnie (bound script).
+ * @returns {Object} Obiekt arkusza
  */
 const clearContent = (sheet, range, fileId = null) =>
 	getSheet(sheet, fileId)

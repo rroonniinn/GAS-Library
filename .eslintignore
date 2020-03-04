@@ -1,0 +1,4 @@
+# Ignore built files except build/index.js
+_dist_Tmp/*
+_dist_Gas/*
+_dist_Browser/*
