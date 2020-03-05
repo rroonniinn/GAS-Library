@@ -81,6 +81,20 @@ const getRangeRelative = () => {
 	const b15 = 'J10';
 	const b15Res = 'J10:J';
 
+	// Dołączenie restrykcji zakresu
+	const b16 = 'B';
+	const hor16 = 3;
+	const ver16 = 3;
+	const b16Res = 'B3:D5';
+
+	const b17 = 'B';
+	const ver17 = 3;
+	const b17Res = 'B3:J5';
+
+	const b18 = 'B';
+	const hor18 = 3;
+	const b18Res = 'B3:D';
+
 	QUnit.test('Checking "getRangeRelative" function ', () => {
 		equal(fn(sa, a1).range, a1Res, `${a1} - powinno być ${a1Res}`); // 1
 		equal(fn(sa, a2).range, a2Res, `${a2} - powinno być ${a2Res}`); // 2
@@ -114,6 +128,22 @@ const getRangeRelative = () => {
 		equal(fn(sb, b13).range, b13Res, `${b13} - powinno być ${b13Res}`); // 27
 		equal(fn(sb, b14).range, b14Res, `${b14} - powinno być ${b14Res}`); // 28
 		equal(fn(sb, b15).range, b15Res, `${b15} - powinno być ${b15Res}`); // 29
+
+		equal(
+			fn(sb, b16, hor16, ver16).range,
+			b16Res,
+			`${b16} - powinno być ${b16Res}`
+		); // 30
+		equal(
+			fn(sb, b17, null, ver17).range,
+			b17Res,
+			`${b17} - powinno być ${b17Res}`
+		); // 31
+		equal(
+			fn(sb, b18, hor18).range,
+			b18Res,
+			`${b18} - powinno być ${b18Res}`
+		); // 32
 	});
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 import { getRangeRelative } from './getRangeRelative';
 
 /**
@@ -20,11 +21,18 @@ import { getRangeRelative } from './getRangeRelative';
  *
  * @param {Object} sheetObj
  * @param {String|Number} range
+ * @param {Number} restHor
+ * @param {Number} restVer
  * @return {Object} sheetObj
  */
 
-const clearContent = (sheetObj, range) => {
-	getRangeRelative(sheetObj, range).rangeObj.clearContent();
+const clearContent = (sheetObj, range, restHor = null, restVer = null) => {
+	getRangeRelative(
+		sheetObj,
+		range,
+		restHor,
+		restVer
+	).rangeObj.clearContent();
 	return sheetObj;
 };
 
