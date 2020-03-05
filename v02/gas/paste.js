@@ -4,6 +4,8 @@
 import { getSheet } from './getSheet';
 // import { letterToColumn } from './letterToColumn';
 import { columnToLetter } from './columnToLetter';
+import { clearContent } from './clearContent';
+import { removeFilter } from './removeFilter';
 
 /**
  * Wkleja przekazaną tablicę danych (2D) w określone miejsce przekazanego
@@ -57,8 +59,8 @@ const checkTypes = (arr, str) => {
 		throw new Error('Not valid type was paste as "data" into "paste"');
 	if (!Array.isArray(arr[0]))
 		throw new Error('Only 2D arrays are alowed to "paste"');
-	if (typeof str !== 'string')
-		throw new Error('Range should be string in "paste"');
+	if (typeof str !== 'string' && typeof str !== 'number')
+		throw new Error('Range should be string or number in "paste"');
 };
 
 const newPaste = (
@@ -67,9 +69,9 @@ const newPaste = (
 	data,
 	opt = {
 		fileId: null, // DONE
-		clearContent: null, // before
-		removeFilers: 1, // before
-		sortCol: { col: null, order: 'asc' }, // before
+		notClearContent: null, // before / DONE
+		notRemoveFilers: null, // before / DONE
+		sortCol: { col: null, order: 'asc' }, // before / DONE partly
 		removeEmptyRowsAndCols: 1,
 	}
 ) => {
@@ -83,9 +85,25 @@ const newPaste = (
 				: getSheet(sheet);
 				/* eslint-enable */
 
-
-
+	// Jeśli nie ma co wklejać zwraca nie tknięty arkusz
 	if (data.length === 0) return sheetObj;
+
+	if (!opt.notClearContent) {
+		clearContent(sheetObj, range);
+	}
+
+	if (!opt.notRemoveFilers) {
+		removeFilter(sheetObj);
+	}
+
+	if (opt.sortCol.col) {
+		// TODO - dodać sprawdzanie typu dla col i order
+		// TODO - order można by też podawać jako kolumne / str
+		const dir = opt.sortCol.order === 'asc';
+		sheetObj.sort(opt.sortCol.col, dir);
+	}
+
+	// Rozkminka range
 };
 
 const paste = (sheet, col, row, arr) => {

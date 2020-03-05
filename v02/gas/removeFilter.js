@@ -11,6 +11,7 @@ import { getSheet } from './getSheet';
  * @param {string|Object} sheet Nazwa arkusza
  * @param {string} [fileId] Id pliku
  * @returns {Object} Obiekt arkusza
+
  */
 
 const removeFilter = (sheet, fileId) => {

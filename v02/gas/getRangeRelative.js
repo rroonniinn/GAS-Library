@@ -25,7 +25,6 @@ import { getLastNotEmptyColInRow } from './getLastNotEmptyColInRow';
 
 const getRangeRelative = (sheetObj, strRange) => {
 	const opt = getRangeType(strRange);
-	console.log('opt: ', opt);
 
 	let range;
 
@@ -37,10 +36,6 @@ const getRangeRelative = (sheetObj, strRange) => {
 	if (opt === 'let') {
 		const maxColsLet = columnToLetter(sheetObj.getMaxColumns());
 		const starRow = getLastNotEmptyRowInCol(sheetObj, strRange) + 1;
-
-		console.log('strRange: ', strRange);
-		console.log('starRow: ', starRow);
-
 		range = `${strRange}${starRow}:${maxColsLet}`;
 	}
 
