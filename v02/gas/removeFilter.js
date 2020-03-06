@@ -1,31 +1,24 @@
-import { getSheet } from './getSheet';
+import { isSheet } from './isSheet';
 
 /**
  * Usuwa wszelkie filtry we wskazanym arkuszu
- * Jako arkusz przyjmuje albo string z nazwą arkusza,
- * albo obiekt arkusza. Jeśli drugi parametr nie jest podany
- * - pobiera arkusz z bieżącego pliku (bound)
+ * Jako arkusz przyjmuje obiekt arkusza.
  *
- * @memberof Lib_Gas
- *
- * @param {string|Object} sheet Nazwa arkusza
+ * @param {Object} sheetObj Nazwa arkusza
  * @param {string} [fileId] Id pliku
  * @returns {Object} Obiekt arkusza
-
  */
 
-const removeFilter = (sheet, fileId) => {
-	const sheetToGo = (() => {
-		if (typeof sheet === 'string') {
-			return getSheet(sheet, fileId);
-		}
-		return sheet;
-	})();
+const removeFilter = sheetObj => {
+	if (!isSheet(sheetObj))
+		throw new TypeError(
+			'Not Sheet Object was pased into "removeFilter"'
+		);
 
-	const filter = sheetToGo.getDataRange().getFilter();
+	const filter = sheetObj.getDataRange().getFilter();
 	if (filter) filter.remove();
 
-	return sheetToGo;
+	return sheetObj;
 };
 
 export { removeFilter };

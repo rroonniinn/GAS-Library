@@ -10,9 +10,10 @@ import { getRangeRelative } from './getRangeRelative';
 import { removeEmptyRowCol } from './removeEmptyRowCol';
 import { getFirstCellFromString } from './getFirstCellFromString';
 import { getColAndRowFromCellAsNum } from './getColAndRowFromCellAsNum';
+import { isSheet } from './isSheet';
 
 const typeGuard = (sheetObj, range, arr, opt) => {
-	if (!sheetObj.activate)
+	if (!isSheet(sheetObj))
 		throw new TypeError(
 			'Not valid Sheet object was paste into "paste"'
 		);
