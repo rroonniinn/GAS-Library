@@ -24,21 +24,21 @@ const clearContent = () => {
 	const a1 = 'A'; // -> 'A2:J'
 	const a2 = 'B'; // -> 'B3:J'
 	const a3 = 'I'; // -> 'I10:J'
-	const a4 = 'J'; // -> 'J11:J' - Został dodany dodatkowy wiersz na dole (11 - ty)
+	const a4 = 'J'; // -> 'J11:J' - zakres poza arkuszem - Nic nie robi
 	const a5 = 'C'; // -> 'C1:J'
 	const a6 = 1; // -> 'B1:10'
 	const a7 = 2; // -> 'C2:10'
 	const a8 = 3; // -> 'A3:10'
 	const a9 = 9; // -> 'J9:10'
-	const a10 = 10; // -> 'K10:10' - Została dodana dodatkowa kolumna (K)
+	const a10 = 10; // -> 'K10:10' - zakres poza arkuszem - Nic nie robi
 	const a11 = 'B1'; // -> 'B1:J'
 	const a12 = 'C4'; // -> 'C4:J'
 	const a13 = 'A1'; // -> 'A1:J'
 	const a14 = 'E10'; // -> 'E10:J'
 	const a15 = 'J10'; // -> 'J10:J'
-	const a16 = 'K11'; // zakres poza arkuszem -> 'K11:K' - Dodała się kolumna (K) i wiers (11)
+	const a16 = 'K11'; // zakres poza arkuszem -> 'K11:K' - Nic nie robi
 	const a17 = 'C3:E5'; // -> 'C3:E5'
-	const a18 = 'H8:K11'; // zakres poza arkuszem -> 'H8:K11' ? -  Dodała się kolumna (K) i wiers (11)
+	const a18 = 'H8:K11'; // cały zakres poza arkuszem, ale lewy górny róg się mieści -> 'H8:K11' -  Dodała się kolumna (K) i wiers (11)
 
 	fn(s('a1'), a1).setTabColor('red');
 	fn(s('a2'), a2).setTabColor('red');
