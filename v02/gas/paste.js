@@ -8,76 +8,78 @@ import { sortColumn } from './sortColumn';
 import { removeFilter } from './removeFilter';
 import { getRangeRelative } from './getRangeRelative';
 import { removeEmptyRowCol } from './removeEmptyRowCol';
+import { getFirstCellFromString } from './getFirstCellFromString';
+import { getColAndRowFromCellAsNum } from './getColAndRowFromCellAsNum';
 
-/**
- * Wkleja przekazaną tablicę danych (2D) w określone miejsce przekazanego
- * arkusza. Jako sheet przyjmuje zarówno string (wtedy pobiera arkusz
- * z bieżącego pliku - bound). Przy przekazaniu sheet jako object
- * pochodzenie pliku już nie ma znaczenia
- * @memberof Lib_Gas
- *
- * @param {string|object} sheet Nazwa arkusza lub obiekt arkusza
- * @param {string} col Lewa kolumna zakresu - string np. 'A'
- * @param {number} row Wiersz lewego górnego zakresu do wklejenia
- * @param {arrow[][]} arr Tablica 2D z danymi
- */
+const typeGuard = (sheetObj, range, arr, opt) => {
+	if (!sheetObj.activate)
+		throw new TypeError(
+			'Not valid Sheet object was paste into "paste"'
+		);
 
-/**
- * Trzy możliwe opcje userRange (przykładowy zakres arkusza A:D20)
- * 'A' - zakres zaczyna się od ostatniego pustego wiersza kolumny A,
- * kończy się na ostatniej kolumnie. Np. A3:D
- * '1' - zakres zaczyna się od ostatniej pustej kolumny wiersza 1,
- * kończy się na ostatnim wierszu. Np. C1:D
- * 'A1' - zakres zaczyna się w A1, kończy na ostatnim wierszu i kolumnie
- * Np. A1:D20
- *
- * @param {*} sheetObj
- * @param {*} userRange
- */
-
-const checkTypes = (arr, str) => {
 	if (!Array.isArray(arr))
-		throw new Error('Not valid type was paste as "data" into "paste"');
+		throw new TypeError(
+			'Not valid type was paste as "data" into "paste"'
+		);
+
 	if (!Array.isArray(arr[0]))
-		throw new Error('Only 2D arrays are alowed to "paste"');
-	if (typeof str !== 'string' && typeof str !== 'number')
-		throw new Error('Range should be string or number in "paste"');
-	// Dopisać sprawdzenie typów dla opt
+		throw new TypeError('Only 2D arrays are alowed to "paste"');
+
+	if (typeof range !== 'string' && typeof range !== 'number')
+		throw new TypeError('Range should be string or number in "paste"');
+
+	if (opt.restrictCleanup) {
+		if (!['down', 'right', 'preserve'].includes(opt.restrictCleanup))
+			throw new TypeError(
+				'Wrong keyword passed as "restrictCleanup" to "paste"'
+			);
+	}
 };
 
 const getRange = (status, sheetObj, userRange, restHor, restVer) => {
-	if (status === 'no' || status === 'belowAndOnTheRight') {
-		/* Domyślna wartość - usuwa wszystko na prawo i w dół
-		od komórki startowej */
-		return getRangeRelative(sheetObj, userRange);
-	}
-	if (status === 'below') {
-		/* Usuwa tylko dane w doł od komórki startowej
-		w kolumach w których znajdują się wklejane dane.
-		Przydatna do wklejania danych ciągnących się w dół
-		w arkuszach w których znajują się inne dane po prawej */
+	/* Usuwa tylko dane w doł od komórki startowej
+	w kolumach w których znajdują się wklejane dane.
+	Przydatna do wklejania danych ciągnących się w dół
+	w arkuszach w których znajują się inne dane po prawej */
+	if (status === 'down') {
 		return getRangeRelative(sheetObj, userRange, restHor);
 	}
-	if (status === 'onTheRight') {
-		/* Usuwa tylko dane znajdujące się prawej stronie
-		komórki startowej i tylko w wierszach zajmowanych przez nowe
-		dane. Przydatne do wklejania "szerokich, ale nie wysokich"
-		danych ciągnących się w poziomie (rzadko stosowane) */
+
+	/* Usuwa tylko dane znajdujące się prawej stronie
+	komórki startowej i tylko w wierszach zajmowanych przez nowe
+	dane. Przydatne do wklejania "szerokich, ale nie wysokich"
+	danych ciągnących się w poziomie (rzadko stosowane) */
+	if (status === 'right') {
 		return getRangeRelative(sheetObj, userRange, null, restVer);
 	}
+
+	/* Domyślna wartość - od górnej lewej komórki do końca
+	w prawo i w dół  */
+	return getRangeRelative(sheetObj, userRange);
 };
 
 const defaults = {
-	clearExistingContent: 'belowAndOnTheRight', // 'below', 'onTheRight', 'no'
-	notRemoveFilers: null,
-	sortCol: { col: null, order: 'asc' },
-	removeEmptyRowsAndCols: true, // Aplikowane po wklejeniu
+	/* Usuwanie filtrów */
+	notRemoveFilers: false,
+	/* Sortowanie kolumn numer (1) lub string ('A') */
+	sort: false,
+	/* Kolejność sortowania. Możliwe: 'az', 'za', 'asc', 'des' */
+	sortOrder: false,
+	/** Usuwanie istniejących przed wklejeniem treści:
+	 * false - usuwa wszystko na prawo i w doł od lewej komórki
+	 * down - usuwa wszystko w dół. Po prawej tylko na szerokość danych
+	 * right - usuwa wszystko po prawej. W dół tylko do wysokości danych
+	 * preserve - nic nie usuwa
+	 */
+	restrictCleanup: false,
+	/* Usuwanie pustych kolumn i wierszy z arkusza (po wklejeniu) */
+	notRemoveEmptys: false,
 };
 
 /**
  * Wkleja przekazaną tablicę danych w określone miejsce przekazanego
  * arkusza.
- * Przyjmując 3 możliwe zapisy zakresu (określające lewy górny róg
+ * Przyjmując 4 możliwe zapisy zakresu (określające lewy górny róg
  * gdzie mają być wklejone dane):
  * 1) Identyfikator kolumny np.'A' - zakres zaczyna się od ostatniego
  * pustego wiersza kolumny A,
@@ -85,6 +87,9 @@ const defaults = {
  * pustej kolumny wiersza 1,
  * 3) Pełny adres komórki - np. A1 - zakres zaczyna się w A1 bez względu
  * na znajdujące się już w arkuszu dane).
+ * 4) Przekazanie całego zakresu (np. A1:B2) działa tak samo jak wyżej.
+ * Tylko pierwsza komórka brana jest pod uwagę (BUG - nie czyści wtedy
+ * istniejących danych)
  *
  * Domyślnie przed wklejeniem danych usuwa treści już istniejące
  * poniżej oraz po prawej lewego górnego rogu obszaru do wklejenia
@@ -106,21 +111,25 @@ const defaults = {
 
 const paste = (sheetObj, userRange, data, opt = defaults) => {
 	// Sprawdzenie typów
-	checkTypes(data, userRange);
+	typeGuard(sheetObj, userRange, data, opt);
 
 	// Jeśli nie ma co wklejać zwraca nie tknięty arkusz
 	if (data.length === 0) return sheetObj;
 
-	// Upraszczamy skałdnię
-	const clearStatus = opt.clearExistingContent;
+	/* ---- Właściwa funkcja ----------------------------- */
+
+	// Upraszczamy składnię
 	const dataWidth = data[0].length;
 	const dataHeight = data.length;
 
 	// Pobierz zakres do pracy (obiekt)
-	const rangeObj = getRange(
-		clearStatus,
+	const { range, rangeObj } = getRange(
+		opt.restrictCleanup,
 		sheetObj,
-		userRange,
+		// Na wypadek przekazania pełnego zakresu
+		typeof userRange === 'string' && userRange.includes(':')
+			? getFirstCellFromString(userRange)
+			: userRange,
 		dataWidth,
 		dataHeight
 	);
@@ -131,27 +140,37 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 	}
 
 	// Sortujemy
-	if (opt.sortCol.col) {
-		sortColumn(sheetObj, opt.sortCol.col, opt.sortCol.order);
+	if (opt.sort) {
+		sortColumn(sheetObj, opt.sort, opt.sortOrder || 'az');
 	}
 
 	// Usuwamy kontent
-	if (clearStatus !== 'no') {
-		rangeObj.rangeObj.clearContent();
+	if (opt.restrictCleanup !== 'preserve') {
+		/* Sprawdzamy czy lewa komórka zakresu zawiera się w istniejącycm
+		arkuszu - dla komórki wychodzącej poza nie ma potrzeby
+		czyścić danych */
+		const { col, row } = getColAndRowFromCellAsNum(range);
+
+		if (
+			sheetObj.getMaxColumns() >= col &&
+			sheetObj.getMaxRows() >= row
+		) {
+			rangeObj.clearContent();
+		}
 	}
 
 	// Wklejka
 	sheetObj
 		.getRange(
-			Number(/[0-9]+/.exec(rangeObj.range)[0]),
-			letterToColumn(/[A-Z]+/.exec(rangeObj.range)[0]),
+			Number(/[0-9]+/.exec(range)[0]),
+			letterToColumn(/[A-Z]+/.exec(range)[0]),
 			dataHeight,
 			dataWidth
 		)
 		.setValues(data);
 
 	// Usuwa puste kolumny i wiersze
-	if (opt.removeEmptyRowsAndCols) {
+	if (!opt.notRemoveEmptyRowsAndCols) {
 		removeEmptyRowCol(sheetObj);
 	}
 

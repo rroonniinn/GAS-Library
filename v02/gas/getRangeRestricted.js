@@ -1,6 +1,5 @@
 /* eslint-disable max-params */
 import { pipe } from '../fp/pipe';
-import { tap } from '../fp/tap';
 import { letterToColumn } from './letterToColumn';
 import { columnToLetter } from './columnToLetter';
 
@@ -24,14 +23,12 @@ const extendedColLetter = (startLetter, extendToRight) => {
 const getRangeRestricted = (range, restHor = null, restVer = null) =>
 	pipe(
 		() => /(([A-Z]+)([0-9]+?)):(([A-Z]+)?([0-9]+)?)/.exec(range),
-		tap(v => console.log('1. Regex: ', v)),
 		([, , sChar, sNum, , eChar, eNum]) => ({
 			startLet: sChar,
 			startNum: Number(sNum),
 			endLet: eChar,
 			endNum: Number(eNum),
 		}),
-		tap(v => console.log('2. Object: ', v)),
 		({ startLet, startNum, endLet, endNum }) => ({
 			startLet,
 			startNum,

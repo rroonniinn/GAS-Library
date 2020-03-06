@@ -1,5 +1,6 @@
 /* eslint-disable max-params */
 import { getRangeRelative } from './getRangeRelative';
+import { getColAndRowFromCellAsNum } from './getColAndRowFromCellAsNum';
 
 /**
  * Usuwa treść zachowując formatowanie w przekazanym
@@ -27,12 +28,23 @@ import { getRangeRelative } from './getRangeRelative';
  */
 
 const clearContent = (sheetObj, range, restHor = null, restVer = null) => {
-	getRangeRelative(
+	const expectedRange = getRangeRelative(
 		sheetObj,
 		range,
 		restHor,
 		restVer
-	).rangeObj.clearContent();
+	);
+
+	/* Weryfikacja czy wynikowy zakres nie wychodzi poza ramy
+	przekazanego arkusza. Jeśli tak się dzieje - nie musi nic czyścić
+	*/
+
+	const { col, row } = getColAndRowFromCellAsNum(expectedRange.range);
+
+	if (sheetObj.getMaxColumns() >= col && sheetObj.getMaxRows() >= row) {
+		expectedRange.rangeObj.clearContent();
+	}
+
 	return sheetObj;
 };
 
