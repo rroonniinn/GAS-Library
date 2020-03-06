@@ -170,7 +170,7 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 		.setValues(data);
 
 	// Usuwa puste kolumny i wiersze
-	if (!opt.notRemoveEmptyRowsAndCols) {
+	if (!opt.notRemoveEmptys) {
 		removeEmptyRowCol(sheetObj);
 	}
 
