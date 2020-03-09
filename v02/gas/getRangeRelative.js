@@ -1,12 +1,13 @@
 /* eslint-disable max-params */
 /* eslint-disable complexity */
 
-import { columnToLetter } from './columnToLetter';
-import { getRangeType } from './getRangeType';
-import { getRangeRestricted } from './getRangeRestricted';
+import { disp } from '../../v01/gas/disp';
 
-import { getLastNotEmptyRowInCol } from './getLastNotEmptyRowInCol';
+import { columnToLetter } from './columnToLetter';
 import { getLastNotEmptyColInRow } from './getLastNotEmptyColInRow';
+import { getLastNotEmptyRowInCol } from './getLastNotEmptyRowInCol';
+import { getRangeRestricted } from './getRangeRestricted';
+import { getRangeType } from './getRangeType';
 
 /**
  * Przyjmując 4 możliwe zapisy zakresu, zwraca m.in relatywny zakres

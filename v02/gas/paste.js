@@ -3,15 +3,15 @@
 /* eslint-disable complexity */
 /* eslint-disable max-params */
 
-import { letterToColumn } from './letterToColumn';
-import { sortColumn } from './sortColumn';
-import { removeFilter } from './removeFilter';
-import { getRangeRelative } from './getRangeRelative';
-import { removeEmptyRowCol } from './removeEmptyRowCol';
-import { getFirstCellFromString } from './getFirstCellFromString';
 import { getColAndRowFromCellAsNum } from './getColAndRowFromCellAsNum';
-import { isSheet } from './isSheet';
+import { getFirstCellFromString } from './getFirstCellFromString';
+import { getRangeRelative } from './getRangeRelative';
 import { isArray2d } from './isArray2d';
+import { isSheet } from './isSheet';
+import { letterToColumn } from './letterToColumn';
+import { removeEmptyRowCol } from './removeEmptyRowCol';
+import { removeFilter } from './removeFilter';
+import { sortColumn } from './sortColumn';
 
 const typeGuard = (sheetObj, range, arr, opt) => {
 	if (!isSheet(sheetObj))
@@ -95,7 +95,7 @@ const defaults = {
  * Domyśline po wklejeniu usuwa puste kolumny (po prawej)
  * i wiersze (poniżej)
  *
- * Funkcja przujmuje opcjonalny obiekt z dalszymi ustawieniami
+ * Funkcja przyjmuje opcjonalny obiekt z dalszymi ustawieniami
  *
  * @param {Object} sheetObj Obiekt arkusza
  * @param {String|Number} userRange Np. 'A', 1, '1', 'A1', 'A1:B2'

@@ -1,7 +1,7 @@
 /* global QUnit, equal */
 
-import { getLastNotEmptyRowInCol as fn } from '../getLastNotEmptyRowInCol';
 import { getIdFromUrl } from '../getIdFromUrl';
+import { getLastNotEmptyRowInCol as fn } from '../getLastNotEmptyRowInCol';
 import { getSheet } from '../getSheet';
 
 const url =
@@ -36,6 +36,8 @@ const getLastNotEmptyRowInCol = () => {
 	const lRes = 10;
 	const m = 'M';
 	const mRes = 1;
+	const n = 'N';
+	const nRes = 3;
 
 	QUnit.test('Checking "getLastNotEmptyRowInCol" function ', () => {
 		equal(fn(s, c), cRes, `${c} - powinno być ${cRes}`); // 1
@@ -49,6 +51,7 @@ const getLastNotEmptyRowInCol = () => {
 		equal(fn(s, k), kRes, `${k} - powinno być ${kRes}`); // 9
 		equal(fn(s, l), lRes, `${l} - powinno być ${lRes}`); // 10
 		equal(fn(s, m), mRes, `${m} - powinno być ${mRes}`); // 11
+		equal(fn(s, n), nRes, `${n} - powinno być ${nRes}`); // 12
 	});
 };
 

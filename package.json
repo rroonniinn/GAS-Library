@@ -1,5 +1,5 @@
 {
-	"name": "gas-js-lib",
+	"name": "gulp-tutorial",
 	"version": "1.0.0",
 	"description": "Config files for ESNext and GAS",
 	"main": "index.js",
@@ -30,7 +30,7 @@
 		"del": "^5.1.0",
 		"eslint": "^6.4.0",
 		"eslint-config-airbnb": "^18.0.1",
-		"eslint-config-prettier": "^6.3.0",
+		"eslint-config-prettier": "^6.10.0",
 		"eslint-config-wesbos": "0.0.19",
 		"eslint-plugin-googleappsscript": "^1.0.3",
 		"eslint-plugin-html": "^6.0.0",

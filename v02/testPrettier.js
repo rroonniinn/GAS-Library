@@ -1,8 +1,17 @@
-import { tail } from '../arr/tail';
-import { pipe } from '../fp/pipe';
+import { tail } from '../v01/arr/tail';
+import { getSheetFp as getSheet } from '../v01/gas/getSheet';
+import { getValues } from '../v01/gas/getValues';
 
-import { getSheetFp as getSheet } from './getSheet';
-import { getValues } from './getValues';
+import { pipe } from './fp/pipe';
+
+pipe(
+	() => console.log,
+	v => v
+);
+
+pipe(getValues, tail, () => console.log, tail, tail);
+
+// --import { tail } from '../arr/tail';
 
 /**
  * Pobiera wszystkie dane ze wskazanego arkusza usuwając nagłowek.
@@ -16,10 +25,6 @@ import { getValues } from './getValues';
  */
 
 const getTableDataNoHeader = (sheetName, fileId) =>
-	pipe(
-		getSheet(sheetName, fileId),
-		getValues,
-		tail
-	)();
+	pipe(getSheet(sheetName, fileId), getValues, tail)();
 
 export { getTableDataNoHeader };
