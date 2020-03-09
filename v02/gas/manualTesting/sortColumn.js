@@ -16,8 +16,9 @@ import { getIdFromUrl } from '../getIdFromUrl';
 const url =
 	'https://docs.google.com/spreadsheets/d/1I7JCxsEJKvdPsoI_5MxvYhRWKoJSRgHYzAe73xNUrEM/edit#gid=853409013';
 const id = getIdFromUrl(url);
-const file = SpreadsheetApp.openById(id);
-const s = sheetName => file.getSheetByName(sheetName);
+// const file = SpreadsheetApp.openById(id);
+const s = sheetName =>
+	SpreadsheetApp.openById(id).getSheetByName(sheetName);
 
 const sheetNoHeader = s('a');
 const sheetHeader = s('b');

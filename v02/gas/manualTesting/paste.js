@@ -5,10 +5,7 @@ import { getIdFromUrl } from '../getIdFromUrl';
  * Tego nie sprawdzam przez QUnit, bo za dużo roboty
  * z setupem testu. Te testy należy wykonać manualnie.
  *
- *
- *
  * Plik z testem jest tu: https://docs.google.com/spreadsheets/d/1I7JCxsEJKvdPsoI_5MxvYhRWKoJSRgHYzAe73xNUrEM/edit#gid=853409013
- * Stan starowy pliku w histori zmian: 'Przygotowanie do testu'
  */
 
 const url =
@@ -39,10 +36,6 @@ const optB = {
 const optC = {
 	sort: 'B',
 };
-
-// const optD = { Error
-// 	sort: '1',
-// };
 
 const optE = {
 	sort: 'A',

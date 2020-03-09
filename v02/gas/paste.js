@@ -11,23 +11,17 @@ import { removeEmptyRowCol } from './removeEmptyRowCol';
 import { getFirstCellFromString } from './getFirstCellFromString';
 import { getColAndRowFromCellAsNum } from './getColAndRowFromCellAsNum';
 import { isSheet } from './isSheet';
+import { isArray2d } from './isArray2d';
 
 const typeGuard = (sheetObj, range, arr, opt) => {
 	if (!isSheet(sheetObj))
-		throw new TypeError(
-			'Not valid Sheet object was paste into "paste"'
-		);
-
-	if (!Array.isArray(arr))
-		throw new TypeError(
-			'Not valid type was paste as "data" into "paste"'
-		);
-
-	if (!Array.isArray(arr[0]))
-		throw new TypeError('Only 2D arrays are alowed to "paste"');
+		throw new TypeError('Only Sheet objecta are alowed in "paste"');
 
 	if (typeof range !== 'string' && typeof range !== 'number')
 		throw new TypeError('Range should be string or number in "paste"');
+
+	if (!isArray2d(arr))
+		throw new TypeError('Only 2D arrays are alowed to "paste"');
 
 	if (opt.restrictCleanup) {
 		if (!['down', 'right', 'preserve'].includes(opt.restrictCleanup))
@@ -104,7 +98,7 @@ const defaults = {
  * Funkcja przujmuje opcjonalny obiekt z dalszymi ustawieniami
  *
  * @param {Object} sheetObj Obiekt arkusza
- * @param {String|Number} userRange Np. 'A', 1, '1', 'A1'
+ * @param {String|Number} userRange Np. 'A', 1, '1', 'A1', 'A1:B2'
  * @param {Array[]} data Dane do wklejenia
  * @param {Object} [opt=defaults] Dalsze parametry
  * @returns {Object} Obiekt arkusza do dalszych manipulacji
