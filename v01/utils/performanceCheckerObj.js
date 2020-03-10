@@ -9,22 +9,22 @@
  *
  * @param {Array} logResults Tablica do której doklejane są wyniki perf.
  * @param {Function} callback Funkcja do wykonania
- * @param {String} descShort Krótki opis
- * @param {String} descLong Dłuższy opis
- * @param {Number} [stat=0] Opcjonalnie kod wiadomości 0-3.
+ * @param {String} descA Krótki opis
+ * @param {String} descB Dłuższy opis
+ * @param {Number} [descC=0] Opcjonalnie kod wiadomości 0-3.
  * @returns {Any} Rezultat działania funkcji przekaznej
  */
 const performanceCheckerObj = (
 	logResults,
 	callback,
-	descShort,
-	descLong,
-	stat = 0
+	descA,
+	descB,
+	descC = 0 // status (1-2-3)
 ) => {
 	const startTime = new Date();
 	const res = callback();
 	const time = (new Date() - startTime) / 1000;
-	logResults.push([new Date(), descShort, time, descLong, stat]);
+	logResults.push([new Date(), descA, time, descB, descC]);
 	return res;
 };
 
