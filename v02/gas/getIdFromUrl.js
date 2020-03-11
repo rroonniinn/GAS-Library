@@ -13,6 +13,7 @@ const getIdFromUrl = url => {
 		return /folders\/(.+)/.exec(url)[1];
 	}
 	// file
-	return /d\/(.+)\//.exec(url)[1];
+	// return /d\/(.+)\//.exec(url)[1];
+	return /d\/([^/]+)/.exec(url)[1];
 };
 export { getIdFromUrl };
