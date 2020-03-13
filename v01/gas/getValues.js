@@ -3,7 +3,7 @@
  *
  * @memberof Lib_Gas
  *
- * @param {object} sheetObj Obiekt arkusza
+ * @param {Object<string, any>} sheetObj Obiekt arkusza
  * @param {string} [range] Zakres np. <tt>A2:B2'</tt>, <tt>'A4'</tt>.
  * Jeśli brak, to zostanie pobrana cała, wypełniona
  * zawartość danych (getDataRange)

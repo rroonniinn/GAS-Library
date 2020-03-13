@@ -35,6 +35,7 @@
 		"no-unused-vars": ["warn", {
 			"varsIgnorePattern": "^[A-Z]|^_|onOpen"
 		}],
+		"function-call-argument-newline": ["warn", "consistent"],
 		"complexity": ["warn", 5],
 		"max-nested-callbacks": ["warn", 2],
 		"max-depth": ["warn", 3],
