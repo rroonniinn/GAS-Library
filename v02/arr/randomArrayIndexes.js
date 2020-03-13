@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 import { randomIntegersArray } from '../num/randomIntegersArray';
 
 /**
