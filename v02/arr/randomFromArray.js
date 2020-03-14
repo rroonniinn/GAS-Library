@@ -4,24 +4,23 @@ import { randomArrayIndexes } from './randomArrayIndexes';
 import { randomShuffleArray } from './randomShuffleArray';
 
 /**
- * Returns random elements from an array
+ * Returns random elements from an array in given quantity
  *
- * @param {object} arr An Array with data
- * @param {number} amount Liczba transakcji do pobrania
- * @param {boolean} mustInclStarEnd Czy lista ma zawierać najbardziej
- * skrajne transakcje
- * @param {boolean} sort Czy wyniki mają być posortowane czy nie
- * @returns {Array[]} Tablica 2d transakcji
+ * @param {array} arr Array with data
+ * @param {number} quantity How many elements to return
+ * @param {boolean} mustInclStarEnd Whether to return first and last el.
+ * @param {boolean} sort Whether to sort returned alements according to oryginal positions
+ * @returns {array} Array with random elements
  */
 
 const randomFromArray = (
 	arr,
-	amount,
+	quantity,
 	mustInclStarEnd = false,
 	sort = false
 ) => {
-	const indexes = randomArrayIndexes(arr, amount, mustInclStarEnd, true);
-	const final = arr.filter((row, i) => indexes.includes(i));
+	const inds = randomArrayIndexes(arr, quantity, mustInclStarEnd, true);
+	const final = arr.filter((row, i) => inds.includes(i));
 	return sort ? final : randomShuffleArray(final);
 };
 
