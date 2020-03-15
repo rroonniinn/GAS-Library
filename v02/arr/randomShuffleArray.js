@@ -1,9 +1,9 @@
 /**
- * Shuffle random array of numbers. Based on the right algorithm:
+ * Shuffle random array of numbers. Based on "the right" algorithm:
  * https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
  *
- * @param {number[]} arr
- * @returns {number[]}
+ * @param {array} arr Array of elements
+ * @returns {array} Shuffled array
  */
 
 const randomShuffleArray = arr => {

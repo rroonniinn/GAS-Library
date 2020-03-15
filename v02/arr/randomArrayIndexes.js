@@ -1,26 +1,27 @@
 /* eslint-disable max-params */
 import { randomIntegersArray } from '../num/randomIntegersArray';
 
+const errorMsg = 'Quantity is biger than array length!';
+
 /**
  * Returns array of unique, random indexes of passed array
  *
- * @param {[][]} arr Data array
- * @param {number} quantity Quantity of indexes
+ * @param {array} arr Data array
+ * @param {number} quant Quantity of indexes
  * @param {boolean} sort Whether to sort indexes
- * @param {boolean} mustInclStarEnd Whether to include first and last index
+ * @param {boolean} startEnd Whether to include first and last index
  * @returns {number[]} Array of random indexes
  */
 
-const randomArrayIndexes = (arr, quantity, mustInclStarEnd, sort) => {
-	if (quantity > arr.length) {
-		throw new Error('Quantity is biger than array length!');
-	}
+const randomArrayIndexes = (arr, quant, startEnd, sort) => {
+	if (quant > arr.length) throw new Error(errorMsg);
+
 	return randomIntegersArray(
-		quantity,
+		quant,
 		0,
 		arr.length - 1,
 		true,
-		mustInclStarEnd,
+		startEnd,
 		sort
 	);
 };

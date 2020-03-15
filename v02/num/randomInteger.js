@@ -1,8 +1,8 @@
 /**
- * Zwraca pseudolosową liczbę (integer) z przedziału min-max włącznie
+ * Returns (pseudo) random integer from min - max range (inclusive)
  *
- * @param {number} min Liczba minimalna (włącznie)
- * @param {number} max Liczba maksymalna (włącznie)
+ * @param {number} min Min value (inclusive)
+ * @param {number} max Max value (inclusive)
  */
 
 const randomInteger = (min, max) =>
