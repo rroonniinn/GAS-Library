@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import { randomIntegersArray } from '../num/randomIntegersArray';
+import { randomIntegersArray } from './randomIntegersArray';
 
 const errorMsg = 'Quantity is biger than array length!';
 

@@ -1,7 +1,7 @@
 /* eslint-disable max-params */
 /* eslint-disable complexity */
-import { randomShuffleArray } from '../arr/randomShuffleArray';
-import { randomInteger } from './randomInteger';
+import { randomShuffleArray } from './randomShuffleArray';
+import { randomInteger } from '../num/randomInteger';
 
 /**
  * Returns an array of random unique numbers from given range

@@ -11,8 +11,8 @@
  * @param {Function} callback Funkcja do wykonania
  * @param {String} descA Krótki opis
  * @param {String} descB Dłuższy opis
- * @param {Number} [descC=0] Opcjonalnie kod wiadomości 0-3.
- * @returns {Any} Rezultat działania funkcji przekaznej
+ * @param {number|string} [descC=0] Opcjonalnie kod wiadomości 0-3.
+ * @returns {any} Rezultat działania funkcji przekaznej
  */
 const performanceCheckerObj = (
 	logResults,
