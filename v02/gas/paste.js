@@ -53,21 +53,35 @@ const getRange = (status, sheetObj, userRange, restHor, restVer) => {
 	return getRangeRelative(sheetObj, userRange);
 };
 
+/**
+ * Paste Options
+ * @typedef {Object} PasteOptions
+ * @property {boolean} [notRemoveFilers] Usuwanie filtrów przed wklejeniem.
+ * Domyślnie false
+ * @property {number|string} [sort] Sortowanie kolumn przed wklejeniem.
+ * Przyjmuje numer (1) lub string ('A'). Domyślnie brak sortowania
+ * @property {string} [sortOrder] Kolejność sortowania.
+ * Możliwe: 'az', 'za', 'asc', 'des'. Domyślie brak
+ * @property {string} restrictCleanup Usuwanie istniejących
+ * przed wklejeniem treści:
+ * 'null' - usuwa wszystko na prawo i w doł od lewej komórki
+ * 'down' - usuwa wszystko w dół. Po prawej tylko na szerokość danych
+ * 'right' - usuwa wszystko po prawej. W dół tylko do wysokości danych
+ * 'preserve' - nic nie usuwa. Domyślnie 'null'
+ * @property {boolean} notRemoveEmptys Usuwanie pustych kolumn i wierszy
+ * z arkusza (po wklejeniu). Domyślnie 'false'
+ */
+
+/**
+ * Obiekt z dodatkowymi opcjami dla funkcji "paste"
+ * @type {PasteOptions} defaults
+ */
+
 const defaults = {
-	/* Usuwanie filtrów */
 	notRemoveFilers: false,
-	/* Sortowanie kolumn numer (1) lub string ('A') */
-	sort: false,
-	/* Kolejność sortowania. Możliwe: 'az', 'za', 'asc', 'des' */
-	sortOrder: false,
-	/** Usuwanie istniejących przed wklejeniem treści:
-	 * false - usuwa wszystko na prawo i w doł od lewej komórki
-	 * down - usuwa wszystko w dół. Po prawej tylko na szerokość danych
-	 * right - usuwa wszystko po prawej. W dół tylko do wysokości danych
-	 * preserve - nic nie usuwa
-	 */
-	restrictCleanup: false,
-	/* Usuwanie pustych kolumn i wierszy z arkusza (po wklejeniu) */
+	sort: null,
+	sortOrder: null,
+	restrictCleanup: null,
 	notRemoveEmptys: false,
 };
 

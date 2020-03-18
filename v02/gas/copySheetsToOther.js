@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable max-params */
 import { pipe } from '../fp/pipe';
 
 /**

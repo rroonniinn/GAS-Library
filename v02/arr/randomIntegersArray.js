@@ -9,9 +9,9 @@ import { randomInteger } from '../num/randomInteger';
  * @param {number} quant Quantity of numbers
  * @param {number} min Min value
  * @param {number} max Max value
- * @param {boolean} startEnd Whether to include min and max value
- * @param {boolean} sort Whether to sort final values
- * @param {boolean} unique Whether values have to be unique
+ * @param {boolean} unique Whether values have to be unique. Def. 'false'
+ * @param {boolean} startEnd Whether to include min and max value. Def. 'false'
+ * @param {boolean} sort Whether to sort final values. Default 'false'
  * @param {number[]} arr Tablica startowa indeksów (używna jeśli któreś
  * indeksy mają być umieszczone w tablicy)
  * @returns {number[]}
