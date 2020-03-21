@@ -11,15 +11,11 @@ import { getValues } from './getValues';
  * wtedy otwiera plik o wskazanym id w w nim szuka arkusza
  *
  * @param {String} sheetName Nazwa arkusza z danymi
- * @param {String} fileId Id pliku (opcjonalny)
+ * @param {String} [fileId] Id pliku (opcjonalny)
  * @returns {Array[]}
  */
 
 const getTableDataNoHeader = (sheetName, fileId) =>
-	pipe(
-		getSheet(sheetName, fileId),
-		getValues,
-		tail
-	)();
+	pipe(getSheet(sheetName, fileId), getValues, tail)();
 
 export { getTableDataNoHeader };

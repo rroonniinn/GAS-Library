@@ -8,8 +8,8 @@ const errorMsg = 'Quantity is biger than array length!';
  *
  * @param {array} arr Data array
  * @param {number} quant Quantity of indexes
- * @param {boolean} sort Whether to sort indexes
  * @param {boolean} startEnd Whether to include first and last index
+ * @param {boolean} sort Whether to sort indexes
  * @returns {number[]} Array of random indexes
  */
 

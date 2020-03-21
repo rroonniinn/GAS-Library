@@ -9,8 +9,8 @@ import { randomShuffleArray } from './randomShuffleArray';
  *
  * @param {array} arr Array with data
  * @param {number} quant How many elements to return. Default = arr.length
- * @param {boolean} startEnd Whether to include first and last element. Default = false
- * @param {boolean} sort Whether to sort elements according to their original positions. Default = false
+ * @param {boolean} [startEnd] Whether to include first and last element. Default = false
+ * @param {boolean} [sort] Whether to sort elements according to their original positions. Default = false
  * @returns {array} Array with random elements
  */
 
