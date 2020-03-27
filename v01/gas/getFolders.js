@@ -12,7 +12,9 @@
  */
 const getFolders = (id, search) => {
 	const rootFolder = DriveApp.getFolderById(id);
-	const folders = !search ? rootFolder.getFolders() : rootFolder.searchFolders(search);
+	const folders = !search
+		? rootFolder.getFolders()
+		: rootFolder.searchFolders(search);
 	const arr = [];
 
 	while (folders.hasNext()) {
