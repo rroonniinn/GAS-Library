@@ -1,14 +1,15 @@
+import { isEmpty } from './isEmpty';
 /**
  * Weryfikuje czy przekazana wartośc jest tablicą 2d
  *
- * @param {Any} val Sprawdzana wartość
+ * @param {any} val Sprawdzana wartość
  * @returns {Boolean} true / false
  */
 
 const isArray2d = val => {
+	if (isEmpty(val)) return false;
 	if (!Array.isArray(val)) return false;
-	if (!Array.isArray(val[0])) return false;
-	return true;
+	return val.every(cell => Array.isArray(cell));
 };
 
 export { isArray2d };
