@@ -11,6 +11,9 @@ import { pipe } from '../fp/pipe';
  * @param {string} sourceId Id pliku źródłowego
  * @param {string} targetId Id pliku docelowego
  * @param {Function} callback np. sheet => sheet.getName().includes('res')
+ * @returns {GoogleAppsScript.Spreadsheet.Spreadsheet} Plik do którego
+ * zostały skopiowane arkusze
+
  */
 
 const copySheetsToOther = (sourceId, targetId, callback) => {
@@ -37,6 +40,8 @@ const copySheetsToOther = (sourceId, targetId, callback) => {
 					.showSheet()
 			)
 	)();
+
+	return targetSpreadsheet;
 };
 
 export { copySheetsToOther };
