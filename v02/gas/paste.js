@@ -111,19 +111,19 @@ const defaults = {
  *
  * Funkcja przyjmuje opcjonalny obiekt z dalszymi ustawieniami
  *
- * @param {Object} sheetObj Obiekt arkusza
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet Obiekt arkusza
  * @param {String|Number} userRange Np. 'A', 1, '1', 'A1', 'A1:B2'
  * @param {Array[]} data Dane do wklejenia
  * @param {Object} [opt=defaults] Dalsze parametry
- * @returns {Object} Obiekt arkusza do dalszych manipulacji
+ * @returns {GoogleAppsScript.Spreadsheet.Sheet} Obiekt arkusza
  */
 
-const paste = (sheetObj, userRange, data, opt = defaults) => {
+const paste = (sheet, userRange, data, opt = defaults) => {
 	// Sprawdzenie typów
-	typeGuard(sheetObj, userRange, data, opt);
+	typeGuard(sheet, userRange, data, opt);
 
 	// Jeśli nie ma co wklejać zwraca nie tknięty arkusz
-	if (data.length === 0) return sheetObj;
+	if (data.length === 0) return sheet;
 
 	/* ---- Właściwa funkcja ----------------------------- */
 
@@ -134,7 +134,7 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 	// Pobierz zakres do pracy (obiekt)
 	const { range, rangeObj } = getRange(
 		opt.restrictCleanup,
-		sheetObj,
+		sheet,
 		// Na wypadek przekazania pełnego zakresu
 		typeof userRange === 'string' && userRange.includes(':')
 			? getFirstCellFromString(userRange)
@@ -145,12 +145,12 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 
 	// Usuwamy filtry
 	if (!opt.notRemoveFilers) {
-		removeFilter(sheetObj);
+		removeFilter(sheet);
 	}
 
 	// Sortujemy
 	if (opt.sort) {
-		sortColumn(sheetObj, opt.sort, opt.sortOrder || 'az');
+		sortColumn(sheet, opt.sort, opt.sortOrder || 'az');
 	}
 
 	// Usuwamy kontent
@@ -160,16 +160,13 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 		czyścić danych */
 		const { col, row } = getColAndRowFromCellAsNum(range);
 
-		if (
-			sheetObj.getMaxColumns() >= col &&
-			sheetObj.getMaxRows() >= row
-		) {
+		if (sheet.getMaxColumns() >= col && sheet.getMaxRows() >= row) {
 			rangeObj.clearContent();
 		}
 	}
 
 	// Wklejka
-	sheetObj
+	sheet
 		.getRange(
 			Number(/[0-9]+/.exec(range)[0]),
 			letterToColumn(/[A-Z]+/.exec(range)[0]),
@@ -180,11 +177,11 @@ const paste = (sheetObj, userRange, data, opt = defaults) => {
 
 	// Usuwa puste kolumny i wiersze
 	if (!opt.notRemoveEmptys) {
-		removeEmptyRowCol(sheetObj);
+		removeEmptyRowCol(sheet);
 	}
 
 	// Zwrotka arkusza
-	return sheetObj;
+	return sheet;
 };
 
 export { paste };

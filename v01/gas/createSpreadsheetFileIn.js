@@ -6,7 +6,7 @@ import { addFileToFolder } from './addFileToFolder';
  *
  * @memberof Lib_Gas
  *
- * @param {string} parentFolderId ID katalogu w którym ma być utworzony subfolder
+ * @param {string} parentFolderId ID katalogu w którym ma być utworzony nowy plik
  * @param {string} newFileName Nazwa pliku
  * @returns {string} ID nowo utworzonego pliku
  */
@@ -22,3 +22,6 @@ const createSpreadsheetFileIn = (parentFolderId, newFileName) => {
 };
 
 export { createSpreadsheetFileIn };
+
+// To raczej powinno zwracać Spreadsheeta a nie jego id. Samo id jest łatwo
+// z tego pobrać....

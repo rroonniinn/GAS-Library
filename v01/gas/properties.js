@@ -19,7 +19,7 @@ const deleteProp = (kind, key) => getPropsStore(kind).deleteProperty(key);
  * Zwraca zawartość określonego klucza w określonym property storze
  * @namespace Lib_GasProps
  *
- * @param {string} store Rodzaj properties (document, script, user)
+ * @param {'document'|'script'|'user'} store Rodzaj properties
  * @param {string} key Klucz
  * @returns {any} zawartość propsów
  */
@@ -33,9 +33,9 @@ const getProp = (store, key) =>
  * Klucz danych - csvFiles
  * @namespace Lib_GasProps
  *
- * @param {strig} store Rodzaj properties (document, script, user)
+ * @param {'document'|'script'|'user'} store Rodzaj properties
  * @param {string} key Klucz pod jakim dostępne będą dane
- * @param {array} data Dane do dodania
+ * @param {any} data Dane do dodania
  * @returns {void}
  */
 
@@ -45,7 +45,7 @@ const addToProps = (store, key, data) => {
 		setProps(store, { [key]: JSON.stringify(data) });
 	} else {
 		throw new Error(
-			'Niewłaściy store, key lub data do dodania do Propsów'
+			'Niewłaściy store, key lub dane do dodania do Propsów'
 		);
 	}
 };

@@ -19,9 +19,10 @@ const crusherCache = {
 
 	/**
 	 * Pobieranie danych z cacha
-	 * @param {string} key Klucz danych z cacha
+	 * @param {string|number} key Klucz danych z cacha
 	 */
 	get(key) {
+		console.log(`Pobieram z Cacha cr-${key}`);
 		return this.init.get(`cr-${key}`);
 	},
 

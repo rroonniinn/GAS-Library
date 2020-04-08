@@ -13,6 +13,7 @@
  */
 const getFiles = (id, search) => {
 	const rootFolder = DriveApp.getFolderById(id);
+
 	const files = !search
 		? rootFolder.getFiles()
 		: rootFolder.searchFiles(search);
@@ -25,3 +26,6 @@ const getFiles = (id, search) => {
 	return arr;
 };
 export { getFiles };
+
+// TODO - funkcja mogła by również przyjmować url folderu, nie tylk id
+// podobnie jak zrobiłem z getSheet
