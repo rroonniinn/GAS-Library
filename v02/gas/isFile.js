@@ -1,15 +1,16 @@
 /**
  * Sprawdza czy przekazana wartośc jest obiektem
- * arkusza (Sheet). Weryfikuje czy dostępna jest
- * na nim metoda .showSheet
+ * File {GoogleAppsScript.Drive.File}.
+ * Weryfikuje czy dostępna jest
+ * na nim metoda .getMimeType()
  *
  * @param {any} val Sprawdzana wartość
  */
 
-const isSheet = val => {
+const isFile = val => {
 	if (!val) return false;
 	if (typeof val !== 'object') return false;
-	return !!val.showSheet;
+	return !!val.getMimeType;
 };
 
-export { isSheet };
+export { isFile };

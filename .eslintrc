@@ -24,7 +24,7 @@
 			"comments": 75,
 			"tabWidth": 4,
 			"ignoreUrls": true,
-			"ignoreComments": false,
+			"ignoreComments": true,
 			"ignoreStrings": true,
 			"ignoreTemplateLiterals": true
 		}],

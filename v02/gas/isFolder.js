@@ -1,15 +1,15 @@
 /**
  * Sprawdza czy przekazana wartośc jest obiektem
- * arkusza (Sheet). Weryfikuje czy dostępna jest
- * na nim metoda .showSheet
+ * Folderu (Folder). Weryfikuje czy dostępna jest
+ * na nim metoda .createFolder(name)
  *
  * @param {any} val Sprawdzana wartość
  */
 
-const isSheet = val => {
+const isFolder = val => {
 	if (!val) return false;
 	if (typeof val !== 'object') return false;
-	return !!val.showSheet;
+	return !!val.createFolder;
 };
 
-export { isSheet };
+export { isFolder };
