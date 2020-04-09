@@ -1,6 +1,7 @@
 import { isUrl } from '../str/isUrl';
 
 import { getIdFromUrl } from './getIdFromUrl';
+import { isSheet } from './isSheet';
 
 const { openById } = SpreadsheetApp;
 /**
@@ -8,16 +9,19 @@ const { openById } = SpreadsheetApp;
  * opcjonalnie id lub url skoroszytu zewnętrznego. Jeśli drugi parametr
  * nie jest podany - pobiera arkusz z bieżącego pliku (bound)
  *
- * @param {string} sheetName Nazwa arkusza
- * @param {string} [source] Id lub url pliku
+ * @param {any} val Obiekt Sheet lub Nazwa arkusza
+ * @param {string} [source] ID lub Url Skoroszytu
  * @returns {GoogleAppsScript.Spreadsheet.Sheet} Arkusz
  */
-const getSheet = (sheetName, source = null) =>
-	source
+const getSheet = (val, source = null) => {
+	if (isSheet(val)) return val;
+
+	return source
 		? isUrl(source)
-			? openById(getIdFromUrl(source)).getSheetByName(sheetName)
-			: openById(source).getSheetByName(sheetName)
-		: SpreadsheetApp.getActive().getSheetByName(sheetName);
+			? openById(getIdFromUrl(source)).getSheetByName(val)
+			: openById(source).getSheetByName(val)
+		: SpreadsheetApp.getActive().getSheetByName(val);
+};
 
 export { getSheet };
 

@@ -10,10 +10,10 @@ const { getFileById } = DriveApp;
  * @returns {GoogleAppsScript.Drive.File}
  */
 
-const getHandyFile = val => {
+const getFile = val => {
 	if (isFile(val)) return val;
 	if (isUrl(val)) return getFileById(getIdFromUrl(val));
 	return getFileById(val);
 };
 
-export { getHandyFile };
+export { getFile };

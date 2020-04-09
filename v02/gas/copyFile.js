@@ -1,6 +1,6 @@
 /* eslint-disable max-params */
-import { getHandyFile } from './getHandyFile';
-import { getHandyFolder } from './getHandyFolder';
+import { getFile } from './getFile';
+import { getFolder } from './getFolder';
 
 /**
  * Kopiuje wkazany plik (ID) do wskazanego folderu jednocześnie zmienijąc
@@ -12,6 +12,6 @@ import { getHandyFolder } from './getHandyFolder';
  */
 
 const copyFile = (source, name, toFolder) =>
-	getHandyFile(source).makeCopy(name, getHandyFolder(toFolder));
+	getFile(source).makeCopy(name, getFolder(toFolder));
 
 export { copyFile };

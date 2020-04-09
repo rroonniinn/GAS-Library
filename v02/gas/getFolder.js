@@ -9,10 +9,10 @@ const { getFolderById } = DriveApp;
  * @param {any} val Folder, URL lub ID
  * @returns {GoogleAppsScript.Drive.Folder}
  */
-const getHandyFolder = val => {
+const getFolder = val => {
 	if (isFolder(val)) return val;
 	if (isUrl(val)) return getFolderById(getIdFromUrl(val));
 	return getFolderById(val);
 };
 
-export { getHandyFolder };
+export { getFolder };
