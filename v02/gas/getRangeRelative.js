@@ -28,7 +28,7 @@ import { getRangeType } from './getRangeType';
  * Chcą podać tylko restVer należy przekazać restHor z wartością null
  *
  * @param {Object} sheetObj Obiekt arkusza
- * @param {String|Number} strRange Zakres
+ * @param {string|number} strRange Zakres
  * @param {Number|null} restHor Ograniczają zakres w poziomie traktując
  * pierwszą komórkę (np. A1) jako początek zakresu. Zatem dla wynikowego
  * zakresu np. A1:C3 dla restHor = 2 dostaniemy A1:B3
