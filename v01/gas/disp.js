@@ -1,7 +1,7 @@
 /**
  * Wyświetla Browser.msg
  * @memberof Lib_Gas
- * @param {string} val Wartość do wyświetlenia
+ * @param {any} val Wartość do wyświetlenia
  * @returns {void} Tylko side effect
  */
 
