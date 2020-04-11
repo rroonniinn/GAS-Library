@@ -44,7 +44,7 @@ import { isArray2d } from './isArray2d';
  * @type {Object} value
  */
 
-const formatTranslation = {
+const translation = {
 	background: 'setBackground',
 	fontColor: 'setFontColor',
 	fontFamily: 'setFontFamily',
@@ -100,32 +100,28 @@ const whatToApply = val => {
 
 /**
  * Wkleja odpwiednie formaty i treści do zakresów przekazanego arkusza
- * @param {RangeOptions[]} sheetChanges Tablica ['A1:B2', {formats}]
- * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheetName Nazwa arkusza lub Arkusz
+ * @param {RangeOptions[]} allChanges Tablica ['A1:B2', {formats}]
+ * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheet Nazwa arkusza lub Arkusz
  * @param {string} idUrl Id lub Url Skoroszytu z arkuszem (jeśli nie jest lokalny)
  */
 
-const applyMassChangesToSheet = (
-	sheetChanges,
-	sheetName,
-	idUrl = null
-) => {
-	const sheet = getSheet(sheetName, idUrl);
+const modifySheet = (allChanges, sheet, idUrl = null) => {
+	const s = getSheet(sheet, idUrl);
 
-	sheetChanges.forEach(([rangeStr, changes]) => {
-		const range = sheet.getRange(rangeStr);
+	allChanges.forEach(([rangeStr, changes]) => {
+		const range = s.getRange(rangeStr);
 
-		Object.entries(changes).forEach(([formatStr, value]) => {
-			const gasName = formatTranslation[formatStr];
-			if (gasName !== 'setBorder' && gasName !== 'values') {
-				range[gasName](value);
-			} else if (gasName === 'setBorder') {
-				range[gasName](...translateBorder(value));
-			} else if (gasName === 'values') {
+		Object.entries(changes).forEach(([format, value]) => {
+			const gas = translation[format];
+			if (gas !== 'setBorder' && gas !== 'values') {
+				range[gas](value);
+			} else if (gas === 'setBorder') {
+				range[gas](...translateBorder(value));
+			} else if (gas === 'values') {
 				range[whatToApply(value)](value);
 			}
 		});
 	});
 };
 
-export { applyMassChangesToSheet };
+export { modifySheet };
