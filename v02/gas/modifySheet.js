@@ -1,10 +1,27 @@
+/* eslint-disable complexity */
 /* eslint-disable max-params */
+import { disp } from '../../v01/gas/disp';
 import { isFormula } from '../../v01/utils/isFormula';
 import { isNumber } from '../../v01/utils/isNumber';
 import { isString } from '../../v01/utils/isString';
 
 import { getSheet } from './getSheet';
 import { isArray2d } from './isArray2d';
+
+/**
+ * Możliwe opcje obiektu definującego border.
+ * Ustawienia bordera wokół zakresu.
+ * Możliwe wartości - true - nowy border, false - brak bordera, null - border bez zmian
+ * @typedef {Object} Borders
+ * @property {boolean} [t] - top
+ * @property {boolean} [l] - left
+ * @property {boolean} [b] - bottom
+ * @property {boolean} [r] - right
+ * @property {boolean} [v] - pionowe linie pomiędzy
+ * @property {boolean} [h] - poziome linie pomiędzy
+ * @property {string} [color] - kolor css
+ * @property {'dotted'|'dashed'|'solid'|'solidM'|'solidT'|'double'} [style] - style (enum)
+ */
 
 /**
  * String z zakresem komórek - np. A1, A1:B3, itp
@@ -23,12 +40,13 @@ import { isArray2d } from './isArray2d';
  * @property {string} [fontFormat] Format numerów np. '#,##', '0.00%'
  * @property {'left'|'center'|'right'} [alignH] Wyrównanie w poziomie
  * @property {'top'|'middle'|'bottom'} [alignV] Wyrównanie w pionie
+ * @property {number} [rowHeight] Wysokość każdego wiersza w ramach zakresu
+ * @property {number} [colWidth] Szerokość każdej kolumny w ramach zakresu
  * @property {boolean} [showHyperlink] Czy linki mają być widoczne (underline) i aktywne
  * @property {boolean} [wrap] Czy zawijać treść w komórce
  * @property {GoogleAppsScript.Spreadsheet.WrapStrategy} [wrapType] Jeśli zawijać treść to jak
  * @property {Object} [textStyle] Obiekt z formatowaniem powstały jako efekt SpreadsheetApp.newTextStyle()
- * @property {{t: boolean, l: boolean, b: boolean, r: boolean, v: boolean, h: boolean, color: string,
- * style: GoogleAppsScript.Spreadsheet.BorderStyle}} [border] Ustawienia bordera wokół zakresu. t - top, l - left itd, v, h - pionowe i poziome linie pomiędzy. true - jest nowy border, false - brak bordera, null - border bez zmian
+ * @property {Borders} [border] Ustawienia bordera wokół zakresu. t - top, l - left itd, v, h - pionowe i poziome linie pomiędzy. true - jest nowy border, false - brak bordera, null - border bez zmian
  * @property {any} [values] Nowe wartości do wklejenia. Mogą być pojedyńcze lub tablice. Mogą być formuły. Tablice muszą mieć ten sam rozmiar co zakres
  */
 
@@ -59,7 +77,23 @@ const translation = {
 	wrapType: 'setWrapStrategy',
 	textStyle: 'setTextStyle',
 	border: 'setBorder',
-	values: 'values', // jedyny nietypowy, wrzucam do obiektu aby było łatwiej
+	values: 'values',
+	rowHeight: 'rowHeight', // nietypowy, wrzucam do obiektu aby było łatwiej
+	colWidth: 'colWidth', // nietypowy, wrzucam do obiektu aby było łatwiej
+};
+
+/**
+ * Enumy do BorderStyle - tłumaczenie na ludzki :)
+ * @type {Object<string, GoogleAppsScript.Spreadsheet.BorderStyle>} borderEnumes
+ */
+
+const borderEnumes = {
+	dotted: SpreadsheetApp.BorderStyle.DOTTED,
+	dashed: SpreadsheetApp.BorderStyle.DASHED,
+	solid: SpreadsheetApp.BorderStyle.SOLID,
+	solidM: SpreadsheetApp.BorderStyle.SOLID_MEDIUM,
+	solidT: SpreadsheetApp.BorderStyle.SOLID_THICK,
+	double: SpreadsheetApp.BorderStyle.DOUBLE,
 };
 
 /**
@@ -75,7 +109,7 @@ const translateBorder = value => [
 	value.v,
 	value.h,
 	value.color,
-	value.style,
+	borderEnumes[value.style],
 ];
 
 /**
@@ -111,17 +145,52 @@ const modifySheet = (allChanges, sheet, idUrl = null) => {
 	allChanges.forEach(([rangeStr, changes]) => {
 		const range = s.getRange(rangeStr);
 
-		Object.entries(changes).forEach(([format, value]) => {
-			const gas = translation[format];
-			if (gas !== 'setBorder' && gas !== 'values') {
+		disp(
+			`Range: ${rangeStr}.
+			getRow(): ${range.getRow()}.
+			getColumn(): ${range.getColumn()}.
+			getNumColumns(): ${range.getNumColumns()}.
+			getWidth(): ${range.getWidth()}.
+			getNumRows(): ${range.getNumRows()}.
+			getHeight(): ${range.getHeight()}`
+		);
+
+		Object.entries(changes).forEach(([entity, value]) => {
+			const gas = translation[entity];
+			if (
+				gas !== 'setBorder' &&
+				gas !== 'values' &&
+				gas !== 'rowHeight' &&
+				gas !== 'colWidth'
+			) {
 				range[gas](value);
 			} else if (gas === 'setBorder') {
 				range[gas](...translateBorder(value));
 			} else if (gas === 'values') {
 				range[whatToApply(value)](value);
+			} else if (gas === 'rowHeight') {
+				s.setRowHeights(range.getRow(), range.getNumRows(), value);
+			} else if (gas === 'colWidth') {
+				s.setColumnWidths(
+					range.getColumn(),
+					range.getNumColumns(),
+					value
+				);
 			}
 		});
 	});
 };
+
+/**
+ Range . getRow()
+ Range . getColumn()
+
+Range . getNumColumns()  Range . getWidth()
+Range . getNumRows()   Range . getHeight()
+
+
+
+
+ */
 
 export { modifySheet };

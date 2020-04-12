@@ -1,5 +1,3 @@
-import { isSpreadsheet } from '../../v01/utils/isSpreadsheet';
-
 import { getSpreadsheet } from './getSpreadsheet';
 import { modifySheet } from './modifySheet';
 
