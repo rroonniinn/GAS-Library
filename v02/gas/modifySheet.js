@@ -97,8 +97,9 @@ const borderEnumes = {
 };
 
 /**
- * Rozbija argumenty pozyskane do bordera na tablicę
- * @type {Object} value
+ * Rozbija argumenty pozyskane do bordera na tablicę. Bez tego nie była by
+ * zachowana odpowiednia kolejność
+ * @param {Borders} value
  */
 
 const translateBorder = value => [
@@ -142,55 +143,39 @@ const whatToApply = val => {
 const modifySheet = (allChanges, sheet, idUrl = null) => {
 	const s = getSheet(sheet, idUrl);
 
-	allChanges.forEach(([rangeStr, changes]) => {
-		const range = s.getRange(rangeStr);
+	if (s) {
+		allChanges.forEach(([rangeStr, changes]) => {
+			const range = s.getRange(rangeStr);
 
-		disp(
-			`Range: ${rangeStr}.
-			getRow(): ${range.getRow()}.
-			getColumn(): ${range.getColumn()}.
-			getNumColumns(): ${range.getNumColumns()}.
-			getWidth(): ${range.getWidth()}.
-			getNumRows(): ${range.getNumRows()}.
-			getHeight(): ${range.getHeight()}`
-		);
-
-		Object.entries(changes).forEach(([entity, value]) => {
-			const gas = translation[entity];
-			if (
-				gas !== 'setBorder' &&
-				gas !== 'values' &&
-				gas !== 'rowHeight' &&
-				gas !== 'colWidth'
-			) {
-				range[gas](value);
-			} else if (gas === 'setBorder') {
-				range[gas](...translateBorder(value));
-			} else if (gas === 'values') {
-				range[whatToApply(value)](value);
-			} else if (gas === 'rowHeight') {
-				s.setRowHeights(range.getRow(), range.getNumRows(), value);
-			} else if (gas === 'colWidth') {
-				s.setColumnWidths(
-					range.getColumn(),
-					range.getNumColumns(),
-					value
-				);
-			}
+			Object.entries(changes).forEach(([entity, value]) => {
+				const gas = translation[entity];
+				if (
+					gas !== 'setBorder' &&
+					gas !== 'values' &&
+					gas !== 'rowHeight' &&
+					gas !== 'colWidth'
+				) {
+					range[gas](value);
+				} else if (gas === 'setBorder') {
+					range[gas](...translateBorder(value));
+				} else if (gas === 'values') {
+					range[whatToApply(value)](value);
+				} else if (gas === 'rowHeight') {
+					s.setRowHeights(
+						range.getRow(),
+						range.getNumRows(),
+						value
+					);
+				} else if (gas === 'colWidth') {
+					s.setColumnWidths(
+						range.getColumn(),
+						range.getNumColumns(),
+						value
+					);
+				}
+			});
 		});
-	});
+	}
 };
-
-/**
- Range . getRow()
- Range . getColumn()
-
-Range . getNumColumns()  Range . getWidth()
-Range . getNumRows()   Range . getHeight()
-
-
-
-
- */
 
 export { modifySheet };
