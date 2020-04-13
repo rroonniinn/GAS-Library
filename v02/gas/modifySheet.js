@@ -1,6 +1,4 @@
-/* eslint-disable complexity */
 /* eslint-disable max-params */
-import { disp } from '../../v01/gas/disp';
 import { isFormula } from '../../v01/utils/isFormula';
 import { isNumber } from '../../v01/utils/isNumber';
 import { isString } from '../../v01/utils/isString';
@@ -58,8 +56,12 @@ import { isArray2d } from './isArray2d';
  */
 
 /**
+ * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
+ */
+
+/**
  * Tłumaczy moje określenia na formatowanie na użyte w GAS
- * @type {Object} value
+ * @type {Object<StylerOptions, string>} value
  */
 
 const translation = {
@@ -134,6 +136,39 @@ const whatToApply = val => {
 };
 
 /**
+ * Wykonuje operację (formatowanie lub wklejenie danyc) i zwraca Sheet, na
+ * którym został wywołany
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet
+ * @param {GoogleAppsScript.Spreadsheet.Range} range
+ * @return {(entity, value) => GoogleAppsScript.Spreadsheet.Sheet}
+ */
+
+const applyStyles = (sheet, range) => ([entity, value]) => {
+	const gas = translation[entity];
+	if (gas === 'rowHeight')
+		return sheet.setRowHeights(
+			range.getRow(),
+			range.getNumRows(),
+			value
+		);
+
+	if (gas === 'colWidth')
+		return sheet.setColumnWidths(
+			range.getColumn(),
+			range.getNumColumns(),
+			value
+		);
+
+	if (gas === 'values')
+		return range[whatToApply(value)](value).getSheet();
+
+	if (gas === 'setBorder')
+		return range[gas](...translateBorder(value)).getSheet();
+
+	return range[gas](value);
+};
+
+/**
  * Wkleja odpwiednie formaty i treści do zakresów przekazanego arkusza
  * @param {RangeOptions[]} allChanges Tablica ['A1:B2', {formats}]
  * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheet Nazwa arkusza lub Arkusz
@@ -144,38 +179,14 @@ const modifySheet = (allChanges, sheet, idUrl = null) => {
 	const s = getSheet(sheet, idUrl);
 
 	if (s) {
-		allChanges.forEach(([rangeStr, changes]) => {
-			const range = s.getRange(rangeStr);
-
-			Object.entries(changes).forEach(([entity, value]) => {
-				const gas = translation[entity];
-				if (
-					gas !== 'setBorder' &&
-					gas !== 'values' &&
-					gas !== 'rowHeight' &&
-					gas !== 'colWidth'
-				) {
-					range[gas](value);
-				} else if (gas === 'setBorder') {
-					range[gas](...translateBorder(value));
-				} else if (gas === 'values') {
-					range[whatToApply(value)](value);
-				} else if (gas === 'rowHeight') {
-					s.setRowHeights(
-						range.getRow(),
-						range.getNumRows(),
-						value
-					);
-				} else if (gas === 'colWidth') {
-					s.setColumnWidths(
-						range.getColumn(),
-						range.getNumColumns(),
-						value
-					);
-				}
-			});
+		allChanges.forEach(([range, changes]) => {
+			Object.entries(changes).forEach(
+				applyStyles(s, s.getRange(range))
+			);
 		});
 	}
+
+	return s;
 };
 
 export { modifySheet };
