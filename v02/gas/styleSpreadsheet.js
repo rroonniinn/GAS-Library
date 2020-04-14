@@ -1,8 +1,8 @@
 import { getSpreadsheet } from './getSpreadsheet';
-import { modifySheet } from './modifySheet';
+import { styleSheet } from './styleSheet';
 
 /**
- * @typedef {import('./modifySheet').RangeOptions} RangeOptions
+ * @typedef {import('./styleSheet').RangeOptions} RangeOptions
  */
 
 /**
@@ -18,13 +18,13 @@ import { modifySheet } from './modifySheet';
  * @param {SheetMassChangesOptions} allChanges  ['Nazwa arkusza', [[range, {formats}]]]
  */
 
-const modifySheets = (val, allChanges) => {
+const styleSpreadsheet = (val, allChanges) => {
 	const ss = getSpreadsheet(val);
 
 	Object.entries(allChanges).forEach(([sStr, changes]) =>
-		modifySheet(changes, ss.getSheetByName(sStr))
+		styleSheet(changes, ss.getSheetByName(sStr))
 	);
 	return ss;
 };
 
-export { modifySheets };
+export { styleSpreadsheet };

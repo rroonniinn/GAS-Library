@@ -1,5 +1,12 @@
 /* eslint-disable max-params */
 
+import { isFormula } from '../../v01/utils/isFormula';
+import { isNumber } from '../../v01/utils/isNumber';
+import { isString } from '../../v01/utils/isString';
+
+import { getSheet } from './getSheet';
+import { isArray2d } from './isArray2d';
+
 /**
  * Możliwe opcje obiektu definującego border.
  * Ustawienia bordera wokół zakresu.
@@ -53,13 +60,6 @@
  * To na razie nie używane
  * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
  */
-
-import { isFormula } from '../../v01/utils/isFormula';
-import { isNumber } from '../../v01/utils/isNumber';
-import { isString } from '../../v01/utils/isString';
-
-import { getSheet } from './getSheet';
-import { isArray2d } from './isArray2d';
 
 /**
  * Tłumaczy moje określenia na formatowanie na użyte w GAS
@@ -178,7 +178,7 @@ const applyStyles = (sheet, range) => ([entity, value]) => {
  * @param {string} idUrl Id lub Url Skoroszytu z arkuszem (jeśli nie jest lokalny)
  */
 
-const modifySheet = (rangesChanges, sheet, idUrl = null) => {
+const styleSheet = (rangesChanges, sheet, idUrl = null) => {
 	const s = getSheet(sheet, idUrl);
 
 	if (s) {
@@ -192,4 +192,4 @@ const modifySheet = (rangesChanges, sheet, idUrl = null) => {
 	return s;
 };
 
-export { modifySheet };
+export { styleSheet };
