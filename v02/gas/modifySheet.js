@@ -1,10 +1,4 @@
 /* eslint-disable max-params */
-import { isFormula } from '../../v01/utils/isFormula';
-import { isNumber } from '../../v01/utils/isNumber';
-import { isString } from '../../v01/utils/isString';
-
-import { getSheet } from './getSheet';
-import { isArray2d } from './isArray2d';
 
 /**
  * Możliwe opcje obiektu definującego border.
@@ -56,12 +50,20 @@ import { isArray2d } from './isArray2d';
  */
 
 /**
+ * To na razie nie używane
  * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
  */
 
+import { isFormula } from '../../v01/utils/isFormula';
+import { isNumber } from '../../v01/utils/isNumber';
+import { isString } from '../../v01/utils/isString';
+
+import { getSheet } from './getSheet';
+import { isArray2d } from './isArray2d';
+
 /**
  * Tłumaczy moje określenia na formatowanie na użyte w GAS
- * @type {Object<StylerOptions, string>} value
+ * @property {Object<string, string>} value
  */
 
 const translation = {
@@ -116,7 +118,7 @@ const translateBorder = value => [
 ];
 
 /**
- * Weryfikuje jakia wartość została przekazana do funkcji aplikującej
+ * Weryfikuje jaka wartość została przekazana do funkcji aplikującej
  * formaty i wartości do sheeta. Zwraca odpowiednią metodę. Jeśli przekazana
  * została tablica o innych wymiatach niż zakres, gas wyrzuci błąd.
  * @param {any} val
@@ -137,10 +139,11 @@ const whatToApply = val => {
 
 /**
  * Wykonuje operację (formatowanie lub wklejenie danyc) i zwraca Sheet, na
- * którym został wywołany
+ * którym został wywołany (nie wykorzystuję dalej tego, ale dzięki temu,
+ * mogę uniknąc if else)
  * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet
  * @param {GoogleAppsScript.Spreadsheet.Range} range
- * @return {(entity, value) => GoogleAppsScript.Spreadsheet.Sheet}
+ * @return {([entity, value]) => GoogleAppsScript.Spreadsheet.Sheet}
  */
 
 const applyStyles = (sheet, range) => ([entity, value]) => {
@@ -170,16 +173,16 @@ const applyStyles = (sheet, range) => ([entity, value]) => {
 
 /**
  * Wkleja odpwiednie formaty i treści do zakresów przekazanego arkusza
- * @param {RangeOptions[]} allChanges Tablica ['A1:B2', {formats}]
+ * @param {RangeOptions[]} rangesChanges Tablica ['A1:B2', {changes: val}]
  * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheet Nazwa arkusza lub Arkusz
  * @param {string} idUrl Id lub Url Skoroszytu z arkuszem (jeśli nie jest lokalny)
  */
 
-const modifySheet = (allChanges, sheet, idUrl = null) => {
+const modifySheet = (rangesChanges, sheet, idUrl = null) => {
 	const s = getSheet(sheet, idUrl);
 
 	if (s) {
-		allChanges.forEach(([range, changes]) => {
+		rangesChanges.forEach(([range, changes]) => {
 			Object.entries(changes).forEach(
 				applyStyles(s, s.getRange(range))
 			);
