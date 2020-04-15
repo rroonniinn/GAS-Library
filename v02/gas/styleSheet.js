@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
 /* eslint-disable max-params */
 
 import { isFormula } from '../../v01/utils/isFormula';
@@ -36,14 +38,15 @@ import { isArray2d } from './isArray2d';
  * @property {number} [fontSize] Wielkość czcionki w punktach
  * @property {'italic'|'normal'} [fontStyle] Styl czcionki
  * @property {'bold'|'normal'} [fontWeight] Grubość czcionki
- * @property {string} [fontFormat] Format numerów np. '#,##', '0.00%'
+ * @property {'number 0,00'|'number 0,0'|'number 0'|'money 0,00 zł'|'money 0 zł'|'money 0,00 $'|'money 0 $'|'money 0,00 €'|'money 0 €'|'percent 0,00'|'percent 0,0'|'percent 0'|'date yyyy-mm-dd'|'date yy-mm-dd'} [fontFormatNum] Format numerów
  * @property {'left'|'center'|'right'} [alignH] Wyrównanie w poziomie
  * @property {'top'|'middle'|'bottom'} [alignV] Wyrównanie w pionie
+ * @property {'all'|'ver'|'hor'|'off'} [merge] Czy komórki mają być zmerchowane i jak
  * @property {number} [rowHeight] Wysokość każdego wiersza w ramach zakresu
  * @property {number} [colWidth] Szerokość każdej kolumny w ramach zakresu
  * @property {boolean} [showHyperlink] Czy linki mają być widoczne (underline) i aktywne
- * @property {boolean} [wrap] Czy zawijać treść w komórce
- * @property {GoogleAppsScript.Spreadsheet.WrapStrategy} [wrapType] Jeśli zawijać treść to jak
+ * @property {boolean} [wrap] Włącza i wyłącza model zachowania w przypadku tekstu dłuższego niż szerokość kolumny. false przywraca standard - overflow
+ * @property {'wrap'|'overflow'|'clip'} [wrapType] Model zawijania wierszy - wrap: zawijanie, clip: ucinianie, overflow - domyślny, rozlewanie na sąsienie kolumny
  * @property {Object} [textStyle] Obiekt z formatowaniem powstały jako efekt SpreadsheetApp.newTextStyle()
  * @property {Borders} [border] Ustawienia bordera wokół zakresu. t - top, l - left itd, v, h - pionowe i poziome linie pomiędzy. true - jest nowy border, false - brak bordera, null - border bez zmian
  * @property {any} [values] Nowe wartości do wklejenia. Mogą być pojedyńcze lub tablice. Mogą być formuły. Tablice muszą mieć ten sam rozmiar co zakres
@@ -72,8 +75,8 @@ const translation = {
 	fontFamily: 'setFontFamily',
 	fontSize: 'setFontSize',
 	fontStyle: 'setFontStyle',
+	fontFormatNum: 'setNumberFormat',
 	fontWeight: 'setFontWeight',
-	fontFormat: 'setNumberFormat',
 	alignH: 'setHorizontalAlignment',
 	alignV: 'setVerticalAlignment',
 	showHyperlink: 'setShowHyperlink',
@@ -81,9 +84,38 @@ const translation = {
 	wrapType: 'setWrapStrategy',
 	textStyle: 'setTextStyle',
 	border: 'setBorder',
-	values: 'values',
+	values: 'values', // nietypowy, wrzucam do obiektu aby było łatwiej
 	rowHeight: 'rowHeight', // nietypowy, wrzucam do obiektu aby było łatwiej
 	colWidth: 'colWidth', // nietypowy, wrzucam do obiektu aby było łatwiej
+	merge: 'merge', // nietypowy, wrzucam do obiektu aby było łatwiej
+};
+
+const numberFormats = {
+	'number 0,00': '#,##0.00',
+	'number 0,0': '#,##0.0',
+	'number 0': '#,##',
+	'money 0,00 zł': '#,##0.00 [$zł-415]',
+	'money 0 zł': '#,## [$zł-415]',
+	'money 0,00 $': '#,##0.00 [$$ ]',
+	'money 0 $': '#,## [$$ ]',
+	'money 0,00 €': '#,##0.00 [$€]',
+	'money 0 €': '#,## [$€]',
+	'percent 0,00': '0.00%',
+	'percent 0,0': '0.0%',
+	'percent 0': '0%',
+	'date yyyy-mm-dd': 'yyyy-MM-dd',
+	'date yy-mm-dd': 'yy-MM-dd',
+};
+
+/**
+ * Enumy do wrapType - tłumaczenie na ludzki :)
+ * @type {Object<string,GoogleAppsScript.Spreadsheet.WrapStrategy>}
+ */
+
+const wrapEnumes = {
+	wrap: SpreadsheetApp.WrapStrategy.WRAP,
+	overflow: SpreadsheetApp.WrapStrategy.OVERFLOW,
+	clip: SpreadsheetApp.WrapStrategy.CLIP,
 };
 
 /**
@@ -116,6 +148,13 @@ const translateBorder = value => [
 	value.color,
 	borderEnumes[value.style],
 ];
+
+const applyMerge = {
+	all: 'merge',
+	ver: 'mergeVertically',
+	hor: 'mergeAcross',
+	off: 'breakApart',
+};
 
 /**
  * Weryfikuje jaka wartość została przekazana do funkcji aplikującej
@@ -168,7 +207,15 @@ const applyStyles = (sheet, range) => ([entity, value]) => {
 	if (gas === 'setBorder')
 		return range[gas](...translateBorder(value)).getSheet();
 
-	return range[gas](value);
+	if (gas === 'setWrapStrategy')
+		return range[gas](wrapEnumes[value]).getSheet();
+
+	if (gas === 'setNumberFormat')
+		return range[gas](numberFormats[value]).getSheet();
+
+	if (gas === 'merge') return range[applyMerge[value]]().getSheet();
+
+	return range[gas](value).getSheet();
 };
 
 /**

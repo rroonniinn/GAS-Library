@@ -7,11 +7,7 @@ import { styleSpreadsheet as fn } from '../styleSpreadsheet';
  */
 
 /**
- * Tego nie sprawdzam przez QUnit, bo za dużo roboty
- * z setupem testu.
  * Plik z testem jest tu: https://docs.google.com/spreadsheets/d/138usMqswIw8Ki3PQc5qPmJLxL1MyqJt2dE1jG1C4j68/edit#gid=1232029654
- *
-
  */
 
 const url =
@@ -23,14 +19,14 @@ const niceYellow = '#ffd966';
  */
 
 const sets = {
-	global: {
+	globalA: {
 		values: '',
 		alignH: 'center',
 		fontColor: 'white',
 		fontFamily: 'Roboto Condensed',
-		background: '#820333',
-		rowHeight: 50,
-		colWidth: 50,
+		rowHeight: 40,
+		colWidth: 60,
+		background: 'blue',
 		border: {
 			b: false,
 			l: false,
@@ -42,48 +38,23 @@ const sets = {
 			style: 'solid',
 		},
 	},
-	a1: {
-		background: '#F0433A',
-	},
-	b2: {
-		background: '#C9283E',
-	},
-	c3: {
-		background: '#820333',
-	},
-	d: {
+	globalB: {
+		values: '',
+		alignH: 'center',
+		fontColor: niceYellow,
+		fontFamily: 'Roboto Condensed',
+		rowHeight: 60,
+		colWidth: 40,
+		background: 'orange',
 		border: {
-			t: true,
-			b: true,
-			l: true,
-			r: true,
-			v: false,
-			h: false,
-			style: 'solidM',
-			color: '#C9283E',
-		},
-	},
-	e: {
-		border: {
-			t: true,
-			b: true,
-			l: false,
-			r: false,
-			v: false,
-			h: true,
-			style: 'dashed',
-			color: '#C9283E',
-		},
-	},
-	f: {
-		background: '#2E112D',
-		border: {
-			t: false,
 			b: false,
 			l: false,
 			r: false,
+			t: false,
+			v: true,
+			h: true,
+			color: niceYellow,
 			style: 'dotted',
-			color: 'black',
 		},
 	},
 };
@@ -93,32 +64,17 @@ const sets = {
  */
 const changesSpread = {
 	Arkusz1: [
-		['A1:L12', sets.global],
-		['A1', sets.a1],
+		['A1:L12', sets.globalA],
+		['A1', { background: '#F0433A' }],
 	],
 	Arkusz2: [
-		['A1:L12', sets.global],
-		['B2', sets.b2],
-	],
-	Arkusz3: [
-		['A1:L12', sets.global],
-		['C3:J10', sets.d],
-		['D6:I8', sets.e],
-		[
-			'D4',
-			{
-				alignH: 'left',
-				alignV: 'middle',
-				fontSize: 16,
-				values: 'Działa// -> ?',
-				fontColor: niceYellow,
-			},
-		],
+		['A1:L12', sets.globalB],
+		['B2', { background: niceYellow }],
 	],
 };
 
 const styleSpreadsheet = {
-	a1: () => fn(url, changesSpread), // Kolumna A posortowana od A - Z (arkusza a)
+	a1: () => fn(url, changesSpread),
 };
 
 export { styleSpreadsheet };
