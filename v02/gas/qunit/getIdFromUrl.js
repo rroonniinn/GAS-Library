@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* global QUnit, equal */
 
 import { getIdFromUrl as fn } from '../getIdFromUrl';
@@ -11,6 +12,11 @@ const getIdFromUrl = () => {
 		'https://docs.google.com/spreadsheets/d/15oy9hOnXCp5KGIpbjRxIm7_Sx0aOhIzPegfbF6Lm6Ck/';
 	const a3 =
 		'https://docs.google.com/spreadsheets/d/15oy9hOnXCp5KGIpbjRxIm7_Sx0aOhIzPegfbF6Lm6Ck';
+
+	/**
+	 * A jQuery plugin to make stars fly around your home page.
+	 * @function external:QUnit.test
+	 */
 
 	QUnit.test('Checking "getIdFromUrl" function ', () => {
 		equal(fn(a1), res, `${a1} - ${msg}`);
