@@ -9,6 +9,8 @@ import { isString } from '../../v01/utils/isString';
 import { getSheet } from './getSheet';
 import { isArray2d } from './isArray2d';
 
+/* ************************************** TYPES **************************************************************** */
+
 /**
  * Możliwe opcje obiektu definującego border.
  * Ustawienia bordera wokół zakresu.
@@ -63,6 +65,8 @@ import { isArray2d } from './isArray2d';
  * To na razie nie używane
  * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
  */
+
+/* ************************************** Właściwy kod **************************************************************** */
 
 /**
  * Tłumaczy moje określenia na formatowanie na użyte w GAS
@@ -133,6 +137,18 @@ const borderEnumes = {
 };
 
 /**
+ * Przypisanie odpowedniej metody mergującej GAS do wartości używanych
+ * w moim kodzie
+ */
+
+const applyMerge = {
+	all: 'merge',
+	ver: 'mergeVertically',
+	hor: 'mergeAcross',
+	off: 'breakApart',
+};
+
+/**
  * Rozbija argumenty pozyskane do bordera na tablicę. Bez tego nie była by
  * zachowana odpowiednia kolejność
  * @param {Borders} value
@@ -149,18 +165,12 @@ const translateBorder = value => [
 	borderEnumes[value.style],
 ];
 
-const applyMerge = {
-	all: 'merge',
-	ver: 'mergeVertically',
-	hor: 'mergeAcross',
-	off: 'breakApart',
-};
-
 /**
  * Weryfikuje jaka wartość została przekazana do funkcji aplikującej
  * formaty i wartości do sheeta. Zwraca odpowiednią metodę. Jeśli przekazana
  * została tablica o innych wymiatach niż zakres, gas wyrzuci błąd.
  * @param {any} val
+ * @return {'setValue'|'setFormula'|'setValues'} Nazwę metody do użycia
  */
 
 const whatToApply = val => {
@@ -177,12 +187,12 @@ const whatToApply = val => {
 };
 
 /**
- * Wykonuje operację (formatowanie lub wklejenie danyc) i zwraca Sheet, na
+ * Wykonuje operację (formatowanie lub wklejenie danyc) i zwraca Sheet lub Range, na
  * którym został wywołany (nie wykorzystuję dalej tego, ale dzięki temu,
  * mogę uniknąc if else)
  * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet
  * @param {GoogleAppsScript.Spreadsheet.Range} range
- * @return {([entity, value]) => GoogleAppsScript.Spreadsheet.Sheet}
+ * @return {([entity, value]) => GoogleAppsScript.Spreadsheet.Sheet|GoogleAppsScript.Spreadsheet.Range}
  */
 
 const applyStyles = (sheet, range) => ([entity, value]) => {
@@ -201,26 +211,18 @@ const applyStyles = (sheet, range) => ([entity, value]) => {
 			value
 		);
 
-	if (gas === 'values')
-		return range[whatToApply(value)](value).getSheet();
+	if (gas === 'values') return range[whatToApply(value)](value);
+	if (gas === 'setBorder') return range[gas](...translateBorder(value));
+	if (gas === 'setWrapStrategy') return range[gas](wrapEnumes[value]);
+	if (gas === 'setNumberFormat') return range[gas](numberFormats[value]);
+	if (gas === 'merge') return range[applyMerge[value]]();
 
-	if (gas === 'setBorder')
-		return range[gas](...translateBorder(value)).getSheet();
-
-	if (gas === 'setWrapStrategy')
-		return range[gas](wrapEnumes[value]).getSheet();
-
-	if (gas === 'setNumberFormat')
-		return range[gas](numberFormats[value]).getSheet();
-
-	if (gas === 'merge') return range[applyMerge[value]]().getSheet();
-
-	return range[gas](value).getSheet();
+	return range[gas](value);
 };
 
 /**
  * Wkleja odpwiednie formaty i treści do zakresów przekazanego arkusza
- * @param {RangeOptions[]} rangesChanges Tablica ['A1:B2', {changes: val}]
+ * @param {RangeOptions[]} rangesChanges Tablica [['A1:B2', {changes: val}]]
  * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheet Nazwa arkusza lub Arkusz
  * @param {string} idUrl Id lub Url Skoroszytu z arkuszem (jeśli nie jest lokalny)
  */
