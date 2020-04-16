@@ -1,11 +1,7 @@
 /**
- * @typedef {import('./types').ExpSetup} ExpSetup
- */
-
-/**
  * Tablica rozmiarów arkuszy które mają się znależć w plikach.
  * Samplami nazywamy zestawy danych na których wykonywany jest eksperyment.
- * @param {ExpSetup} expSetup Plik config eksperymentu
+ * @param {import('./types').ExpSetup} expSetup Plik config eksperymentu
  * @return {{code: string, size: number}[]} betterSamples
  */
 const getSamples = expSetup =>

@@ -10,7 +10,7 @@ import { insertProperSheet } from './insertProperSheet';
  * @returns {GoogleAppsScript.Spreadsheet.Spreadsheet}
  */
 
-const buildLocalFile = (expSetup, deleteOthers = true) => {
+const buildLocal = (expSetup, deleteOthers = true) => {
 	const samplesArr = getSamples(expSetup);
 	const callback = insertProperSheet(expSetup);
 
@@ -30,4 +30,4 @@ const buildLocalFile = (expSetup, deleteOthers = true) => {
 	return spreadsheet;
 };
 
-export { buildLocalFile };
+export { buildLocal };

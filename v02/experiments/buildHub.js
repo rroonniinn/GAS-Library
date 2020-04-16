@@ -7,12 +7,11 @@ import { insertProperSheet } from './insertProperSheet';
 /**
  * Buduje plik Huba i umieszcza w propsach skryptu jego id
  * @param {import('./types').ExpSetup} expSetup Plik config eksperymentu
- * @param {GoogleAppsScript.Drive.Folder} parent Folder katalogu w którym
- * ma być utworzony plik
- * @returns {GoogleAppsScript.Spreadsheet.Spreadsheet}
+ * @returns {(parent: GoogleAppsScript.Drive.Folder) => GoogleAppsScript.Spreadsheet.Spreadsheet}
+ *
  */
 
-const buildHub = (expSetup, parent) => {
+const buildHub = expSetup => parent => {
 	const samplesArr = getSamples(expSetup);
 	const { hubName } = expSetup.misc;
 	const callback = insertProperSheet(expSetup);

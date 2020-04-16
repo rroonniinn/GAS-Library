@@ -1,15 +1,10 @@
 /**
- * @typedef {import('../gas/styleSpreadsheet').SheetMassChangesOptions} SheetMassChangesOptions
- * @typedef {import('../gas/styleSheet').MassChangesOptions} MassChangesOptions
- */
-
-/**
  * Zwraca zmiany estetyczne do wprowadzenia w templacie
  * w arkuszach do których nie trafiają dane z eksperymentów
  * (Wyniki i helpers)
  * @param {Object} fileData Obiket pochodzący z configu z danymi dla danego arkusza
  * @param {string} title Tytuł eksperymentu
- * @returns {SheetMassChangesOptions}
+ * @returns {import('../gas/styleSpreadsheet').SheetMassChangesOptions}
  */
 
 const getStylinForOthers = (fileData, title) => ({
@@ -44,6 +39,7 @@ const getStylinForOthers = (fileData, title) => ({
 /**
  * Zwraca zmiany estetyczne do wprowadzenia w templacie w arkuszach z
  * wynikami eskperymentów
+ * @typedef {import('../gas/styleSheet').MassChangesOptions} MassChangesOptions
  * @param {Object} fileData Obiket pochodzący z configu z danymi dla danego arkusza
  * @returns {[string,MassChangesOptions][]}
  */
