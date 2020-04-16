@@ -13,7 +13,8 @@ import { stylingChart } from './stylingChart';
  */
 
 /**
- * Tworzy pliki z wynikami eksperymentów (w przekazanym folderze)
+ * Tworzy pliki z wynikami eksperymentów (w przekazanym folderze) oraz
+ * umieszcza w propsach skryptu id utworzonych plików
  * @param {ExpSetup} expSetup Obiekt z ustawieniami eksperymentu
  * @param {GoogleAppsScript.Drive.Folder} folder Folder w którym zostaną umieszczone pliku
  * @param {{}} urls Pusty obiekt do którego funkcja wrzuci Id plików wynikowych
