@@ -33,9 +33,8 @@
  * Obiekt z zadaniem do wykonania
  * @typedef {Object} ExpTasks Dane na temat funkcji.
  * @property {string} geo Do którego pliku ma wklejać dane. Musi odpowiadać obiektowi printTo z EXP_SETUP w configu
- * @property {string} sheet Nazwa arkusza do którego mają być wklejone wyniki
  * @property {function} callback Skurowana funkcja do wykonania
- * @property {string} desc Opis jakie pojawi się w pliku z wynikami
+ * @property {string} sheetSym Symbol arkusza do którego mają być wklejone dane (małymi litrami)
  */
 
 /**

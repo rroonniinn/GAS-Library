@@ -24,7 +24,6 @@ const performanceCheckerObj = (
 	const startTime = new Date().getTime();
 	const res = callback();
 	const time = (new Date().getTime() - startTime) / 1000;
-	console.log('---- PODLICZAM TIMER ----');
 	logResults.push([new Date(), descA, time, descB, descC]);
 	return res;
 };

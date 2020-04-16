@@ -6,7 +6,7 @@
  * @param {1|5|10|15|30} mins Interwał minutowy
  */
 
-const startMinuteTrigger = (callback, mins) => {
+const setEveryMin = (callback, mins) => {
 	ScriptApp.newTrigger(callback)
 		.timeBased()
 		.everyMinutes(mins)
@@ -14,13 +14,12 @@ const startMinuteTrigger = (callback, mins) => {
 };
 /**
  * Odpala wskazaną akcję co określoną liczbę godzin
- *
  * @param {string} callback Nazwa funkcji do odpalenia
  * (musi być dostępna w obiekcie global)
  * @param {number} h Interwał godzinny
  */
 
-const startHourTrigger = (callback, h) => {
+const setEveryH = (callback, h) => {
 	ScriptApp.newTrigger(callback)
 		.timeBased()
 		.everyHours(h)
@@ -29,10 +28,9 @@ const startHourTrigger = (callback, h) => {
 
 /**
  * Usuwa wszystki triggery czasowe
- *
  */
 
-const cancelTimeTriggers = () => {
+const stopTimeTriggers = () => {
 	const clock = ScriptApp.TriggerSource.CLOCK;
 	const del = ScriptApp.deleteTrigger;
 	const triggers = ScriptApp.getProjectTriggers();
@@ -42,4 +40,4 @@ const cancelTimeTriggers = () => {
 	});
 };
 
-export { startMinuteTrigger, startHourTrigger, cancelTimeTriggers };
+export { setEveryMin, setEveryH, stopTimeTriggers };
