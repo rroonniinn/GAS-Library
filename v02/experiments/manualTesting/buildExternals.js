@@ -7,7 +7,7 @@ const url =
 const folder = getFolder(url);
 
 const buildExternals = {
-	a1: () => fn(EXP_SETUP)(folder),
+	a1: () => fn(folder)(EXP_SETUP),
 };
 
 export { buildExternals };

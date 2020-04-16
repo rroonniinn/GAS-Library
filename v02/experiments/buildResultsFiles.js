@@ -47,12 +47,14 @@ const buildResultFile = (expSetup, folder, urls) => ([geo, fileData]) => {
 };
 
 /**
- * Tworzy i formatuje arkusze służące do wklejania wyników eksperymentów
- * @param {ExpSetup} expSetup Plik config eksperymentu
+ * Tworzy i formatuje arkusze służące do wklejania wyników eksperymentów.
+ * URLe ładuje do propsów skryptu
  * @param {GoogleAppsScript.Drive.Folder} folder - Folder, w którym znajduje mają się znaleźć pliki
+ * @returns  {(expSetup: ExpSetup) => Object<string, string>} Obiekt z urleami powstałych plików
  */
 
-const buildResultsFiles = (expSetup, folder) => {
+// @ts-ignore
+const buildResultsFiles = folder => expSetup => {
 	const { printTo } = expSetup;
 
 	// Do poniższego obiektu trafiają url powstałych plików
@@ -65,6 +67,7 @@ const buildResultsFiles = (expSetup, folder) => {
 
 	// Uzyskane urle ładowane są do propsów
 	addToProps('script', 'PRINT_TO_PROPS', urls);
+	return urls;
 };
 
 export { buildResultsFiles };

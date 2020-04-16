@@ -1,23 +1,26 @@
 import { deleteSheets } from '../../v01/gas/deleteSheets';
 import { getSamples } from './getSamples';
 import { insertProperSheet } from './insertProperSheet';
+import { isEmpty } from '../../v01/utils/isEmpty';
 
 /**
  * Dodaje do Skoroszytu ze skryptem arkusze z danymi do eksperymentu
- * @param {import('./types').ExpSetup} expSetup Plik config eksperymentu
- * @param {boolean} deleteOthers Czy usuwać wcześniej istniejące w pliku arkusze.
- * Domyślnie tak.
- * @returns {GoogleAppsScript.Spreadsheet.Spreadsheet}
+ * Wykonuje się tylko jeśli są zdefiniowane dane dla eks local. Jeśli
+ * nie ma definicji eksperymentu zwraca null.
+ * @param {boolean} deleteExisting Czy usuwać wcześniej istniejące arkusze w pliku lokalnym
+ * @returns {(expSetup: import('./types').ExpSetup) => GoogleAppsScript.Spreadsheet.Spreadsheet|null} Spreadsheet lub null
  */
 
-const buildLocal = (expSetup, deleteOthers = true) => {
+const buildLocal = (deleteExisting = true) => expSetup => {
+	if (isEmpty(expSetup.printTo.loc)) return null;
+
 	const samplesArr = getSamples(expSetup);
 	const callback = insertProperSheet(expSetup);
 
 	const spreadsheet = SpreadsheetApp.getActive();
 	samplesArr.map(({ size }) => size).forEach(callback(spreadsheet));
 
-	if (deleteOthers) {
+	if (deleteExisting) {
 		deleteSheets(
 			spreadsheet,
 			sheet =>

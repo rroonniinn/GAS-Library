@@ -8,9 +8,9 @@
  * wprowadzić go w środek kompozycji,
  * to musimy go połączyć z tapem
  *
- * @param {*} args Funkcje mające się wykonać sekwencyjnie na danym
+ * @param {Function[]} args Funkcje mające się wykonać sekwencyjnie na danym
  * zestawie danych
- * @return {void}
+ * @returns {(val: any) => void}
  */
 
 const seq = (...args) => val => {

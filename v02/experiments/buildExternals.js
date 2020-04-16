@@ -3,16 +3,20 @@ import { insertProperSheet } from './insertProperSheet';
 import { deleteSheets } from '../../v01/gas/deleteSheets';
 import { addToProps } from '../../v01/gas/properties';
 import { getSamples } from './getSamples';
+import { isEmpty } from '../../v01/utils/isEmpty';
 
 /**
  * Tworzy pliki z danymi do eksperymentów external dodając ich id do
- * propsów skryptu
- * @param {import('./types').ExpSetup} expSetup Plik config eksperymentu
- * @returns {(parent: GoogleAppsScript.Drive.Folder) => Object<string, string>}
+ * propsów skryptu. Wykonuje się tylko jeśli są zdefiniowane dane dla
+ * eks ext. Jeśli nie ma definicji eksperymentu zwraca null.
+ * @param {GoogleAppsScript.Drive.Folder} parent
+ * @returns {(expSetup: import('./types').ExpSetup) => Object<string, string>|null}
  */
 
 // @ts-ignore
-const buildExternals = expSetup => parent => {
+const buildExternals = parent => expSetup => {
+	if (isEmpty(expSetup.printTo.ext)) return null;
+
 	const urls = {};
 	const samplesArr = getSamples(expSetup);
 	const { externalsSheetName, externalsPrefix } = expSetup.misc;
