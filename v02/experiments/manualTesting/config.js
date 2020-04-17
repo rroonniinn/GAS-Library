@@ -21,7 +21,7 @@ const EXP_SETUP = {
 		s7: 8000,
 		s8: 16000,
 	},
-	printTo: {
+	results: {
 		loc: {
 			prefix: 'A1',
 			name: 'Local',
@@ -84,7 +84,7 @@ const EXP_SETUP = {
 		},
 	},
 	misc: {
-		templatPrintTo:
+		resultsTemplate:
 			'https://docs.google.com/spreadsheets/d/139mlb1yO8e_T8Bs25yX5kTiHaCvSNRuQf8RRyH2WpTg/edit#gid=1941260253',
 		printToSubname: 'Wyniki',
 		dataFolder: '_Pliki',

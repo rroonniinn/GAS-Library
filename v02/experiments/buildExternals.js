@@ -1,9 +1,10 @@
 import { createSpreadsheetIn } from '../gas/createSpreadsheetIn';
-import { insertProperSheet } from './insertProperSheet';
 import { deleteSheets } from '../../v01/gas/deleteSheets';
 import { addToProps } from '../../v01/gas/properties';
-import { getSamples } from './getSamples';
 import { isEmpty } from '../../v01/utils/isEmpty';
+
+import { getSamples } from './getSamples';
+import { insertProperSheet } from './insertProperSheet';
 
 /**
  * Tworzy pliki z danymi do eksperymentów external dodając ich id do
@@ -15,7 +16,7 @@ import { isEmpty } from '../../v01/utils/isEmpty';
 
 // @ts-ignore
 const buildExternals = parent => expSetup => {
-	if (isEmpty(expSetup.printTo.ext)) return null;
+	if (isEmpty(expSetup.results.ext)) return null;
 
 	const urls = {};
 	const samplesArr = getSamples(expSetup);

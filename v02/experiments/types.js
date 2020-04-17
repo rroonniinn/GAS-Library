@@ -5,7 +5,7 @@
  * @property {string} method Metoda eksperymentu. Pojawia się w opisie wyniku w piątek kolumnie. Mało istotna obecnie
  * @property {ExpStructure} structure Struktura arkusza biorącego udział w ekspermencie
  * @property {Object<string, number>} samples Rozmiar arkuszy biorących udział w eksperymencie. Dostępnych jest maksymalnie 8 slotów. Można użyć mniej nie tworząc właściwości s2-s8. Musi być min jeden arkusz.
- * @property {Object<string, PrintResults>} printTo Info na temat plików, do których wklajane są dane z eksperymentów
+ * @property {Object<string, PrintResults>} results Info na temat plików, do których wklajane są dane z eksperymentów
  * @property {ExpMisc} misc Dodatkowe ustawienia rzadko modyfikowane
  *
  */
@@ -21,7 +21,7 @@
 /**
  * Ustawienia eskperymentu rzadko zmieniane
  * @typedef {Object} ExpMisc
- * @property {string} templatPrintTo URL do tempaltu z wynikiami eksperymntów
+ * @property {string} resultsTemplate URL do tempaltu z wynikiami eksperymntów
  * @property {string} printToSubname Nazwa pojawiająca się w tytule pliku z wynikami
  * @property {string} dataFolder Nazwa katalogu z danymi testowymi
  * @property {string} externalsSheetName Nazwa arkusza z danymi dla plików do eksperymentu External
@@ -32,7 +32,7 @@
 /**
  * Obiekt z zadaniem do wykonania
  * @typedef {Object} ExpTasks Dane na temat funkcji.
- * @property {string} geo Do którego pliku ma wklejać dane. Musi odpowiadać obiektowi printTo z EXP_SETUP w configu
+ * @property {string} geo Do którego pliku ma wklejać dane. Musi odpowiadać obiektowi results z EXP_SETUP w configu
  * @property {function} callback Skurowana funkcja do wykonania
  * @property {string} sheetSym Symbol arkusza do którego mają być wklejone dane (małymi litrami)
  */

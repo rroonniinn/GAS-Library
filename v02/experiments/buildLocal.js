@@ -12,7 +12,7 @@ import { isEmpty } from '../../v01/utils/isEmpty';
  */
 
 const buildLocal = (deleteExisting = true) => expSetup => {
-	if (isEmpty(expSetup.printTo.loc)) return null;
+	if (isEmpty(expSetup.results.loc)) return null;
 
 	const samplesArr = getSamples(expSetup);
 	const callback = insertProperSheet(expSetup);

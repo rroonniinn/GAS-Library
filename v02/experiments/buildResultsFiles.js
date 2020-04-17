@@ -23,13 +23,13 @@ import { stylingChart } from './stylingChart';
 
 const buildResultFile = (expSetup, folder, urls) => ([geo, fileData]) => {
 	const { title, misc } = expSetup;
-	const { templatPrintTo, printToSubname } = misc;
+	const { resultsTemplate, printToSubname } = misc;
 
 	/* Nazwa pliku */
 	const name = `${title} : ${printToSubname} : ${fileData.prefix}. ${fileData.name}`;
 
 	/* Nowy plik */
-	const newFileId = copyFile(templatPrintTo, name, folder).getId();
+	const newFileId = copyFile(resultsTemplate, name, folder).getId();
 
 	/* Zapisanie jego ID w przekazanym by reference obiekcie url */
 	urls[geo] = newFileId;
@@ -55,13 +55,13 @@ const buildResultFile = (expSetup, folder, urls) => ([geo, fileData]) => {
 
 // @ts-ignore
 const buildResultsFiles = folder => expSetup => {
-	const { printTo } = expSetup;
+	const { results } = expSetup;
 
 	// Do poniższego obiektu trafiają url powstałych plików
 	const urls = {};
 
 	// Dla każdego 'geo' tworzony jest nowy plik z wynikami
-	Object.entries(printTo).forEach(
+	Object.entries(results).forEach(
 		buildResultFile(expSetup, folder, urls)
 	);
 

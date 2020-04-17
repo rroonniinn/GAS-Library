@@ -15,7 +15,7 @@ import { isEmpty } from '../../v01/utils/isEmpty';
  */
 
 const buildHub = parent => expSetup => {
-	if (isEmpty(expSetup.printTo.hub)) return null;
+	if (isEmpty(expSetup.results.hub)) return null;
 
 	const samplesArr = getSamples(expSetup);
 	const { hubName } = expSetup.misc;

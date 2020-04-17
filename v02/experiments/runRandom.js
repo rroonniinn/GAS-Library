@@ -4,7 +4,7 @@ import { run } from './run';
 
 /**
  * Generator obiektu dla funkcji / zadania
- * @param {[string, function, string][]} arr Do którego pliku ma wklejać dane. Musi odpowiadać obiektowi printTo z EXP_SETUP z configu
+ * @param {[string, function, string][]} arr Do którego pliku ma wklejać dane. Musi odpowiadać obiektowi results z EXP_SETUP z configu
  * @returns {import('./types').ExpTasks[]}
  */
 

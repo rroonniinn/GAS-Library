@@ -27,9 +27,9 @@ const loggerRes = [];
  */
 
 const run = (target, task, expSetup) => {
-	const { title, printTo } = expSetup;
+	const { title, results } = expSetup;
 	const { geo, sheetSym, callback } = task;
-	const desc = `${title} : ${printTo[geo].name} : ${printTo[geo].sheetsMeaning[sheetSym]}`;
+	const desc = `${title} : ${results[geo].name} : ${results[geo].sheetsMeaning[sheetSym]}`;
 	const sheet = sheetSym.toUpperCase();
 
 	performanceCheckerObj(
