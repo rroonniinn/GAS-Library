@@ -27,6 +27,11 @@
  * @property {string} externalsSheetName Nazwa arkusza z danymi dla plików do eksperymentu External
  * @property {string} externalsPrefix Przedrostek nazwy plików z danymi dla eskperymentów External
  * @property {string} hubName Nazwa pliku z danymi do eksperymentów Hub
+ * @property {string} dashboardName Sufix doklejana do nazwy dashboardu
+ * @property {string} dashboardMainSheet Nazwa głównego akrusza w dashboardzie
+ * @property {string} dashboardDataSheet Nazwa akrusza z danymi w dashboardzie
+ * @property {string} dashboardTemplate URL do templatu dashboardu
+ * @property {string} dashboardColor CSS koloru dla dashboardu
  */
 
 /**

@@ -50,24 +50,24 @@ const buildResultFile = (expSetup, folder, urls) => ([geo, fileData]) => {
  * Tworzy i formatuje arkusze służące do wklejania wyników eksperymentów.
  * URLe ładuje do propsów skryptu
  * @param {GoogleAppsScript.Drive.Folder} folder - Folder, w którym znajduje mają się znaleźć pliki
- * @returns  {(expSetup: ExpSetup) => Object<string, string>} Obiekt z urleami powstałych plików
+ * @returns  {(expSetup: ExpSetup) => Object<string, string>} Obiekt z IDs powstałych plików
  */
 
 // @ts-ignore
 const buildResultsFiles = folder => expSetup => {
 	const { results } = expSetup;
 
-	// Do poniższego obiektu trafiają url powstałych plików
-	const urls = {};
+	// Do poniższego obiektu trafiają ID powstałych plików
+	const ids = {};
 
 	// Dla każdego 'geo' tworzony jest nowy plik z wynikami
 	Object.entries(results).forEach(
-		buildResultFile(expSetup, folder, urls)
+		buildResultFile(expSetup, folder, ids)
 	);
 
 	// Uzyskane urle ładowane są do propsów
-	addToProps('script', 'PRINT_TO_PROPS', urls);
-	return urls;
+	addToProps('script', 'PRINT_TO_PROPS', ids);
+	return ids;
 };
 
 export { buildResultsFiles };

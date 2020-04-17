@@ -5,6 +5,8 @@ import { createFolder } from '../gas/createFolder';
 import { buildLocal } from './buildLocal';
 import { buildHub } from './buildHub';
 import { buildExternals } from './buildExternals';
+import { buildDashboard } from './buildDashboard';
+import { pipe } from '../fp/pipe';
 
 /**
  * Folder, w którym znajduje się plik ze skryptem (bouund) eksperymentu
@@ -27,7 +29,7 @@ const buildStructure = (expSetup, deleteExisting = true) => {
 	const dirData = createFolder(dirExp, dataFolder);
 
 	seq(
-		buildResultsFiles(dirExp),
+		pipe(buildResultsFiles(dirExp), buildDashboard(expSetup, dirExp)),
 		buildLocal(deleteExisting),
 		buildHub(dirData),
 		buildExternals(dirData)

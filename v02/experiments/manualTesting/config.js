@@ -1,4 +1,13 @@
 /**
+ * Kolory eksperymentu
+ */
+const colors = {
+	light: '#ea4335',
+	dark: '#c32e21',
+	accent: '#ffff00',
+};
+
+/**
  * Ustawienie całego eksperymentu
  * @type {import('../types').ExpSetup} EXP_SETUP
  */
@@ -9,7 +18,7 @@ const EXP_SETUP = {
 	structure: {
 		fixed: 'col',
 		fixedSize: 15,
-		randomData: true,
+		randomData: false,
 	},
 	samples: {
 		s1: 100,
@@ -23,56 +32,56 @@ const EXP_SETUP = {
 	},
 	results: {
 		loc: {
-			prefix: 'A1',
+			prefix: 'A',
 			name: 'Local',
-			colorLight: '#ea4335',
-			colorDark: '#c32e21',
-			accentColor: '#ffff00',
+			colorLight: colors.light,
+			colorDark: colors.dark,
+			accentColor: colors.accent,
 			sheetsMeaning: {
 				a: 'nothing',
 				b: 'default',
 				c: 'full',
-				d: '',
+				d: 'native',
 				e: '',
 				f: '',
 			},
 		},
 		hub: {
-			prefix: 'B1',
+			prefix: 'B',
 			name: 'Hub',
-			colorLight: '#ea4335',
-			colorDark: '#c32e21',
-			accentColor: '#ffff00',
+			colorLight: colors.light,
+			colorDark: colors.dark,
+			accentColor: colors.accent,
 			sheetsMeaning: {
 				a: 'nothing',
 				b: 'default',
 				c: 'full',
-				d: '',
+				d: 'native',
 				e: '',
 				f: '',
 			},
 		},
 		ext: {
-			prefix: 'C1',
+			prefix: 'C',
 			name: 'External',
-			colorLight: '#ea4335',
-			colorDark: '#c32e21',
-			accentColor: '#ffff00',
+			colorLight: colors.light,
+			colorDark: colors.dark,
+			accentColor: colors.accent,
 			sheetsMeaning: {
 				a: 'nothing',
 				b: 'default',
 				c: 'full',
-				d: '',
+				d: 'native',
 				e: '',
 				f: '',
 			},
 		},
 		cache: {
-			prefix: 'D1',
+			prefix: 'D',
 			name: 'Cache',
-			colorLight: '#ea4335',
-			colorDark: '#c32e21',
-			accentColor: '#ffff00',
+			colorLight: colors.light,
+			colorDark: colors.dark,
+			accentColor: colors.accent,
 			sheetsMeaning: {
 				a: '1 min',
 				b: '15 min',
@@ -91,6 +100,12 @@ const EXP_SETUP = {
 		externalsSheetName: 'Dane',
 		externalsPrefix: 'file',
 		hubName: 'externalHub',
+		dashboardName: 'Dashboard',
+		dashboardMainSheet: 'Dashboard',
+		dashboardDataSheet: 'h_dropData',
+		dashboardTemplate:
+			'https://docs.google.com/spreadsheets/d/1uPhrwk4YD0-7ZXDVdKKUZ5ACjk-WCfbhBBqIAe4SiUI/edit#gid=880283590',
+		dashboardColor: colors.light,
 	},
 };
 
