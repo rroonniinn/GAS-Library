@@ -1,11 +1,12 @@
 import { copyFile } from '../gas/copyFile';
 import { styleSpreadsheet } from '../gas/styleSpreadsheet';
 
-// /**
-//  * Tworzy i formatuje dashboard spinający wszystkie wyniki
-//  * @param {GoogleAppsScript.Drive.Folder} folder - Folder, w którym znajduje mają się znaleźć pliki
-//  * @returns  {(expSetup: import('./types').ExpSetup) => any}
-//  */
+/**
+ * Tworzy i formatuje dashboard spinający wszystkie wyniki
+ * @param {import('./types').ExpSetup} expSetup Obiekt z ustawieniami eksperymentu
+ * @param {GoogleAppsScript.Drive.Folder} folder - Folder, w którym znajduje mają się znaleźć pliki
+ * @returns  {(ids: Object<string, string>) => void}
+ */
 
 const buildDashboard = (expSetup, folder) => ids => {
 	const { title, misc } = expSetup;

@@ -5,7 +5,8 @@ import { getSheet } from '../gas/getSheet';
 import { styleSheet } from '../gas/styleSheet';
 import { styleSpreadsheet } from '../gas/styleSpreadsheet';
 import { addToProps } from '../../v01/gas/properties';
-import { getStylinForOthers, gerStylingForResults } from './styling';
+
+import { getUtilsStyles, getResultsStyles } from './styling';
 import { stylingChart } from './stylingChart';
 
 /**
@@ -29,18 +30,21 @@ const buildResultFile = (expSetup, folder, urls) => ([geo, fileData]) => {
 	const name = `${title} : ${printToSubname} : ${fileData.prefix}. ${fileData.name}`;
 
 	/* Nowy plik */
-	const newFileId = copyFile(resultsTemplate, name, folder).getId();
+	const newFileId = copyFile(resultsTemplate, name, folder)
+		.setSharing(
+			DriveApp.Access.ANYONE_WITH_LINK,
+			DriveApp.Permission.VIEW
+		)
+		.getId();
 
 	/* Zapisanie jego ID w przekazanym by reference obiekcie url */
 	urls[geo] = newFileId;
 
 	/* Zmiany estetyczne */
-	styleSpreadsheet(newFileId, getStylinForOthers(fileData, title))
+	styleSpreadsheet(newFileId, getUtilsStyles(fileData, title))
 		.getSheets()
 		.filter(sheet => /[A-Z]$/.test(sheet.getName()))
-		.forEach(sheet =>
-			styleSheet(gerStylingForResults(fileData), sheet)
-		);
+		.forEach(sheet => styleSheet(getResultsStyles(fileData), sheet));
 
 	/* Formatowanie wykresu */
 	stylingChart(getSheet('Wyniki', newFileId), 'A', 13, fileData);
