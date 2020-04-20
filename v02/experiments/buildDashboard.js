@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { copyFile } from '../gas/copyFile';
 import { styleSpreadsheet } from '../gas/styleSpreadsheet';
 
@@ -41,6 +42,7 @@ const buildDashboard = (expSetup, folder) => ids => {
 			['A63:AQ82', { background: dashboardColor }],
 		],
 		[dashboardDataSheet]: [
+			['B2', { values: title }],
 			['B5', { values: urls[0] || '' }],
 			['J5', { values: urls[1] || '' }],
 			['R5', { values: urls[2] || '' }],

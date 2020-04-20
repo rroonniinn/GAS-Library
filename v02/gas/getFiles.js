@@ -1,9 +1,8 @@
+import { getFolder } from './getFolder';
+
 /**
  * Zwraca tablicę plików znajdujących się ze wskazanym folderze
- *
- * @memberof Lib_Gas
- *
- * @param {string} id ID folderu
+ * @param {string|GoogleAppsScript.Drive.Folder} folder ID, URL lub Folder
  * @param {string} [search] Opcjonalne Querry do wyszukiwania plików
  * np. <tt>'title contains "__MACOSX"'</tt>.
  * Jeśli jest przekazany to funkcja
@@ -11,8 +10,8 @@
  * Jeśli brak, to funkcja zwraca wszystkie pliki z katalogu.
  * @returns {array} Tablica plików
  */
-const getFiles = (id, search) => {
-	const rootFolder = DriveApp.getFolderById(id);
+const getFiles = (folder, search) => {
+	const rootFolder = getFolder(folder);
 
 	const files = !search
 		? rootFolder.getFiles()
@@ -26,5 +25,3 @@ const getFiles = (id, search) => {
 	return arr;
 };
 export { getFiles };
-
-// Poprawiona metoda znajudje się w ver 02

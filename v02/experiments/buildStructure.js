@@ -7,14 +7,7 @@ import { buildHub } from './buildHub';
 import { buildExternals } from './buildExternals';
 import { buildDashboard } from './buildDashboard';
 import { pipe } from '../fp/pipe';
-
-/**
- * Folder, w którym znajduje się plik ze skryptem (bouund) eksperymentu
- * @returns {GoogleAppsScript.Drive.Folder}
- *
- */
-const experimentRoot = () =>
-	getContainingFolder(SpreadsheetApp.getActive());
+import { resetStructure } from './resetStructure';
 
 /**
  * Na bazie pliku z konfigujracją eksperymentu, buduje całą strukturę plików,
@@ -25,7 +18,17 @@ const experimentRoot = () =>
  */
 const buildStructure = (expSetup, deleteExisting = true) => {
 	const { dataFolder } = expSetup.misc;
-	const dirExp = experimentRoot();
+	const scriptFile = SpreadsheetApp.getActive();
+
+	// Usuwa wcześniejsze pliki i arkusza
+	resetStructure(expSetup);
+
+	// Zmienia nazwę pliku ze skryptem
+	scriptFile.rename(
+		`${expSetup.title} : ${expSetup.misc.scriptFileSufix}`
+	);
+
+	const dirExp = getContainingFolder(scriptFile);
 	const dirData = createFolder(dirExp, dataFolder);
 
 	seq(

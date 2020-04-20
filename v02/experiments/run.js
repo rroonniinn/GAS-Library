@@ -1,8 +1,8 @@
 /* eslint-disable max-params */
-import { performanceCheckerObj } from '../../v01/utils/performanceCheckerObj';
-import { paste } from '../gas/paste';
 import { getSheet } from '../gas/getSheet';
+import { paste } from '../gas/paste';
 import { getProp } from '../../v01/gas/properties';
+import { performanceCheckerObj } from '../../v01/utils/performanceCheckerObj';
 
 /**
  * @type {Object<string, string>} Obiekt pobrany z propsów zawierający ID
@@ -34,7 +34,7 @@ const run = (target, task, expSetup) => {
 
 	performanceCheckerObj(
 		loggerRes,
-		callback(target),
+		() => callback(target),
 		target.printName,
 		desc,
 		expSetup.method

@@ -5,7 +5,7 @@
  * @property {string} method Metoda eksperymentu. Pojawia się w opisie wyniku w piątek kolumnie. Mało istotna obecnie
  * @property {ExpStructure} structure Struktura arkusza biorącego udział w ekspermencie
  * @property {Object<string, number>} samples Rozmiar arkuszy biorących udział w eksperymencie. Dostępnych jest maksymalnie 8 slotów. Można użyć mniej nie tworząc właściwości s2-s8. Musi być min jeden arkusz.
- * @property {Object<string, PrintResults>} results Info na temat plików, do których wklajane są dane z eksperymentów
+ * @property {GEO} results Info na temat plików, do których wklajane są dane z eksperymentów
  * @property {ExpMisc} misc Dodatkowe ustawienia rzadko modyfikowane
  *
  */
@@ -19,6 +19,15 @@
  */
 
 /**
+ * Możliwe opcje struktury eksperymentu
+ * @typedef {Object} GEO
+ * @property {PrintResults} [loc] - Strkutura plików - Lokalna
+ * @property {PrintResults} [hub] - Strkutura plików - Hub
+ * @property {PrintResults} [ext] - Strkutura plików - External
+ * @property {PrintResults} [cache] - Strkutura plików - Cache
+ */
+
+/**
  * Ustawienia eskperymentu rzadko zmieniane
  * @typedef {Object} ExpMisc
  * @property {string} resultsTemplate URL do tempaltu z wynikiami eksperymntów
@@ -26,6 +35,7 @@
  * @property {string} dataFolder Nazwa katalogu z danymi testowymi
  * @property {string} externalsSheetName Nazwa arkusza z danymi dla plików do eksperymentu External
  * @property {string} externalsPrefix Przedrostek nazwy plików z danymi dla eskperymentów External
+ * @property {string} scriptFileSufix Doklejka do nazwy pliku ze skryptem w którym są arkusze do eksperymentu lokalnego
  * @property {string} hubName Nazwa pliku z danymi do eksperymentów Hub
  * @property {string} dashboardName Sufix doklejana do nazwy dashboardu
  * @property {string} dashboardMainSheet Nazwa głównego akrusza w dashboardzie

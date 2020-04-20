@@ -17,3 +17,5 @@ const moveFilesToTrash = idArr => {
 	}
 };
 export { moveFilesToTrash };
+
+// TODO: należał przebudować aby bral jako argument również obiekty File oraz url
