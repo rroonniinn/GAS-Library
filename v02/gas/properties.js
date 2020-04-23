@@ -30,7 +30,7 @@ const crusherProps = {
 	 * @param {string} key Klucz danych z cacha
 	 * @param {any} vals Dane do wprowadzenia
 	 */
-	put(key, vals, t) {
+	put(key, vals) {
 		this.init.put(`cr-${key}`, vals);
 	},
 };
