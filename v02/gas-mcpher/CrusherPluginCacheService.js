@@ -1,7 +1,7 @@
 /* eslint-disable max-params */
-import { isUndefined } from './isUndefined';
-import { expBackoff } from './expBackoff';
 import { Squeeze } from './Squeeze';
+import { expBackoff } from './expBackoff';
+import { isUndefined } from './isUndefined';
 
 /* eslint-disable max-lines-per-function */
 
@@ -79,7 +79,7 @@ function CrusherPluginCacheService() {
 		settings_ = settings || {};
 
 		// set default chunkzise for cacheservice
-		settings_.chunkSize = settings_.chunkSize || 100000;
+		settings_.chunkSize = settings_.chunkSize || 100 * 1000; // 100 kb
 
 		// respect digest can reduce the number of chunks read,
 		// but may return stale

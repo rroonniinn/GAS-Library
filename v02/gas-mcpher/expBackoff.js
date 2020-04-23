@@ -4,26 +4,25 @@ import { errorQualifies } from './errorQualifies';
 /* eslint-disable complexity */
 /* eslint-disable max-params */
 /* eslint-disable max-lines-per-function */
+
+/**
+ * @typedef {Object} OPTIONS
+ * @property {number} [sleepFor=750] optional amount of time to sleep for on the first failure in missliseconds
+ * @property {number} [maxAttempts=5] optional maximum number of amounts to try
+ * @property {boolean} [logAttempts=true] log re-attempts to Logger
+ * @property {function} [checker] function to check whether error is retryable
+ * @property {function} [lookahead] function to check response and force retry (passes response, attemprs)
+ */
+
 /**
  * recursive rateLimitExpBackoff()
- * @param {function} callBack some function to call that might return rate
- * limit exception
- * @param {object} options properties as below
- * @param {number} [attempts=1] optional the attempt number of this
- * instance - usually only used recursively and not user supplied
- * @param {number} [options.sleepFor=750] optional amount of time to sleep
- * for on the first failure in missliseconds
- * @param {number} [options.maxAttempts=5] optional maximum number
- * of amounts to try
- * @param {boolean} [options.logAttempts=true] log re-attempts to Logger
- * @param {function} [options.checker] function to check whether error
- * is retryable
- * @param {function} [options.lookahead] function to check response
- * and force retry (passes response,attemprs)
+ * @param {function} callBack some function to call that might return rate limit exception
+ * @param {OPTIONS} [options] properties as below
+ * @param {number} [attempts = 1] optional the attempt number of this instance - usually only used recursively and not user supplied
  * @return {*} results of the callback
  */
 
-const expBackoff = (callBack, options, attempts) => {
+const expBackoff = (callBack, options, attempts = 1) => {
 	// sleepFor = Math.abs(options.sleepFor ||
 
 	// eslint-disable-next-line no-param-reassign
@@ -43,18 +42,16 @@ const expBackoff = (callBack, options, attempts) => {
 		}
 	});
 
-	// for recursion
-	// eslint-disable-next-line no-param-reassign
-	attempts = attempts || 1;
-
 	// make sure that the checker is really a function
 	if (typeof options.checker !== 'function') {
+		// @ts-ignore
 		throw errorStack('if you specify a checker it must be a function');
 	}
 
 	// check properly constructed
 	if (!callBack || typeof callBack !== 'function') {
 		throw errorStack(
+			// @ts-ignore
 			'you need to specify a function for rateLimitBackoff to execute'
 		);
 	}
@@ -63,6 +60,7 @@ const expBackoff = (callBack, options, attempts) => {
 		// give up?
 		if (attempts > options.maxAttempts) {
 			throw errorStack(
+				// @ts-ignore
 				`${theErr} (tried backing off ${attempts - 1} times`
 			);
 		} else {
