@@ -25,6 +25,8 @@
  * @property {PrintResults} [hub] - Strkutura plików - Hub
  * @property {PrintResults} [ext] - Strkutura plików - External
  * @property {PrintResults} [cache] - Strkutura plików - Cache
+ * @property {PrintResults} [prop] - Strkutura plików - Properties
+ * @property {PrintResults} [memo] - Strkutura plików - Memory
  */
 
 /**

@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import { CrusherPluginCacheService } from '../gas-mcpher/CrusherPluginCacheService';
+import { CrusherPluginPropertyService } from '../gas-mcpher/CrusherPluginPropertyService';
 
 /**
  * Cache Object
@@ -13,7 +13,7 @@ import { CrusherPluginCacheService } from '../gas-mcpher/CrusherPluginCacheServi
  * @type {CacheObject} obj
  */
 const crusherProps = {
-	init: new CrusherPluginCacheService().init({
+	init: new CrusherPluginPropertyService().init({
 		store: PropertiesService.getScriptProperties(),
 	}),
 
