@@ -15,4 +15,5 @@ const randomIntegersArray2d = (rows, cols) => {
 	}
 	return arr;
 };
+
 export { randomIntegersArray2d };

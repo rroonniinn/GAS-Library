@@ -4,8 +4,8 @@
  * z resztą kompozycji. Jej działanie sprowadza się do wykonania przekazanej funkcji
  * na przekazanym obiekcie a następnie zwróceniu niezmodyfikowanego obiektu
  *
- * @param {Function} Funkcja do przetworzenia przekazanej na dalszym etapie wartości
- * @returns {any} Przekazana na dalszym etapie wartość
+ * @param {Function} fn do przetworzenia przekazanej na dalszym etapie wartości
+ * @returns {(a: *) => a} Przekazana na dalszym etapie wartość
  */
 
 const tap = fn => a => {

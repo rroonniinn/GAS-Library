@@ -8,7 +8,7 @@ import { getFolder } from './getFolder';
  * Jeśli jest przekazany to funkcja
  * zwraca tylko pliki spełniające warunek zawarty w querry.
  * Jeśli brak, to funkcja zwraca wszystkie pliki z katalogu.
- * @returns {array} Tablica plików
+ * @returns {GoogleAppsScript.Drive.File[]} Tablica plików
  */
 const getFiles = (folder, search) => {
 	const rootFolder = getFolder(folder);

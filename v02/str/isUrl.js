@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
+
 /**
  * Sprawdza czy przekazany string jest urlem.
  * Wzięte stąd: https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
- *
  * @param {string} str
  */
 

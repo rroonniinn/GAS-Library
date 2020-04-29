@@ -1,6 +1,19 @@
-// @ts-nocheck
 /* eslint-disable max-params */
-import { pipe } from '../fp/pipe';
+import { getSpreadsheet } from './getSpreadsheet';
+
+/**
+ * @typedef {GoogleAppsScript.Spreadsheet.Spreadsheet} Spreadsheet
+ * @typedef {GoogleAppsScript.Spreadsheet.Sheet} Sheet
+ */
+
+/**
+ * Funkcja przekazywana do metody filter() aplikowanej na Sheet[].
+ * @callback filterCallback
+ * @param {Sheet} Sheet Arkusz
+ * @param {number} [i] Index
+ * @param {array} [array] Tablica arkuszy
+ * @return {boolean}
+ */
 
 /**
  * Kopiuje arkusze które pasują do przekazanego callbacku z jednego
@@ -8,40 +21,35 @@ import { pipe } from '../fp/pipe';
  * taki arkusz - wtedy dokleja info 'Copy'. Jeśli arkusze były uktyte w
  * źródłowym pliku w nowym zostaną 'odkryte'
  *
- * @param {string} sourceId Id pliku źródłowego
- * @param {string} targetId Id pliku docelowego
- * @param {Function} callback np. sheet => sheet.getName().includes('res')
- * @returns {GoogleAppsScript.Spreadsheet.Spreadsheet} Plik do którego
- * zostały skopiowane arkusze
-
+ * @param {string|Spreadsheet} source Obiekt, id lub url
+ * @param {string|Spreadsheet} target Obiekt, id lub url
+ * @param {filterCallback} callback Funkcja zwracająca boolean
+ * @example copySheetsToOther('xxxxxx', 'xxxxxxx', sheet => sheet.getName().includes('abc'))
+ * @returns {Spreadsheet} Skoroszyt do którego zostały skopiowane arkusze
  */
 
-const copySheetsToOther = (sourceId, targetId, callback) => {
-	const targetSpreadsheet = SpreadsheetApp.openById(targetId);
-	const existing = targetSpreadsheet
-		.getSheets()
-		.map(sheet => sheet.getName());
+const copySheetsToOther = (source, target, callback) => {
+	const dest = getSpreadsheet(target);
+	const existing = dest.getSheets().map(sheet => sheet.getName());
 
-	const setName = sheet => {
-		const orgName = sheet.getName();
-		return existing.includes(orgName) ? `Copy ${orgName}` : orgName;
+	const getName = sheet => {
+		const name = sheet.getName();
+		return existing.includes(name) ? `Copy ${name}` : name;
 	};
 
-	pipe(
-		() =>
-			SpreadsheetApp.openById(sourceId)
-				.getSheets()
-				.filter(callback),
-		arr =>
-			arr.forEach(sheet =>
-				sheet
-					.copyTo(targetSpreadsheet)
-					.setName(setName(sheet))
-					.showSheet()
-			)
-	)();
+	getSpreadsheet(source)
+		.getSheets()
+		.filter(callback)
+		.forEach(sheet =>
+			sheet
+				.copyTo(dest)
+				.setName(getName(sheet))
+				.showSheet()
+		);
 
-	return targetSpreadsheet;
+	return dest;
 };
 
 export { copySheetsToOther };
+
+// TODO można zmienić nazwę na copySheetsTo

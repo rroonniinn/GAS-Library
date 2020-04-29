@@ -13,3 +13,5 @@ const addFileToFolder = (folder, fileId) => {
 };
 
 export { addFileToFolder };
+
+//  W lib 1 znajduje się gorsza wersja
