@@ -11,4 +11,5 @@
  * @param {Date} dateObj Obiekt daty do porówania
  * @returns {Date}
  */
-export const getNormalizedDate = dateObj => new Date(dateObj.toDateString());
+export const getNormalizedDate = dateObj =>
+	new Date(dateObj.toDateString());

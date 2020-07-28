@@ -25,7 +25,6 @@ const getDaysDiffRelative = (a, b) => {
 		dateB.getDate()
 	);
 
-	// Kolejność podawanych day bez znaczenia
 	const timeDiff = utc2 - utc1;
 
 	return Math.floor(timeDiff / _MS_PER_DAY);

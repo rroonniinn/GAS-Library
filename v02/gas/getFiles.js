@@ -1,6 +1,10 @@
 import { getFolder } from './getFolder';
 
 /**
+ * Search query: https://developers.google.com/drive/api/v2/ref-search-terms
+ */
+
+/**
  * Zwraca tablicę plików znajdujących się ze wskazanym folderze
  * @param {string|GoogleAppsScript.Drive.Folder} folder ID, URL lub Folder
  * @param {string} [search] Opcjonalne Querry do wyszukiwania plików

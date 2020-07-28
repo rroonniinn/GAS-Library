@@ -15,7 +15,7 @@ import { styleSheet } from './styleSheet';
  * Wkleja odpwiednie formaty i treści do zakresów w arkuszach zdefiowanych
  * w przekazanych jako argument SheetMassChangesOptions
  * @param {string|GoogleAppsScript.Spreadsheet.Spreadsheet} val Obiekt Skoroszytu lub ID lub Url Spreadsheetu
- * @param {SheetMassChangesOptions} allChanges  ['Nazwa arkusza', [[range, {formats}]]]
+ * @param {SheetMassChangesOptions} allChanges  {'Nazwa arkusza':[[range, {formats}]]}
  */
 
 const styleSpreadsheet = (val, allChanges) => {

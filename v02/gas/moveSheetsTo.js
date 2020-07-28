@@ -4,7 +4,6 @@ import { getSpreadsheet } from './getSpreadsheet';
 /**
  * @typedef {GoogleAppsScript.Spreadsheet.Spreadsheet} Spreadsheet
  * @typedef {GoogleAppsScript.Spreadsheet.Sheet} Sheet
- * @typedef {GoogleAppsScript.Drive.File} File
  */
 
 /**
@@ -17,19 +16,19 @@ import { getSpreadsheet } from './getSpreadsheet';
  */
 
 /**
- * Kopiuje arkusze które pasują do przekazanego callbacku z jednego
+ * Przenosi arkusze które pasują do przekazanego callbacku z jednego
  * arkusza do drugiego. Nazwy pozostają takie same, chyba że już istnieje
  * taki arkusz - wtedy dokleja info 'Copy'. Jeśli arkusze były uktyte w
  * źródłowym pliku w nowym zostaną 'odkryte'
  *
- * @param {string|Spreadsheet|File} source Obiekt, id lub url
- * @param {string|Spreadsheet|File} target Obiekt, id lub url
+ * @param {string|Spreadsheet} source Obiekt, id lub url
+ * @param {string|Spreadsheet} target Obiekt, id lub url
  * @param {filterCallback} callback Funkcja zwracająca boolean
  * @example copySheetsToOther('xxxxxx', 'xxxxxxx', sheet => sheet.getName().includes('abc'))
  * @returns {Spreadsheet} Skoroszyt do którego zostały skopiowane arkusze
  */
 
-const copySheetsToOther = (source, target, callback) => {
+const moveSheetsTo = (source, target, callback) => {
 	const dest = getSpreadsheet(target);
 	const existing = dest.getSheets().map(sheet => sheet.getName());
 
@@ -41,16 +40,17 @@ const copySheetsToOther = (source, target, callback) => {
 	getSpreadsheet(source)
 		.getSheets()
 		.filter(callback)
-		.forEach(sheet =>
+		.forEach(sheet => {
 			sheet
 				.copyTo(dest)
 				.setName(getName(sheet))
-				.showSheet()
-		);
+				.showSheet();
+
+			// @ts-ignore
+			source.deleteSheet(sheet);
+		});
 
 	return dest;
 };
 
-export { copySheetsToOther };
-
-// TODO można zmienić nazwę na copySheetsTo
+export { moveSheetsTo };

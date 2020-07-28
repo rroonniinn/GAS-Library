@@ -1,6 +1,7 @@
 /* eslint-disable max-params */
-import { isArray } from './isArray';
 import { counter } from '../../v01/utils/counter';
+
+import { isArray } from './isArray';
 
 /**
  * Helper
@@ -19,7 +20,7 @@ const print = (count, val, locCounter) =>
  * separatory. Sposób użycia poniżej (pod funkcją)
  * @param {array|string[]} elements Tablica elementów, które mają się znaleźć w menu
  * @param {string} name Nazwa menu
- * @param {boolean} [c=false]
+ * @param {boolean} [c=false] Dodaje numeratory przed pozycjami menu
  * @return {void} Tylko side effect
  */
 

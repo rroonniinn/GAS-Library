@@ -9,7 +9,7 @@
  *
  * @param {Array} arr
  * @param {Number} index
- * @param {Any} element
+ * @param {*} element
  * @returns {Array}
  */
 

@@ -1,4 +1,5 @@
 /* eslint-disable max-params */
+const isIndexOk = (arr, i) => i >= 0 && i < arr.length;
 /**
  * Zwraca nową tablicę w której dodano element po wskazanym indeksie.
  * Nowa pozycja pojawi się na pozycji index + 1.
@@ -9,10 +10,9 @@
  *
  * @param {Array} arr
  * @param {Number} index Indeks po którym ma być dodany element
- * @param {Any} element
+ * @param {*} element
  * @returns {Array}
  */
-const isIndexOk = (arr, i) => i >= 0 && i < arr.length;
 
 const insertAfter = (arr, index, element) => {
 	if (isIndexOk(arr, index)) {
