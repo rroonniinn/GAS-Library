@@ -35,4 +35,8 @@ const crusherProps = {
 	},
 };
 
-export { crusherProps };
+const getProps = propName => crusherProps.get(propName);
+const setProps = (propName, val) => crusherProps.put(propName, val);
+
+// crusherProps jest exportowany tylko z powodu legacy code
+export { crusherProps, getProps, setProps };

@@ -22,6 +22,5 @@ const turnArrIntoDb = arr =>
 export { turnArrIntoDb };
 
 /**
- * TODO: zamiana liter na małe w nagłówku i usunięcie spacji,
- * znaków specjalnych itp (w nagłówku)
+ * TODO: zamiana liter w nagłówku na camelCase i usunięcie spacji,
  */
