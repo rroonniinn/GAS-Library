@@ -40,7 +40,7 @@
 		"max-nested-callbacks": ["warn", 2],
 		"max-depth": ["warn", 3],
 		"no-param-reassign": "warn",
-		"max-params": ["warn", 2],
+		"max-params": ["warn", 3],
 		"no-irregular-whitespace": ["error", {
 			"skipComments": true
 		}],

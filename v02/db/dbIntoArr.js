@@ -3,7 +3,7 @@
  * przekazaną tablicą kluczy (ich kolejnością)
  *
  * @param {array} dbKeysOrder
- * @param {*} db
+ * @param {Object<string, array>} db DataBase
  * @returns {array[]}
  */
 const dbIntoArr = (dbKeysOrder, db) => {
