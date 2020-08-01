@@ -3,7 +3,7 @@
  * Przed sprawdzeniem usuwa puste wartości
  */
 
-export const areValuesUniqe = arr => {
+export const areValuesUnique = arr => {
 	const fullArr = arr.filter(el => el !== '');
 	return arr.filter(el => el !== '').length === new Set(fullArr).size;
 };
