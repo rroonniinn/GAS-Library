@@ -1,6 +1,7 @@
+/* eslint-disable max-params */
 /**
  * Change value on given index for given key.
- * Returns new db object without modifying an oryginal.
+ * Returns new db object without modifying an original.
  * If key is missing in db, nothing is changed.
  * If index exceed db arr size nothing is changed.
  * @param {Object<string, array>} db DataBase
