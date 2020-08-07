@@ -1,7 +1,8 @@
 /* eslint-disable max-params */
 import { pipe } from '../fp/pipe';
-import { letterToColumn } from './letterToColumn';
+
 import { columnToLetter } from './columnToLetter';
+import { letterToColumn } from './letterToColumn';
 
 const extendedColLetter = (startLetter, extendToRight) => {
 	const endNum = letterToColumn(startLetter) + extendToRight;
@@ -41,7 +42,7 @@ const getRangeRestricted = (range, restHor = null, restVer = null) =>
 		}),
 		({ startLet, startNum, finalEndLet, finalEndNum }) =>
 			/* Jeśli range występuje w formacie A1:9 lub A1:C
-			dostajemy undefine jak eChar lub eNum - dltego
+			dostajemy 'undefined' jak eChar lub eNum - dlatego
 			zamieniamy na pusty, ignorowany string '' */
 			`${startLet}${startNum}:${finalEndLet || ''}${finalEndNum ||
 				''}`

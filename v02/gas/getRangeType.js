@@ -11,7 +11,7 @@
  * Dla innych wartości, lub "nie stringów" wyrzuca błąd
  *
  * @param {string|number} rangeStr Zakres
- * @returns {String} kod
+ * @returns {'regular'|'letNum'|'let'|'num'} kod
  */
 
 const getRangeType = rangeStr => {

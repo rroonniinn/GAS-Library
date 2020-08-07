@@ -53,6 +53,8 @@ const getRange = (status, sheetObj, userRange, restHor, restVer) => {
 	return getRangeRelative(sheetObj, userRange);
 };
 
+
+
 /**
  * Paste Options
  * @typedef {Object} PasteOptions
