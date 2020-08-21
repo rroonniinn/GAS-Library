@@ -1,8 +1,6 @@
 /* eslint-disable max-params */
 /* eslint-disable complexity */
 
-import { disp } from '../../v01/gas/disp';
-
 import { columnToLetter } from './columnToLetter';
 import { getLastNotEmptyColInRow } from './getLastNotEmptyColInRow';
 import { getLastNotEmptyRowInCol } from './getLastNotEmptyRowInCol';
@@ -21,13 +19,13 @@ import { getRangeType } from './getRangeType';
  * i kolumnie Np. A1:J10 (bez względu na znajdujące się już w arkuszu dane)
  * 'A3:B5' zwraca nie zmieniony zakres.
  *
- * Jeśli dodatkowo zostaną przkazane argumenty restHor i/lub restVer
- * wynikowy zakres będzie pomniejszony do przkazanej
+ * Jeśli dodatkowo zostaną przekazane argumenty restHor i/lub restVer
+ * wynikowy zakres będzie pomniejszony do przekazanej
  * liczny wierszy (restVer) i/lub kolumn (restHor)
  *
  * Chcą podać tylko restVer należy przekazać restHor z wartością null
  *
- * @param {Object} sheetObj Obiekt arkusza
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet Sheet object
  * @param {string|number} strRange Zakres
  * @param {Number|null} restHor Ograniczają zakres w poziomie traktując
  * pierwszą komórkę (np. A1) jako początek zakresu. Zatem dla wynikowego
@@ -40,7 +38,7 @@ import { getRangeType } from './getRangeType';
  */
 
 const getRangeRelative = (
-	sheetObj,
+	sheet,
 	strRange,
 	restHor = null,
 	restVer = null
@@ -50,19 +48,19 @@ const getRangeRelative = (
 	let rangeTmp;
 
 	if (opt === 'letNum') {
-		const maxCols = sheetObj.getMaxColumns();
+		const maxCols = sheet.getMaxColumns();
 		rangeTmp = `${strRange}:${columnToLetter(maxCols)}`;
 	}
 
 	if (opt === 'let') {
-		const maxColsLet = columnToLetter(sheetObj.getMaxColumns());
-		const starRow = getLastNotEmptyRowInCol(sheetObj, strRange) + 1;
+		const maxColsLet = columnToLetter(sheet.getMaxColumns());
+		const starRow = getLastNotEmptyRowInCol(sheet, strRange) + 1;
 		rangeTmp = `${strRange}${starRow}:${maxColsLet}`;
 	}
 
 	if (opt === 'num') {
-		const maxRows = sheetObj.getMaxRows();
-		const startCol = getLastNotEmptyColInRow(sheetObj, strRange) + 1;
+		const maxRows = sheet.getMaxRows();
+		const startCol = getLastNotEmptyColInRow(sheet, strRange) + 1;
 		const startColLet = columnToLetter(startCol);
 		rangeTmp = `${startColLet}${strRange}:${maxRows}`;
 	}
@@ -71,18 +69,18 @@ const getRangeRelative = (
 		rangeTmp = strRange;
 	}
 
-	// Jeśli potrzeba zmiejszenia zakresu
+	// Jeśli potrzeba zmniejszenia zakresu
 	const range =
 		restHor || restVer
 			? getRangeRestricted(rangeTmp, restHor, restVer)
 			: rangeTmp;
 
-	const rangeObj = sheetObj.getRange(range);
+	const rangeObj = sheet.getRange(range);
 
 	return {
 		range,
 		rangeObj,
-		sheetObj,
+		sheetObj: sheet,
 	};
 };
 

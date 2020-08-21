@@ -13,13 +13,13 @@ const normalize = ([el]) =>
  * QUnit zrobiony. Arkusz z przypadkami:
  * https://docs.google.com/spreadsheets/d/1e7G8Yo8Np30bnyXzQm8NNyTZtBIZfK2eMjtd06f1GxM/edit#gid=0
  *
- * @param {Object} sheetObj Obiekt arkusza
- * @param {String} colStr
- * @returns {Number} Numer ostatniego wiersza z treścią
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet Obiekt arkusza
+ * @param {string|number} colStr
+ * @returns {number} Numer ostatniego wiersza z treścią
  */
 
-const getLastNotEmptyRowInCol = (sheetObj, colStr) => {
-	const indexes = sheetObj
+const getLastNotEmptyRowInCol = (sheet, colStr) => {
+	const indexes = sheet
 		.getRange(`${colStr}:${colStr}`)
 		.getValues()
 		.map(normalize)
@@ -32,6 +32,6 @@ export { getLastNotEmptyRowInCol };
 
 /**
  * Todo:
- * - możliwość przekazania równieć numeru kolumny
+ * - możliwość przekazania również numeru kolumny
  * - obsługa błędów dla nieprawidłowych argumentów
  */
