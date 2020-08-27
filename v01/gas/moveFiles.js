@@ -9,9 +9,9 @@ import { removeFileFromRoot } from './removeFileFromRoot';
  *
  * @param {GoogleAppsScript.Drive.File[]} files Tablica plików
  * @param {string} targetFolderId Id docelowego folderu
- * @param {string} existingFolderId Id obecnego folderu. Jeśli nie podane
+ * @param {string} [existingFolderId] Id obecnego folderu. Jeśli nie podane
  * zakłada, że plik należy przenieść z roota
- * @returns {Array} Zwracja otrzymaną tablicę plików
+ * @returns {Array} Zwraca otrzymaną tablicę plików
  */
 const moveFiles = (files, targetFolderId, existingFolderId = null) => {
 	// Przeniesienie plików do folderu

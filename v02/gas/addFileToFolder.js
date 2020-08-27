@@ -1,16 +1,15 @@
 import { getFolder } from './getFolder';
+import { getFile } from './getFile';
 
 /**
  * Dodaje plik do katalogu (plik może znajdować się w wielu katalogach)
- * @memberof Lib_Gas
  * @param {GoogleAppsScript.Drive.Folder|string} folder Folder, ID lub Url katalogu do którego ma być dodany plik
- * @param {string} fileId ID pliku do dodania
- * @returns {void} Tylko side effect
+ * @param {GoogleAppsScript.Drive.File|string} file File, URL lub ID
+ * @returns {GoogleAppsScript.Drive.Folder} Folder do którego był dodany plik
  */
 
-const addFileToFolder = (folder, fileId) => {
-	getFolder(folder).addFile(DriveApp.getFileById(fileId));
-};
+const addFileToFolder = (folder, file) =>
+	getFolder(folder).addFile(getFile(file));
 
 export { addFileToFolder };
 

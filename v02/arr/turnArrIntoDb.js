@@ -4,7 +4,7 @@
  * pierwszy wiersz jako klucze
  *
  * @param {Array[]} arr
- * @returns {Object}
+ * @returns {Object<string, array>}
  */
 
 const turnArrIntoDb = arr =>
@@ -22,5 +22,7 @@ const turnArrIntoDb = arr =>
 export { turnArrIntoDb };
 
 /**
+ * TODO: co z tablicą w której są puste komórki w wierszach? Szczególnie
+ * w nagłówku?
  * TODO: zamiana liter w nagłówku na camelCase i usunięcie spacji,
  */
