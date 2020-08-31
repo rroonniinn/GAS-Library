@@ -15,7 +15,7 @@ const checkArr = arr => {
  * [[[1]]] = false, { a: [[1]] } = false, [0] = false,
  * { a: 0 } = false, 0 = false
  *
- * Nie działa tylko poprawnie dla zagnieżdzonych obiektów
+ * Nie działa tylko poprawnie dla zagnieżdżonych obiektów
  * [{}] - false / a powinno być true
  *
  * @param {*} val Dowolna wartość

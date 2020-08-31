@@ -3,7 +3,7 @@ import { getFile } from './getFile';
 import { getFolder } from './getFolder';
 
 /**
- * Kopiuje wkazany plik (ID) do wskazanego folderu jednocześnie zmienijąc
+ * Kopiuje wskazany plik (ID) do wskazanego folderu jednocześnie zmieniając
  * mu nazwę. Zwraca nowo utworzony plik
  * @param {GoogleAppsScript.Drive.File|string} source Obiekt File, ID lub url pliku kopiowanego
  * @param {GoogleAppsScript.Drive.Folder|string} toFolder Obiekt Folder, ID lub URL katalogu do którego ma być skopiowany plik

@@ -1,6 +1,6 @@
 /**
  * Zwraca id folderu w którym znajduje się przekazany Skoroszyt.
- * Uwaga, zwraca id tylko pierwszego znalezionego folderu rodzica
+ * Uwaga, zwraca obiekt folderu tylko pierwszego znalezionego folderu rodzica
  * (może być wiele)
  * @param {GoogleAppsScript.Spreadsheet.Spreadsheet} spreadsheet
  */

@@ -8,7 +8,8 @@
  */
 const dbIntoArr = (dbKeysOrder, db) => {
 	const arr = [];
-	db.i.forEach((val, index) => {
+	// db.i.forEach((val, index) => {
+	db[Object.keys(db)[0]].forEach((val, index) => {
 		const row = [];
 		dbKeysOrder.forEach(key => {
 			row.push(db[String(key)][index]);
@@ -20,3 +21,8 @@ const dbIntoArr = (dbKeysOrder, db) => {
 };
 
 export { dbIntoArr };
+
+/**
+ * TODO: Tu jest błąd - funkcja zakłada istnienie klucza 'i'
+ * w strukturze DB! Poprawiłem ale, trzeba to przetestować
+ */
