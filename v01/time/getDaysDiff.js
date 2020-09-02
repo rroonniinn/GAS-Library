@@ -1,7 +1,6 @@
 /**
  * Zwraca różnicę w dniach między dwoma datami.
  * Nie bierze pod uwagę która data jest starsza
- * @memberof Lib_Date
  *
  */
 
