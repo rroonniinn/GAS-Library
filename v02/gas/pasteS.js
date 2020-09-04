@@ -44,8 +44,9 @@ const typeGuard = (sheet, range, arr, opt) => {
 	if (typeof range !== 'string' && typeof range !== 'number')
 		throw new TypeError('Range should be string or number in "paste"');
 
-	if (!isArray2d(arr))
+	if (!isArray2d(arr)) {
 		throw new TypeError('Only 2D arrays are allowed to "paste"');
+	}
 
 	if (opt.cleanup) {
 		if (

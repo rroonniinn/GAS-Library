@@ -28,6 +28,6 @@ const getSheet = (val, idUrl = null) => {
 export { getSheet };
 
 /**
- * openByUrl nie rozpoznaje poprawnie wszystkich urli - dlatego jest
- * wyciągane id z urla
+ * openByUrl nie rozpoznaje poprawnie wszystkich url'i - dlatego jest
+ * wyciągane id z url'a
  */
