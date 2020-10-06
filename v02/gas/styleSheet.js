@@ -12,7 +12,7 @@ import { isArray2d } from './isArray2d';
 /* ************************************** TYPES **************************************************************** */
 
 /**
- * Możliwe opcje obiektu definującego border.
+ * Możliwe opcje obiektu defilującego border.
  * Ustawienia bordera wokół zakresu.
  * Możliwe wartości - true - nowy border, false - brak bordera, null - border bez zmian
  * @typedef {Object} Borders
@@ -43,15 +43,15 @@ import { isArray2d } from './isArray2d';
  * @property {'number 0,00'|'number 0,0'|'number 0'|'money 0,00 zł'|'money 0 zł'|'money 0,00 $'|'money 0 $'|'money 0,00 €'|'money 0 €'|'percent 0,00'|'percent 0,0'|'percent 0'|'date yyyy-mm-dd'|'date yy-mm-dd'} [fontFormatNum] Format numerów
  * @property {'left'|'center'|'right'} [alignH] Wyrównanie w poziomie
  * @property {'top'|'middle'|'bottom'} [alignV] Wyrównanie w pionie
- * @property {'all'|'ver'|'hor'|'off'} [merge] Czy komórki mają być zmerchowane i jak
+ * @property {'all'|'ver'|'hor'|'off'} [merge] Czy komórki mają być złączone i jak
  * @property {number} [rowHeight] Wysokość każdego wiersza w ramach zakresu
  * @property {number} [colWidth] Szerokość każdej kolumny w ramach zakresu
  * @property {boolean} [showHyperlink] Czy linki mają być widoczne (underline) i aktywne
  * @property {boolean} [wrap] Włącza i wyłącza model zachowania w przypadku tekstu dłuższego niż szerokość kolumny. false przywraca standard - overflow
- * @property {'wrap'|'overflow'|'clip'} [wrapType] Model zawijania wierszy - wrap: zawijanie, clip: ucinianie, overflow - domyślny, rozlewanie na sąsienie kolumny
+ * @property {'wrap'|'overflow'|'clip'} [wrapType] Model zawijania wierszy - wrap: zawijanie, clip: ucinanie, overflow - domyślny, rozlewanie na sąsiednie kolumny
  * @property {Object} [textStyle] Obiekt z formatowaniem powstały jako efekt SpreadsheetApp.newTextStyle()
  * @property {Borders} [border] Ustawienia bordera wokół zakresu. t - top, l - left itd, v, h - pionowe i poziome linie pomiędzy. true - jest nowy border, false - brak bordera, null - border bez zmian
- * @property {any} [values] Nowe wartości do wklejenia. Mogą być pojedyńcze lub tablice. Mogą być formuły. Tablice muszą mieć ten sam rozmiar co zakres
+ * @property {any} [values] Nowe wartości do wklejenia. Mogą być pojedyncze lub tablice. Mogą być formuły. Tablice muszą mieć ten sam rozmiar co zakres
  */
 
 /**
@@ -112,7 +112,7 @@ const numberFormats = {
 };
 
 /**
- * Enumy do wrapType - tłumaczenie na ludzki :)
+ * Enums do wrapType - tłumaczenie na ludzki :)
  * @type {Object<string,GoogleAppsScript.Spreadsheet.WrapStrategy>}
  */
 
@@ -123,7 +123,7 @@ const wrapEnumes = {
 };
 
 /**
- * Enumy do BorderStyle - tłumaczenie na ludzki :)
+ * Enums do BorderStyle - tłumaczenie na ludzki :)
  * @type {Object<string, GoogleAppsScript.Spreadsheet.BorderStyle>} borderEnumes
  */
 
@@ -137,8 +137,8 @@ const borderEnumes = {
 };
 
 /**
- * Przypisanie odpowedniej metody mergującej GAS do wartości używanych
- * w moim kodzie
+ * Przypisanie odpowiedniej metody łączącej używane w GAS nazwy
+ * z wartości używanych w moim kodzie
  */
 
 const applyMerge = {
@@ -167,8 +167,8 @@ const translateBorder = value => [
 
 /**
  * Weryfikuje jaka wartość została przekazana do funkcji aplikującej
- * formaty i wartości do sheeta. Zwraca odpowiednią metodę. Jeśli przekazana
- * została tablica o innych wymiatach niż zakres, gas wyrzuci błąd.
+ * formaty i wartości do Sheet. Zwraca odpowiednią metodę. Jeśli przekazana
+ * została tablica o innych wymiarach niż zakres, gas wyrzuci błąd.
  * @param {any} val
  * @return {'setValue'|'setFormula'|'setValues'} Nazwę metody do użycia
  */
@@ -183,13 +183,13 @@ const whatToApply = val => {
 	if (isArray2d(val)) {
 		return 'setValues';
 	}
-	throw new TypeError('Custom: Wrong type of data paste into funkction');
+	throw new TypeError('Custom: Wrong type of data paste into function');
 };
 
 /**
- * Wykonuje operację (formatowanie lub wklejenie danyc) i zwraca Sheet lub Range, na
+ * Wykonuje operację (formatowanie lub wklejenie danych) i zwraca Sheet lub Range, na
  * którym został wywołany (nie wykorzystuję dalej tego, ale dzięki temu,
- * mogę uniknąc if else)
+ * mogę uniknąć if else)
  * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet
  * @param {GoogleAppsScript.Spreadsheet.Range} range
  * @return {([entity, value]) => GoogleAppsScript.Spreadsheet.Sheet|GoogleAppsScript.Spreadsheet.Range}
@@ -221,7 +221,7 @@ const applyStyles = (sheet, range) => ([entity, value]) => {
 };
 
 /**
- * Wkleja odpwiednie formaty i treści do zakresów przekazanego arkusza
+ * Wkleja odpowiednie formaty i treści do zakresów przekazanego arkusza
  * @param {RangeOptions[]} rangesChanges Tablica [['A1:B2', {changes: val}]]
  * @param {string|GoogleAppsScript.Spreadsheet.Sheet} sheet Nazwa arkusza lub Arkusz
  * @param {string} idUrl Id lub Url Skoroszytu z arkuszem (jeśli nie jest lokalny)

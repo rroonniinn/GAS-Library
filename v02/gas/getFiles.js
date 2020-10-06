@@ -25,7 +25,7 @@ const getFiles = (folder, search) => {
 	while (files.hasNext()) {
 		arr.push(files.next());
 	}
-
+	console.log(`-- Files number: ${arr.length}`);
 	return arr;
 };
 export { getFiles };
