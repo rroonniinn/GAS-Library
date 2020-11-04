@@ -26,7 +26,9 @@ const googleScriptRun = (gasFnName, args, successFn, failureFn) => {
 			.withSuccessHandler(successFn)
 			[gasFnName].apply(null, args);
 	} catch (error) {
-		console.log(`Function should be execute in GAS environment. This function got those argument: ${args}`);
+		console.log(
+			`Function should be execute in GAS environment. This function got those argument: ${args}`
+		);
 	}
 };
 
