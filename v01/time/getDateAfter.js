@@ -1,7 +1,5 @@
 /**
  * Zwraca datę przesuniętą o liczbę dni wskazaną w argumencie
- * @memberof Lib_Date
- *
  */
 
 const getDateAfter = (date, days) => {

@@ -1,15 +1,15 @@
 /**
- * Zwraca prosty string daty z obeiktu np. 2019-02-20
+ * Zwraca prosty string daty z obiektu np. 2019-02-20
  *
  * @param {object|string} dateObj Obiekt daty lub string daty
- * @param {string} [connector='-'] Lącznik
+ * @param {string} [connector='-'] Łącznik
  * @returns {string} np. 2019-02-20
  */
 
 const getDateAsSimpleStr = (dateObj, connector = '-') => {
 	/*
 		dateObj - object daty
-		connector - str - łącznik pomniędzy elementami daty (np. -)
+		connector - str - łącznik pomiędzy elementami daty (np. -)
 	*/
 
 	const date =
