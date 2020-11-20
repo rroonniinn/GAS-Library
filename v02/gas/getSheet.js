@@ -2,6 +2,7 @@ import { isUrl } from '../str/isUrl';
 
 import { getIdFromUrl } from './getIdFromUrl';
 import { isSheet } from './isSheet';
+import { isSpradsheet } from './isSpradsheet';
 
 const { openById } = SpreadsheetApp;
 
@@ -11,17 +12,18 @@ const { openById } = SpreadsheetApp;
  * nie jest podany - pobiera arkusz z bieżącego pliku (bound)
  *
  * @param {any} val Obiekt Sheet lub Nazwa arkusza
- * @param {string} [idUrl] ID lub Url Skoroszytu
+ * @param {any} [idUrlSs] ID, Url lub Obiekt Skoroszytu
  * @returns {GoogleAppsScript.Spreadsheet.Sheet} Arkusz
  */
 
-const getSheet = (val, idUrl = null) => {
+const getSheet = (val, idUrlSs = null) => {
 	if (isSheet(val)) return val;
+	if(isSpradsheet(idUrlSs)) return idUrlSs.getSheetByName(val)
 
-	return idUrl
-		? isUrl(idUrl)
-			? openById(getIdFromUrl(idUrl)).getSheetByName(val)
-			: openById(idUrl).getSheetByName(val)
+	return idUrlSs
+		? isUrl(idUrlSs)
+			? openById(getIdFromUrl(idUrlSs)).getSheetByName(val)
+			: openById(idUrlSs).getSheetByName(val)
 		: SpreadsheetApp.getActive().getSheetByName(val);
 };
 
