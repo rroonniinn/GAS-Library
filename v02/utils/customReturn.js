@@ -9,7 +9,7 @@
 
 /**
  * Generuje obiekt zwracany przez funkcje zawierający szereg informacji
- * przekazywanych w toku działania programu. Idealnie działa z funkcją alt (./alt), która
+ * przekazywanych w toku działania programu. Idealnie działa z funkcją cont (./cont), która
  * funkcjonuje jako truthy/falsy checker zajmując się tym aby kolejne funkcje nie wykonywały się
  * jeśli RET będzie zawierał success: false.
  * @param {boolean} success Info czy operacja zakończyła się sukcesem. Na tej podstawie funkcje dalsze mogą się wykonywać lub nie

@@ -6,8 +6,8 @@
  * Specyficzna funkcja używana w FP. Sprawdza czy wartość otrzymana
  * z poprzedniej funkcji jest truthy. Jeśli tak, to wykonuje funkcję
  * przekazaną. Jeśli nie, to przekazuje otrzymaną wartość. Działa
- * tylko z wartościami będącymi rezultatami customReturn
+ * tylko z wartościami będącymi rezultatami customReturn (./customReturn)
  * @returns {(val: UltimateReturn) => Function}
  */
 
-export const alt = func => val => (val.success ? func(val) : val);
+export const cont = func => val => (val.success ? func(val) : val);
