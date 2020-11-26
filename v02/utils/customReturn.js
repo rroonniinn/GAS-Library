@@ -9,12 +9,13 @@
 
 /**
  * Generuje obiekt zwracany przez funkcje zawierający szereg informacji
- * przekazywanych w toku działania programu
+ * przekazywanych w toku działania programu. Idealnie działa z funkcją alt (./alt), która
+ * funkcjonuje jako truthy/falsy checker zajmując się tym aby kolejne funkcje nie wykonywały się
+ * jeśli RET będzie zawierał success: false.
  * @param {boolean} success Info czy operacja zakończyła się sukcesem. Na tej podstawie funkcje dalsze mogą się wykonywać lub nie
  * @param {Object<string, any>} tmp Obiekt zawierający dane, które chcemy przekazać dalej
  * @param {string|Error} msgErr Wpis do logów dotyczący danej operacji lub Obiekt Error
- * @param {UltimateReturn} ret Wcześniej uzyskany UltimateReturn pozyskane z poprzedzającej funkcji
- * @param- {Error} [error=null] Obiekt błędu systemowego (jeśli wystąpi)
+ * @param {UltimateReturn} [ret] Wcześniej uzyskany UltimateReturn pozyskane z poprzedzającej funkcji
  * @returns {UltimateReturn}
  */
 
