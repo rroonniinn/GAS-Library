@@ -10,4 +10,4 @@
  * @returns {(val: UltimateReturn) => Function}
  */
 
-export const alt = func => val => (val.success ? func(val) : val);
+export const alt = func => val => (val.continueChain ? func(val) : val);
