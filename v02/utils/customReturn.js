@@ -12,28 +12,28 @@
  * przekazywanych w toku działania programu
  * @param {boolean} success Info czy operacja zakończyła się sukcesem. Na tej podstawie funkcje dalsze mogą się wykonywać lub nie
  * @param {Object<string, any>} tmp Obiekt zawierający dane, które chcemy przekazać dalej
- * @param {string|Error} logMsg Wpis do logów dotyczący danej operacji lub Obiekt Error
- * @param {array} logs Dotychczasowe logi pozyskane z poprzedzającej funkcji
+ * @param {string|Error} msgErr Wpis do logów dotyczący danej operacji lub Obiekt Error
+ * @param {UltimateReturn} ret Wcześniej uzyskany UltimateReturn pozyskane z poprzedzającej funkcji
  * @param- {Error} [error=null] Obiekt błędu systemowego (jeśli wystąpi)
  * @returns {UltimateReturn}
  */
 
-const customReturn = (success, tmp, logMsg, logs = null) => {
-	const logType = logMsg instanceof Error ? 'error' : 'log';
+const RET = (success, tmp, msgErr, ret = null) => {
+	const logType = msgErr instanceof Error ? 'error' : 'log';
 
-	const log =
+	const currentLog =
 		logType === 'error'
 			? // @ts-ignore
-			  `${logMsg.name}. ${logMsg.message}. ${logMsg.stack}`
-			: logMsg;
+			  `${msgErr.name}. ${msgErr.message}. ${msgErr.stack}`
+			: /** @type {string} */ (msgErr);
 
 	return {
-		tmp,
 		success,
-		log: logs
-			? logs.concat([[new Date().getTime(), log]])
-			: [[new Date().getTime(), log]],
+		tmp: ret ? Object.assign(ret.tmp, tmp) : tmp,
+		log: ret
+			? ret.log.concat([[new Date().getTime(), currentLog]])
+			: [[new Date().getTime(), currentLog]],
 	};
 };
 
-export { customReturn };
+export { RET };
