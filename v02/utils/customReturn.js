@@ -20,7 +20,9 @@
  * @param {boolean} success Info czy operacja zakończyła się sukcesem.
  * Służy do obsłużenia błędów po drodze oraz informacji dla interfejsu
  * w jakim kolorze wyświetlić komunikat
- * @param {Object<string, any>} tmp Obiekt zawierający dane, które chcemy przekazać dalej
+ * @param {Object<string, any>} tmp Obiekt zawierający dane, które chcemy
+ * przekazać dalej. Jeśli nie chcemy dodawać nowych danych,
+ * wystarczy przekazać pusty obiekt
  * @param {string|Error} msgErr Wpis do logów dotyczący danej operacji lub Obiekt Error
  * @param {UltimateReturn} [ret] Wcześniej uzyskany UltimateReturn pozyskane z poprzedzającej funkcji
  * @returns {UltimateReturn}
