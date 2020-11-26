@@ -16,7 +16,7 @@
  * która funkcjonuje jako truthy/falsy checker zajmując się tym aby kolejne
  * funkcje nie wykonywały się jeśli RET będzie zawierał success: false.
  * @param {boolean} continueChain Czy wykonywać dalsze funkcje w chainie (pipe).
- * Współpracuje z funkcją fp (utils/alt)
+ * Współpracuje z funkcją fp (./cont)
  * @param {boolean} success Info czy operacja zakończyła się sukcesem.
  * Służy do obsłużenia błędów po drodze oraz informacji dla interfejsu
  * w jakim kolorze wyświetlić komunikat
