@@ -10,4 +10,4 @@
  * @returns {(val: UltimateReturn) => Function}
  */
 
-export const cont = func => val => (val.success ? func(val) : val);
+export const cont = func => val => (val.continueChain ? func(val) : val);
