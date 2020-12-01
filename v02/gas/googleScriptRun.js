@@ -13,6 +13,9 @@
  * interfejs w środowisku przeglądarki nie pojawiał się błąd informujący,
  * że google.script.run nie jest zdefiniowany.
  *
+ * Dodatkowo dane są zamieniane na JSON. Google.Script.Run ma nieładną cechę
+ * cichewo wysypywania się jeśli w danych znajdują się m.in. obiekty daty
+ *
  * @param {string} gasFnName Nazwa funkcji, która ma się wykonać w GAS
  * @param {array} args Tablica argumentów dla powyższej funkcji
  * @param {function} successFn Funkcja do wykonania po stronie frontu do której zostanie przekazany wynik funkcji GAS
@@ -20,11 +23,14 @@
  */
 
 const googleScriptRun = (gasFnName, args, successFn, failureFn) => {
+
+const stringfied = args.map(ar => JSON.stringify(ar))
+
 	try {
 		google.script.run
 			.withFailureHandler(failureFn)
 			.withSuccessHandler(successFn)
-			[gasFnName].apply(null, args);
+			[gasFnName].apply(null, stringfied);
 	} catch (error) {
 		console.log(
 			`Function should be execute in GAS environment. This function got those argument: ${args}`
