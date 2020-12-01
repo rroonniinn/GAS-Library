@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * Zwraca nową tablicę w której wymienony jest element z podanego indexu
+ * Zwraca nową tablicę w której wymieniony jest element z podanego indeksu
  * na przekazaną wartość. Jeśli index jest mniejszy od zera
  * lub przekraczający maksymalny index tablicy,
  * funkcja zwraca oryginalną tablicę
