@@ -1,8 +1,6 @@
 /**
  * Zwraca różnicę w dniach między dwoma datami.
  * Jeśli b jest datą wcześniejszą to zwróci ujemna różnicę dni
- * @memberof Lib_Date
- *
  */
 
 const getDaysDiffRelative = (a, b) => {

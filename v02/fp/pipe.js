@@ -11,4 +11,4 @@
  * @returns {PIPE} Zwraca funkcję oczekującą wartości inicjalnej
  */
 
-export const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
+export const pipe = (...fns) => v => fns.reduce((v, f) => f(v), v);
