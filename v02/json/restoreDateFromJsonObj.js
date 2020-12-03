@@ -1,4 +1,4 @@
-import { isDateStr } from './../../v01/time/isDateStr';
+import { isDateStr } from '../../v01/time/isDateStr';
 
 /**
  * Przyjmując obiekt post JSON-owy zawierający m.in. stringi daty,
@@ -15,4 +15,4 @@ const restoreDateFromJsonObj = postJsonObj =>
 			return res;
 		}, {});
 
-		export { restoreDateFromJsonObj }
+export { restoreDateFromJsonObj };
