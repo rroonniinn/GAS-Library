@@ -2,8 +2,8 @@
 /**
  * Custom object for return values and logs
  * @typedef {Object} UltimateReturn
- * @property {boolean} continueChain Czy wykonywać dalsze funkcje w chainie (pipe).
- * @property {boolean} success Finalne dane do przekazania do frontu
+ * @property {boolean|0|1} continueChain Czy wykonywać dalsze funkcje w chainie (pipe).
+ * @property {boolean|0|1} success Finalne dane do przekazania do frontu
  * @property {Object<string, any>} tmp Tymczasowe elementy do przenoszenia danych pomiędzy funkcjami
  * @property {[number, string][]} log Finalne dane do przekazania do frontu
  */
@@ -15,9 +15,9 @@
  * Idealnie działa z funkcją alt (./alt),
  * która funkcjonuje jako truthy/falsy checker zajmując się tym aby kolejne
  * funkcje nie wykonywały się jeśli RET będzie zawierał success: false.
- * @param {boolean} continueChain Czy wykonywać dalsze funkcje w chainie (pipe).
+ * @param {boolean|0|1} continueChain Czy wykonywać dalsze funkcje w chainie (pipe).
  * Współpracuje z funkcją fp (./cont)
- * @param {boolean} success Info czy operacja zakończyła się sukcesem.
+ * @param {boolean|0|1} success Info czy operacja zakończyła się sukcesem.
  * Służy do obsłużenia błędów po drodze oraz informacji dla interfejsu
  * w jakim kolorze wyświetlić komunikat
  * @param {Object<string, any>} tmp Obiekt zawierający dane, które chcemy
@@ -42,8 +42,8 @@ const RET = (continueChain, success, tmp, msgErr, ret = null) => {
 		success,
 		tmp: ret ? Object.assign(ret.tmp, tmp) : tmp,
 		log: ret
-			? ret.log.concat([[new Date().getTime(), currentLog]])
-			: [[new Date().getTime(), currentLog]],
+			? ret.log.concat([[Date.now(), currentLog]])
+			: [[Date.now(), currentLog]],
 	};
 };
 

@@ -3,11 +3,8 @@
 
 /**
  * Usuwa zbędne kolumny i wiersze ze wskazanego arkusza
- *
- * @memberof Lib_Gas
- *
- * @param {object} sheet Obiekt arkusza
- * @returns {void}
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet Obiekt arkusza
+ * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 
 const removeEmptyRowCol = sheet => {
@@ -34,6 +31,9 @@ const removeEmptyRowCol = sheet => {
 			colDif > 0
 		)
 			sheet.deleteColumns(maxDataColumn + 1, colDif);
+
+			return sheet;
+
 	} catch (error) {
 		throw new Error(error);
 	}
