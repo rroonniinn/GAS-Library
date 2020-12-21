@@ -1,3 +1,6 @@
+import { getExecutionContext } from './getExecutionContext';
+
+/* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable max-params */
 /* eslint-disable no-undef */
 // @ts-nocheck
@@ -14,7 +17,7 @@
  * że google.script.run nie jest zdefiniowany.
  *
  * Dodatkowo dane są zamieniane na JSON. Google.Script.Run ma nieładną cechę
- * cichewo wysypywania się jeśli w danych znajdują się m.in. obiekty daty
+ * cichego wysypywania się jeśli w danych znajdują się m.in. obiekty daty
  *
  * @param {string} gasFnName Nazwa funkcji, która ma się wykonać w GAS
  * @param {array} args Tablica argumentów dla powyższej funkcji
@@ -23,10 +26,10 @@
  */
 
 const googleScriptRun = (gasFnName, args, successFn, failureFn) => {
-
-const stringfied = args.map(ar => JSON.stringify(ar))
+	const stringfied = args.map(ar => JSON.stringify(ar));
 
 	try {
+		// @ts-ignore
 		google.script.run
 			.withFailureHandler(failureFn)
 			.withSuccessHandler(successFn)
@@ -38,4 +41,30 @@ const stringfied = args.map(ar => JSON.stringify(ar))
 	}
 };
 
-export { googleScriptRun };
+// Podejście jako promise:
+const googleScriptRunPromise = (gasFnName, args, localOutput = null) => {
+	if (getExecutionContext() === 'gas') {
+		// GAS
+		return new Promise((resolve, reject) => {
+			const stringfied = args.map(ar => JSON.stringify(ar));
+
+			// @ts-ignore
+			google.script.run
+				.withFailureHandler(err => reject(err))
+				.withSuccessHandler(output => resolve(JSON.parse(output)))
+				[gasFnName].apply(null, stringfied);
+		});
+	}
+
+	// LOCAL
+	return new Promise((resolve, reject) => {
+		if (localOutput) {
+			resolve(localOutput);
+		}
+		reject(
+			`Function should be execute in GAS environment. This function got those argument: ${args}`
+		);
+	});
+};
+
+export { googleScriptRun, googleScriptRunPromise };

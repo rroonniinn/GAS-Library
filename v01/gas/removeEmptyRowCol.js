@@ -32,8 +32,7 @@ const removeEmptyRowCol = sheet => {
 		)
 			sheet.deleteColumns(maxDataColumn + 1, colDif);
 
-			return sheet;
-
+		return sheet;
 	} catch (error) {
 		throw new Error(error);
 	}
