@@ -1,16 +1,12 @@
 /**
  * Zwraca obiekt daty ustawiony na ostatni dzień miesiąca
  * w którym wypada przekazana w argumencie data
- * (nie mutuje przekaznego argumentu)
- *
- * @memberof Lib_Date
- *
- * @param {dateObj} dateObj Obiekt daty
- * @returns {dateObj} Obiekt daty
+ * (nie mutuje przekazanego argumentu)
+ * @param {Date} date Obiekt daty
+ * @returns {Date} Obiekt daty
  */
 
-const getLastDay = dateObj =>
-	// dateObj - obiekt daty
-	new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
+const getLastDay = date =>
+	new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
 export { getLastDay };
