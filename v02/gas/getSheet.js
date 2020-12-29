@@ -18,7 +18,7 @@ const { openById } = SpreadsheetApp;
 
 const getSheet = (val, idUrlSs = null) => {
 	if (isSheet(val)) return val;
-	if(isSpradsheet(idUrlSs)) return idUrlSs.getSheetByName(val)
+	if (isSpradsheet(idUrlSs)) return idUrlSs.getSheetByName(val)
 
 	return idUrlSs
 		? isUrl(idUrlSs)
