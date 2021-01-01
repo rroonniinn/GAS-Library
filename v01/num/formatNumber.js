@@ -3,4 +3,4 @@
  *
  * @param {Number} num Wartość do zformatowania
  */
-export const formatNumber = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+export const formatNumber = num => num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
