@@ -11,6 +11,7 @@ const checkArr = arr => {
  * Sprawdza czy otrzymana wartość jest pusta. Zatem:
  * [] = true, [[]] = true, [[[]]] = true, {} = true, [''] = true,
  * { a: '' } = true, { a: [] } = true, { a: [[]] } = true,
+ * undefined = true, null = true
  *
  * [[[1]]] = false, { a: [[1]] } = false, [0] = false,
  * { a: 0 } = false, 0 = false
