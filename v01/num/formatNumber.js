@@ -4,4 +4,7 @@
  * @param {Number} num Wartość do sformatowania
  */
 export const formatNumber = num =>
-	num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+	num
+		.toFixed(2)
+		.toString()
+		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
