@@ -14,4 +14,5 @@ const letterToColumn = letter => {
 	}
 	return column;
 };
+
 export { letterToColumn };
