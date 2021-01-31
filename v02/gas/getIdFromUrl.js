@@ -1,8 +1,5 @@
 /**
  * Zwraca ID folderu lub pliku z przekazanego URL-a,
- *
- * @memberof Lib_Gas
- *
  * @param {string} url URL folderu lub pliku
  * @returns {string} ID
  */
