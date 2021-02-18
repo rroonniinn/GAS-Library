@@ -11,7 +11,7 @@ const msg = {
 	t03: '{ a: [] } - true',
 	t04: '{ a: [[]] } - true',
 	t05: '{ a: 0 } - false',
-	t06: '{ a: "", b: 1 } - true',
+	t06: '{ a: "", b: 1 } - false',
 };
 
 const input = {
@@ -29,8 +29,8 @@ const objects = () =>
 		strictEqual(fn(input.t02), true, msg.t02);
 		strictEqual(fn(input.t03), true, msg.t03);
 		strictEqual(fn(input.t04), true, msg.t04);
-		strictEqual(fn(input.t05), true, msg.t05);
-		strictEqual(fn(input.t06), true, msg.t06);
+		strictEqual(fn(input.t05), false, msg.t05);
+		strictEqual(fn(input.t06), false, msg.t06);
 	});
 
 export { objects };

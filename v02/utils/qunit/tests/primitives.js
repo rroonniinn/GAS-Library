@@ -29,11 +29,11 @@ const primitives = () =>
 	QUnit.test(title, () => {
 		strictEqual(fn(input.t01), true, msg.t01);
 		strictEqual(fn(input.t02), true, msg.t02);
-		strictEqual(fn(input.t03), true, msg.t03);
-		strictEqual(fn(input.t04), true, msg.t04);
-		strictEqual(fn(input.t05), true, msg.t05);
-		strictEqual(fn(input.t06), true, msg.t06);
-		strictEqual(fn(input.t07), true, msg.t07);
+		strictEqual(fn(input.t03), false, msg.t03);
+		strictEqual(fn(input.t04), false, msg.t04);
+		strictEqual(fn(input.t05), false, msg.t05);
+		strictEqual(fn(input.t06), false, msg.t06);
+		strictEqual(fn(input.t07), false, msg.t07);
 	});
 
 export { primitives };
