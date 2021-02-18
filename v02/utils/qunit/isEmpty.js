@@ -21,4 +21,8 @@ const arrays = () =>
 		strictEqual(fn(input.a02), true, msg.t02);
 	});
 
+const isEmpty = () => ({
+	arrays,
+});
+
 export { arrays };
