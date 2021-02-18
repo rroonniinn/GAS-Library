@@ -8,7 +8,7 @@ const title = 'isEmpty | primitives | Testy na podstawowych typach';
 const msg = {
 	t01: 'undefined - true',
 	t02: 'null - true',
-	t03: 'NaN - false',
+	t03: 'NaN - true',
 	t04: '0 - false',
 	t05: '1 - false',
 	t06: '"a" - false',
@@ -29,7 +29,7 @@ const primitives = () =>
 	QUnit.test(title, () => {
 		strictEqual(fn(input.t01), true, msg.t01);
 		strictEqual(fn(input.t02), true, msg.t02);
-		strictEqual(fn(input.t03), false, msg.t03);
+		strictEqual(fn(input.t03), true, msg.t03);
 		strictEqual(fn(input.t04), false, msg.t04);
 		strictEqual(fn(input.t05), false, msg.t05);
 		strictEqual(fn(input.t06), false, msg.t06);
