@@ -3,29 +3,29 @@
 
 import { isEmpty as fn } from '../../isEmpty';
 
-const title = 'isEmpty | arrays | Testy na tablicach';
+const title = 'isEmpty | primitives | Testy na podstawowych typach';
 
 const msg = {
-	t01: '[] - true',
-	t02: '[[]] - true',
-	t03: '[[[]]] - true',
-	t04: '[""] - true',
-	t05: '[{}] - false',
-	t06: '[1, []] - false',
-	t07: '[[], [], 1] - false',
+	t01: 'undefined - true',
+	t02: 'null - true',
+	t03: 'NaN - false',
+	t04: '0 - false',
+	t05: '1 - false',
+	t06: '"a" - false',
+	t07: '"-" - false',
 };
 
 const input = {
-	t01: [],
-	t02: [[]],
-	t03: [[[]]],
-	t04: [''],
-	t05: [{}],
-	t06: [1, []],
-	t07: [[], [], 1],
+	t01: undefined,
+	t02: null,
+	t03: NaN,
+	t04: 0,
+	t05: 1,
+	t06: 'a',
+	t07: '-',
 };
 
-const arrays = () =>
+const primitives = () =>
 	QUnit.test(title, () => {
 		strictEqual(fn(input.t01), true, msg.t01);
 		strictEqual(fn(input.t02), true, msg.t02);
@@ -33,6 +33,7 @@ const arrays = () =>
 		strictEqual(fn(input.t04), true, msg.t04);
 		strictEqual(fn(input.t05), true, msg.t05);
 		strictEqual(fn(input.t06), true, msg.t06);
+		strictEqual(fn(input.t07), true, msg.t07);
 	});
 
-export { arrays };
+export { primitives };

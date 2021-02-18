@@ -8,17 +8,9 @@ const checkArr = arr => {
 };
 
 /**
- * Sprawdza czy otrzymana wartość jest pusta. Zatem:
- * [] = true, [[]] = true, [[[]]] = true, {} = true, [''] = true,
- * { a: '' } = true, { a: [] } = true, { a: [[]] } = true,
- * undefined = true, null = true
- *
- * [[[1]]] = false, { a: [[1]] } = false, [0] = false,
- * { a: 0 } = false, 0 = false
- *
- * Nie działa tylko poprawnie dla zagnieżdżonych obiektów
- * [{}] - false / a powinno być true
- *
+ * Sprawdza czy otrzymana wartość jest pusta.
+ * Zachowuje się wg. mojego wzoru. W unit testach
+ * widać wyniki dla różnych wartości
  * @param {*} val Dowolna wartość
  * @returns {Boolean}
  */

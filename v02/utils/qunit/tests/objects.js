@@ -7,9 +7,11 @@ const title = 'isEmpty | objects | Testy na obiektach';
 
 const msg = {
 	t01: '{} - true',
-	t02: '[[]] - true',
-	t03: '[[[]]] - true',
-	t04: '[""] - true',
+	t02: '{ a: "" } - true',
+	t03: '{ a: [] } - true',
+	t04: '{ a: [[]] } - true',
+	t05: '{ a: 0 } - false',
+	t06: '{ a: "", b: 1 } - true',
 };
 
 const input = {
@@ -17,6 +19,8 @@ const input = {
 	t02: { a: '' },
 	t03: { a: [] },
 	t04: { a: [[]] },
+	t05: { a: 0 },
+	t06: { a: '', b: 1 },
 };
 
 const objects = () =>
@@ -25,6 +29,8 @@ const objects = () =>
 		strictEqual(fn(input.t02), true, msg.t02);
 		strictEqual(fn(input.t03), true, msg.t03);
 		strictEqual(fn(input.t04), true, msg.t04);
+		strictEqual(fn(input.t05), true, msg.t05);
+		strictEqual(fn(input.t06), true, msg.t06);
 	});
 
 export { objects };
