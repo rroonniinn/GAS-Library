@@ -16,7 +16,7 @@ const randomFromArray = () => {
 		equal(
 			fn(a1).length,
 			a1.length,
-			`${a1} / Długość tablic ma być taka sama`
+			`${a1} / !! Długość tablic ma być taka sama !!`
 		);
 		notEqual(
 			fn(a1),

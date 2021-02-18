@@ -25,4 +25,4 @@ const isEmpty = () => ({
 	arrays,
 });
 
-export { arrays };
+export { isEmpty };
