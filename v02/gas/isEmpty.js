@@ -10,6 +10,13 @@ const checkArr = arr => {
 };
 
 /**
+ * ***********************
+ * TO JEST FUNKCJA ZDUPLIKOWANA! WŁAŚCIWA ZNAJDUJE SIĘ W UTILS/
+ * NIE USUWAM JEJ GDYŻ NIE WIEM JAKIE INNE FUNKCJE Z NIEJ KORZYSTAJĄ
+ * TRZEBA BY TO ZROBIĆ W PRZYSZŁOŚCI
+ * ***********************
+ */
+/**
  * Sprawdza czy otrzymana wartość jest pusta.
  * Zatem:
  * [] = true, [[]] = true, [[[]]] = true, {} = true, [''] = true,
