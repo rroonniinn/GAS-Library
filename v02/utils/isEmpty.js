@@ -1,5 +1,7 @@
 /* eslint-disable no-sparse-arrays */
 
+import { isDate } from './isDate';
+
 const checkArr = arr => {
 	const booleanMap = arr.map(el =>
 		Array.isArray(el) ? checkArr(el) : el === 0 ? false : !el
@@ -16,6 +18,9 @@ const checkArr = arr => {
  */
 
 const isEmpty = val => {
+	if (isDate(val)) {
+		return false;
+	}
 	if (Array.isArray(val)) {
 		return checkArr(val);
 	}

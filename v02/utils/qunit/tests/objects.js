@@ -12,6 +12,7 @@ const msg = {
 	t04: '{ a: [[]] } - true',
 	t05: '{ a: 0 } - false',
 	t06: '{ a: "", b: 1 } - false',
+	t07: 'Obiekt daty - false',
 };
 
 const input = {
@@ -21,6 +22,7 @@ const input = {
 	t04: { a: [[]] },
 	t05: { a: 0 },
 	t06: { a: '', b: 1 },
+	t07: new Date()
 };
 
 const objects = () =>
@@ -31,6 +33,7 @@ const objects = () =>
 		strictEqual(fn(input.t04), true, msg.t04);
 		strictEqual(fn(input.t05), false, msg.t05);
 		strictEqual(fn(input.t06), false, msg.t06);
+		strictEqual(fn(input.t07), false, msg.t07);
 	});
 
 export { objects };
