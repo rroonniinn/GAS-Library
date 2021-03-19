@@ -1,5 +1,5 @@
 /**
- * Z przekazanego zakresu jako stringa w formacie 'A1:B3'
+ * Z przekazanego zakresu jako ciągu znaków w formacie 'A1:B3'
  * zwraca tylko pierwszą komórkę jako string. W tym przypadku 'A1'
  *
  * @param {String} str Zakres typu A1:B2, A1:2, A1:B
@@ -19,5 +19,5 @@ const getFirstCellFromString = str => {
 export { getFirstCellFromString };
 
 /**
- * BUG? Patern przepuszca sting A0:.... można by to poprawić kiedyś
+ * BUG? Wzór przepuszcza sting A0:.... można by to poprawić kiedyś
  */
