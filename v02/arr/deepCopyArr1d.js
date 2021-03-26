@@ -12,4 +12,4 @@ import { correctJsonDates } from './correctJsonDates';
 const deepCopyArr1d = arr =>
 	pipe(() => arr, JSON.stringify, JSON.parse, correctJsonDates)();
 
-export { deepCopyArr1d };
+export { deepCopyArr1d, deepCopyArr1d as deepCopyArr };

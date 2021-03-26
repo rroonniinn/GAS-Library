@@ -1,6 +1,10 @@
 import { isDate } from '../utils/isDate';
 
 /**
+ * *********************************************
+ * UWAGA - funkcja NIE DO DALSZEGO UŻYWANIA.
+ * *********************************************
+ * Została zastąpiona `deepCopyArr`
  * Tworzy głęboką kopię tablicy 2D nie rozwalając przy tym dat.
  * Wymaga nieco pracy - np. walidacji
  * @param {array[]} arr

@@ -8,6 +8,7 @@
 
 const correctJsonDates = postJsonArr => {
 	const isJsonDate = v => /\d{4}-\d{2}-\d{2}T/.test(v);
+
 	return postJsonArr.map(el => {
 		if (Array.isArray(el)) {
 			return el.map(cell =>
@@ -20,3 +21,7 @@ const correctJsonDates = postJsonArr => {
 };
 
 export { correctJsonDates };
+
+/**
+ * UT - done
+ */

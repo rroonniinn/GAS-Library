@@ -7,10 +7,13 @@
  * lub przekraczający maksymalny index tablicy,
  * funkcja zwraca oryginalną tablicę
  *
- * @param {Array} arr
- * @param {Number} index
+ * @example
+ * replaceC([1, 2, 3], 0, 'A') // -> ['A', 2, 3]
+ *
+ * @param {array} arr
+ * @param {number} index
  * @param {*} element
- * @returns {Array}
+ * @returns {array}
  */
 
 const replace = (arr, index, element) => {
