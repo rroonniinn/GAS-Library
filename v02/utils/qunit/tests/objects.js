@@ -22,7 +22,7 @@ const input = {
 	t04: { a: [[]] },
 	t05: { a: 0 },
 	t06: { a: '', b: 1 },
-	t07: new Date()
+	t07: new Date(),
 };
 
 const objects = () =>
