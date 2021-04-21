@@ -22,7 +22,7 @@ import { remove } from './remove';
  * z której pobierany jest indeks (domyślnie nie)
  * @param {number} index Index kolumny z której wartości mają zostać
  * użyte jako klucze. Domyślne 0
- * @returns {Object|{}}
+ * @returns {Object<string, array[]>|{}}
  */
 
 const arrToObj = (arr, removeIdx = false, index = 0) => {

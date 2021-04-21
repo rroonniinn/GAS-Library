@@ -7,6 +7,8 @@ const title = {
 	t01: 'getDaysDiff | test01 | date jako data - test możliwości',
 	t02: 'getDaysDiff | test02 | date jako string - test możliwości',
 	t03: 'getDaysDiff | test03 | date jako miks - test możliwości',
+	t04:
+		'getDaysDiff | test03 | date jako miks (relatywne) - test możliwości',
 };
 
 const test01 = () =>
@@ -30,7 +32,7 @@ const test02 = () =>
 		de(fn(dateS, '2021-01-02'), 1);
 		de(fn(dateS, '2021-01-05'), 4);
 		de(fn(dateS, '2020-12-31'), 1);
-		de(fn(dateS, '2020-12- 01'), 31);
+		de(fn(dateS, '2020-12-01'), 31);
 	});
 
 const test03 = () =>
@@ -42,13 +44,26 @@ const test03 = () =>
 		de(fn(dateS, '2021-01-02'), 1);
 		de(fn(dateS, '2021-01-05'), 4);
 		de(fn(dateS, '2020-12-31'), 1);
-		de(fn(dateS, '2020-12- 01'), 31);
+		de(fn(dateS, '2020-12-01'), 31);
+	});
+
+const test04 = () =>
+	QUnit.test(title.t04, () => {
+		const de = deepEqual;
+		const dateS = new Date(2021, 0, 1);
+
+		de(fn('2021-01-01', dateS, true), 0);
+		de(fn('2021-01-02', dateS, true), -1);
+		de(fn('2021-01-05', dateS, true), -4);
+		de(fn('2020-12-31', dateS, true), 1);
+		de(fn('2020-12-01', dateS, true), 31);
 	});
 
 const getDaysDiff = () => {
 	test01();
 	test02();
 	test03();
+	test04();
 };
 
 export { getDaysDiff };

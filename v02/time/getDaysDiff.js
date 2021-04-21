@@ -1,8 +1,11 @@
 import { isDate } from '../utils/isDate';
 
 /**
- * Zwraca różnicę w dniach między dwoma datami.
- * Nie bierze pod uwagę która data jest starsza
+ * Zwraca różnicę w dniach między dwoma datami. Jeśli trzeci,
+ * opcjonalny argument nie jest podany (domyślnie `false`) to nie bierze
+ * pod uwagę, która data jest starsza - zwraca wartość bezwzględną.
+ * Jeśli argument przyjmuje wartość `true` to jeśli b jest datą
+ * wcześniejszą to zwróci ujemna różnicę dni.
  *
  * @example
  * getDaysDiff('2021-01-01', '2021-01-02'); // -> 1
@@ -10,10 +13,11 @@ import { isDate } from '../utils/isDate';
  *
  * @param {Date|string} a Zarówno obiekt daty jak i string np. "2019-01-01"
  * @param {Date|string} b Zarówno obiekt daty jak i string np. "2019-01-01"
+ * @param {boolean} isRelative Info czy zwrócona wartość ma być relatywna
  * @returns {number}
  */
 
-const getDaysDiff = (a, b) => {
+const getDaysDiff = (a, b, isRelative = false) => {
 	const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 	const dateA = /** @type {Date} */ (isDate(a) ? a : new Date(a));
@@ -30,9 +34,13 @@ const getDaysDiff = (a, b) => {
 		dateB.getDate()
 	);
 
-	const timeDiff = Math.abs(utc2 - utc1);
+	const timeDiff = !isRelative ? Math.abs(utc2 - utc1) : utc2 - utc1;
 
 	return Math.floor(timeDiff / _MS_PER_DAY);
 };
 
 export { getDaysDiff };
+
+/**
+ * UT - done
+ */
