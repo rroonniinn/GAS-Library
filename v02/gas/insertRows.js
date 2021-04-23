@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import { getSheetLastRowPosition } from './getSheetLastRowPosition';
+import { getSheetLastRowPosition } from '../../v01/gas/getSheetLastRowPosition';
 
 /**
  * Dodaje wskazaną liczbę wierszy na końcu wskazanego arkusza.

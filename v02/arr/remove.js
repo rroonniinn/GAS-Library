@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * Zwraca nową tablicę z której usunięto element z podanego indexu
+ * Zwraca nową tablicę z której usunięto element z podanego indeksu
  * Jeśli index jest mniejszy od zera lub przekraczający maksymalny index tablicy,
- * funkcja zwraca nie zmofyfikowaną tablicę
+ * funkcja zwraca nie zmodyfikowaną tablicę
  *
  * @param {Array} arr
  * @param {Number} index
