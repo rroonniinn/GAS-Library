@@ -5,40 +5,46 @@ import { CrusherPluginPropertyService } from '../gas-mcpher/CrusherPluginPropert
  * Cache Object
  * @typedef {Object} CacheObject
  * @property {object} init Metoda do inicjacji obiektu (nie używana pub)
- * @property {function} get Pobieranie danych z propsa
- * @property {function} put Wprowadzanie danych do propsa
- * @property {function} del Usuwa dane z propsa
+ * @property {function} get Pobieranie danych z propsów
+ * @property {function} put Wprowadzanie danych do propsów
+ * @property {function} del Usuwa dane z propsów
  */
+
 /**
- * Obiekt do obsługi cachowania z biblioteki mcpher
+ * Obiekt do obsługi cach-owania z biblioteki McPher
  * @type {CacheObject} obj
  */
+
 const crusherProps = {
 	init: new CrusherPluginPropertyService().init({
 		store: PropertiesService.getScriptProperties(),
 	}),
 
 	/**
-	 * Pobieranie danych z cacha
-	 * @param {string|number} key Klucz danych z cacha
+	 * Pobieranie danych z propsów
+	 * @param {string|number} key Klucz danych
 	 */
+
 	get(key) {
-		console.log(`Pobieram z Propsów cr-${key}`);
+		console.log(`Pobieram z Propsów pr-${key}`);
 		return this.init.get(`pr-${key}`);
 	},
 
 	/**
-	 * @param {string} key Klucz danych z cacha
-	 * @param {any} vals Dane do wprowadzenia
+	 * Wprowadzanie danych do propsów
+	 * @param {string} key Klucz danych
+	 * @param {any} val Dane do wprowadzenia
 	 */
-	put(key, vals) {
-		this.init.put(`pr-${key}`, vals);
+
+	put(key, val) {
+		this.init.put(`pr-${key}`, val);
 	},
 
 	/**
-	 * @param {string} key Klucz danych z cacha
-	 * @param {any} vals Dane do wprowadzenia
+	 * Usuwa wskazany klucz z propsów
+	 * @param {string} key Klucz danych
 	 */
+
 	del(key) {
 		this.init.remove(`pr-${key}`);
 	},
@@ -46,7 +52,7 @@ const crusherProps = {
 
 const getProps = propName => crusherProps.get(propName);
 const setProps = (propName, val) => crusherProps.put(propName, val);
-const delProps = (propName) => crusherProps.del(propName);
+const delProps = propName => crusherProps.del(propName);
 
-// crusherProps jest exportowany tylko z powodu legacy code
+// crusherProps jest eksportowany tylko z powodu legacy code
 export { crusherProps, getProps, setProps, delProps };

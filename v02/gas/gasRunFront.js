@@ -3,18 +3,13 @@
 /* global google */
 
 import { safeJsonParse } from '../json/safeJsonParse';
-import { isStandardGasReturn } from '../utils/isStandardGasReturn';
-
 import { getExecutionContext } from './getExecutionContext';
 
 /**
- * Oczekiwany rezultat rozwiązanego Promise-a otrzymanego z GAS jako rezultat `google.script.run`
- * @typedef {Object} GoogleScriptRunSuccess
+ * Zunifikowany obiekt zwracana z funkcji server-side do frontu
+ * @typedef {Object} ReturnToFrontClean
  * @property {boolean} success Info czy operacja zakończyła się sukcesem
- * (nie wyświetlenie błędu z GAS tylko ewentualne poinformowanie użytkownika
- * o dwóch możliwych stanach - sukces i porażka)
- * @property {*} data Sparsowane (z JSONa), odesłane z serwera dane w dowolnej postaci
- * @property {string} log String logów / właściwie to powinna być wiadomość....
+ * @property {*} out Dane 'odpakowane' z JSONA
  */
 
 /**
@@ -31,45 +26,35 @@ import { getExecutionContext } from './getExecutionContext';
  * jeśli z GAS przychodzi coś co wygląda na JSONa to są parsowane do
  * typowej postaci.
  *
- * Dodatkowo funkcja sprawdza czy to co przyszło z GAS ma formę standardowej
- * odpowiedzi typu {success: boolean, data: *, log: string}
+ * Funkcja pracuje w tandemie z `gasRunServer()`
  *
- * @param {string} gasFnName Nazwa funkcji, która ma się wykonać w GAS
- * @param {array} args Tablica argumentów dla powyższej funkcji
- * @param {*} localOut Lokalne dane symulujące output z GAS
- * @returns {Promise<GoogleScriptRunSuccess>} Promise, który zwraca obiekt o strukturze `GoogleScriptRunSuccess`
+ * @param {array} input Tablica argumentów, w której pierwszy jest nazwą funkcji do odpalenia w GAS, reszta zaś to argumenty dla niej.
+ * @param {*} localOut Lokalne dane symulujące output z GAS (do testów na froncie)
+ * @returns {Promise<ReturnToFrontClean>} Promise, który zwraca obiekt o strukturze `GoogleScriptRunSuccess`
  */
 
-const gasScriptRunPromise = (gasFnName, args, localOut = null) => {
+const gasRunFront = (input, localOut = null) => {
 	// 1.
 	if (getExecutionContext() === 'gas') {
 		return new Promise((resolve, reject) => {
-			const argsStringfied = args.map(ar => JSON.stringify(ar));
+			// 2.
+			const argsStringfied = input.map(ar => JSON.stringify(ar));
 
 			google.script.run
 				.withFailureHandler(err => reject(err))
-				.withSuccessHandler(output => {
-					// 2.
-					if (!isStandardGasReturn(output)) {
-						return reject(
-							new Error('-- Niestandardowy return z GAS! --')
-						);
-					}
-
-					return resolve({
+				.withSuccessHandler(output =>
+					resolve({
 						success: output.success,
-						data: safeJsonParse(output.data), // 3.
-						log: output.log,
-					});
-				})
-				[gasFnName].apply(null, argsStringfied);
+						out: safeJsonParse(output.out), // 3.
+					})
+				)
+				.gasRunServer.apply(null, argsStringfied);
 		})
 			.then(output => output) // 4.
 			.catch(err => ({
 				// 5.
 				success: false,
-				data: {},
-				log: err.message,
+				out: err.message,
 			}));
 	}
 
@@ -79,29 +64,27 @@ const gasScriptRunPromise = (gasFnName, args, localOut = null) => {
 		if (localOut) {
 			resolve({
 				success: localOut.success,
-				data: safeJsonParse(localOut.data),
-				log: localOut.log,
+				out: safeJsonParse(localOut.out),
 			});
 		}
 
 		// 8.
-		reject(new Error('-- Brak zdefiniowanego localOutput --'));
+		reject(new Error('Brak zdefiniowanego localOutput!'));
 	})
 		.then(output => output) // 4.
 		.catch(err => ({
 			// 5.
 			success: false,
-			data: {},
-			log: err.message,
+			out: err.message,
 		}));
 };
 
-export { gasScriptRunPromise };
+export { gasRunFront };
 
 /**
  * 1.) Uruchomienie w środowisku GAS
- * 2.) Weryfikacja czy return z GAS ma standardową formę obiektu, jeśli nie, reject custom-owym errorem
- * 3.) Jeśli format prawidłowy - odparsowanie JSONA (jeśli jako data nie będzie JSON-em nie wysypie błędu)
+ * 2.) Zamiana argumentów na tablicę JSONów
+ * 3.) Odparsowanie odpowiedzi z serwera (jeśli `out` nie będzie JSON-em nie wysypie błędu)
  * 4.) Od razu zwracam rezultat
  * 5.) Jeśli GAS zwróci błąd, to opakowuję wiadomość błędu w standardowy obiekt i zwracam go.
  * 6.) Odpalane podczas testów LOCAL

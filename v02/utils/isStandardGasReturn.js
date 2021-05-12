@@ -10,7 +10,7 @@ const isStandardGasReturn = out => {
 		return false;
 	}
 
-	if (out.success && out.data && out.log) {
+	if (out.success !== undefined && out.data && out.log) {
 		return true;
 	}
 
