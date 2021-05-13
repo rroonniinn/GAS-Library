@@ -45,8 +45,8 @@ const gasRunFront = (input, localOut = null) => {
 				.withFailureHandler(err => reject(err))
 				.withSuccessHandler(output =>
 					resolve({
-						success: output.success,
-						out: safeJsonParse(output.out), // 3.
+						success: true,
+						out: safeJsonParse(output), // 3.
 					})
 				)
 				.gasRunServer.apply(null, argsStringfied);
@@ -55,7 +55,7 @@ const gasRunFront = (input, localOut = null) => {
 			.catch(err => ({
 				// 5.
 				success: false,
-				out: err.message,
+				out: err,
 			}));
 	}
 
@@ -64,8 +64,8 @@ const gasRunFront = (input, localOut = null) => {
 		// 7.
 		if (localOut) {
 			resolve({
-				success: localOut.success,
-				out: safeJsonParse(localOut.out),
+				success: true,
+				out: safeJsonParse(localOut),
 			});
 		}
 
@@ -76,7 +76,7 @@ const gasRunFront = (input, localOut = null) => {
 		.catch(err => ({
 			// 5.
 			success: false,
-			out: err.message,
+			out: err,
 		}));
 };
 

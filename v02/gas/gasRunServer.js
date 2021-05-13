@@ -52,29 +52,13 @@ const gasRunServer = fnx => (...args) => {
 	const [fn, ...cleanArgs] = argsClean;
 
 	console.log(`Run fn: ${fn} with args: [...${cleanArgs}]`);
+
 	const output = fnx[fn](...cleanArgs);
+	console.log(`Clean output from ${fn}:`, output);
 
-	return JSON.stringify(output);
+	const out = JSON.stringify(output);
 
-	// // 1.
-	// try {
-	// 	const argsClean = args.map(ar => JSON.parse(ar));
-	// 	const [fn, ...cleanArgs] = argsClean;
-
-	// 	const output = fnx[fn](...cleanArgs);
-
-	// 	console.log(`Run fn: ${fn} with args: [...${cleanArgs}]`);
-
-	// 	return {
-	// 		out: JSON.stringify(output),
-	// 		success: true,
-	// 	};
-	// } catch (error) {
-	// 	return {
-	// 		out: error.message,
-	// 		success: false,
-	// 	};
-	// }
+	return out;
 };
 
 export { gasRunServer };
