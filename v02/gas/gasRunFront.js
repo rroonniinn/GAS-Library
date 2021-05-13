@@ -3,6 +3,7 @@
 /* global google */
 
 import { safeJsonParse } from '../json/safeJsonParse';
+
 import { getExecutionContext } from './getExecutionContext';
 
 /**

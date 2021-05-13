@@ -12,7 +12,7 @@
 /**
  * @callback GasRunServer
  * @param {...JSON[]} args Argumenty
- * @returns {ReturnToFront} Zunifikowany obiekt zwracany na front
+ * @returns {JSON} Zwrócona wartość funkcji w formie JSON-a
  */
 
 /**
@@ -48,25 +48,33 @@
  */
 
 const gasRunServer = fnx => (...args) => {
-	// 1.
-	try {
-		const argsClean = args.map(ar => JSON.parse(ar));
-		const [fn, ...cleanArgs] = argsClean;
+	const argsClean = args.map(ar => JSON.parse(ar));
+	const [fn, ...cleanArgs] = argsClean;
 
-		const output = fnx[fn](...cleanArgs);
+	console.log(`Run fn: ${fn} with args: [...${cleanArgs}]`);
+	const output = fnx[fn](...cleanArgs);
 
-		console.log(`Run fn: ${fn} with args: [...${cleanArgs}]`);
+	return JSON.stringify(output);
 
-		return {
-			out: JSON.stringify(output),
-			success: true,
-		};
-	} catch (error) {
-		return {
-			out: error.message,
-			success: false,
-		};
-	}
+	// // 1.
+	// try {
+	// 	const argsClean = args.map(ar => JSON.parse(ar));
+	// 	const [fn, ...cleanArgs] = argsClean;
+
+	// 	const output = fnx[fn](...cleanArgs);
+
+	// 	console.log(`Run fn: ${fn} with args: [...${cleanArgs}]`);
+
+	// 	return {
+	// 		out: JSON.stringify(output),
+	// 		success: true,
+	// 	};
+	// } catch (error) {
+	// 	return {
+	// 		out: error.message,
+	// 		success: false,
+	// 	};
+	// }
 };
 
 export { gasRunServer };
