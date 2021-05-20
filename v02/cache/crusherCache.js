@@ -69,10 +69,10 @@ const getCache = cacheKey => crusherCache.get(cacheKey);
  * Wyeksportowana funkcja ustawiająca dane w cache-u
  * @param {string} cacheKey Klucz pod jakim dane mają być dostępne
  * @param {*} val Dane do zapisania
- * @param {number} minutes Liczba minut trzymania danych w cache-u (domyślnie 30 min)
+ * @param {number} minutes Liczba minut trzymania danych w cache-u (domyślnie 60 min)
  */
 
-const setCache = (cacheKey, val, minutes = 30) =>
+const setCache = (cacheKey, val, minutes = 60) =>
 	crusherCache.put(cacheKey, val, minutes);
 
 /**

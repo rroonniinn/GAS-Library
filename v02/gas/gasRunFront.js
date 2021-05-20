@@ -8,10 +8,23 @@ import { getExecutionContext } from './getExecutionContext';
 
 /**
  * Zunifikowany obiekt zwracana z funkcji server-side do frontu
- * @typedef {Object} ReturnToFrontClean
+ * @typedef {Object} GoogleScriptRunReturn
  * @property {boolean} success Info czy operacja zakończyła się sukcesem
- * @property {*} out Dane 'odpakowane' z JSONA
+ * @property {*} output Dane przekazane bezpośrednio przez funkcję po stronie GAS
+ * @property {array[]} logAsync Logi z czasami startu i zakończenia samej funkcji google.script.run
+ * @property {Error} error Obiekt error przekazany w przypadku błędu po stronie GAS
  */
+
+/**
+ * Wstawia czasy wykonywania się samej funkcji Google.Script.Run
+ * @param {number} starTime Startowy czas jako milisekundy (efekt Date.now())
+ * @returns {array[]} Tablica z logami
+ */
+
+const getLogs = starTime => [
+	[starTime, 'google.script.run | START'],
+	[Date.now(), 'google.script.run | END'],
+];
 
 /**
  * Funkcja wykonująca się asynchronicznie po stronie środowiska GAS.
@@ -31,10 +44,12 @@ import { getExecutionContext } from './getExecutionContext';
  *
  * @param {array} input Tablica argumentów, w której pierwszy jest nazwą funkcji do odpalenia w GAS, reszta zaś to argumenty dla niej.
  * @param {*} localOut Lokalne dane symulujące output z GAS (do testów na froncie)
- * @returns {Promise<ReturnToFrontClean>} Promise, który zwraca obiekt o strukturze `GoogleScriptRunSuccess`
+ * @returns {Promise<GoogleScriptRunReturn>} Promise, który zwraca obiekt o strukturze `GoogleScriptRunSuccess`
  */
 
-const gasRunFront = (input, localOut = null) => {
+const gasRunFront = (input, localOut) => {
+	const startT = Date.now();
+
 	// 1.
 	if (getExecutionContext() === 'gas') {
 		return new Promise((resolve, reject) => {
@@ -46,26 +61,32 @@ const gasRunFront = (input, localOut = null) => {
 				.withSuccessHandler(output =>
 					resolve({
 						success: true,
-						out: safeJsonParse(output), // 3.
+						output: safeJsonParse(output), // 3.
+						logAsync: getLogs(startT),
+						error: null,
 					})
 				)
 				.gasRunServer.apply(null, argsStringfied);
 		})
 			.then(output => output) // 4.
-			.catch(err => ({
+			.catch(error => ({
 				// 5.
 				success: false,
-				out: err,
+				output: null,
+				logAsync: getLogs(startT),
+				error,
 			}));
 	}
 
 	// 6.
 	return new Promise((resolve, reject) => {
 		// 7.
-		if (localOut) {
+		if (localOut !== undefined) {
 			resolve({
 				success: true,
-				out: safeJsonParse(localOut),
+				output: safeJsonParse(localOut),
+				logAsync: getLogs(startT),
+				error: null,
 			});
 		}
 
@@ -73,10 +94,12 @@ const gasRunFront = (input, localOut = null) => {
 		reject(new Error('Brak zdefiniowanego localOutput!'));
 	})
 		.then(output => output) // 4.
-		.catch(err => ({
+		.catch(error => ({
 			// 5.
 			success: false,
-			out: err,
+			output: null,
+			logAsync: getLogs(startT),
+			error,
 		}));
 };
 
