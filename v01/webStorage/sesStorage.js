@@ -21,6 +21,12 @@ const sesStorage = {
 	 */
 
 	get: key => JSON.parse(sessionStorage.getItem(key)),
+	/**
+	 * Usuwa dane z sessionStorage
+	 * @param {string} key Nazwa klucza do usunięcia danych
+	 */
+
+	del: key => sessionStorage.removeItem(key),
 };
 
 export { sesStorage };

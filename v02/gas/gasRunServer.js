@@ -52,12 +52,13 @@ const gasRunServer = fnx => (...args) => {
 	const [fn, ...cleanArgs] = argsClean;
 
 	console.log(
-		`Run async function: ${fn} with args: ${cleanArgs.join(', ')}`
+		`Run async function: ${fn}`
+		// `Run async function: ${fn} with args: ${cleanArgs.join(', ')}`
 	);
 
 	const output = fnx[fn](...cleanArgs);
 
-	console.log(`Outupt from async function ${fn}:`, output);
+	// console.log(`OutpUt from async function ${fn}:`, output);
 
 	const out = JSON.stringify(output);
 
