@@ -5,13 +5,17 @@
 
 const sesStorage = {
 	/**
-	 * Zapisuje dane do sessionStorage
+	 * Zapisuje dane do sessionStorage.
 	 * @param {string} key Nazwa klucza
 	 * @param {*} data Dane do zapisania
+	 * @param {boolean} [isJson] Opcjonalne info, czy przekazane dane to JSON,
+	 * 		jeśli tak to nie zamienia ich na JSONa.
 	 */
 
-	set: (key, data) => {
-		sessionStorage.setItem(key, JSON.stringify(data));
+	set: (key, data, isJson = false) => {
+		const dataToSave = isJson ? data : JSON.stringify(data);
+
+		sessionStorage.setItem(key, dataToSave);
 		return data;
 	},
 
