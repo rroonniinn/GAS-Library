@@ -349,9 +349,9 @@ const Chunking = function() {
 
 			data = crushed.chunk
 				? JSON.parse(
-						crushed.skipZip
-							? crushed.chunk
-							: self.unzip(crushed.chunk)
+					crushed.skipZip
+						? crushed.chunk
+						: self.unzip(crushed.chunk)
 				  )
 				: null;
 		}
@@ -407,7 +407,7 @@ const Chunking = function() {
 
 		let slob;
 
-		// donbt allow undefined
+		// don't allow undefined
 		if (isUndefined(ob)) {
 			throw 'cant write undefined to store';
 		}
@@ -421,13 +421,13 @@ const Chunking = function() {
 				blob: true,
 			};
 		} else if (isDateObject(ob)) {
-			// convery to timestamp
+			// convert to timestamp
 			slob = {
 				date: true,
 				content: ob.getTime(),
 			};
 		} else if (typeof ob === 'object') {
-			// strinfigy
+			// stringify
 			slob = {
 				content: JSON.stringify(ob),
 				parse: true,

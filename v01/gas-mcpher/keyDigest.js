@@ -2,9 +2,11 @@
  * @param {[*]} arguments unspecified number and type of args
  * @return {string} a digest of the arguments to use as a key
  */
-const keyDigest = () =>
+const keyDigest = () => {
+	console.log('arguments', arguments);
+
 	// conver args to an array and digest them
-	Utilities.base64EncodeWebSafe(
+	return Utilities.base64EncodeWebSafe(
 		Utilities.computeDigest(
 			Utilities.DigestAlgorithm.SHA_1,
 			Array.prototype.slice
@@ -19,4 +21,5 @@ const keyDigest = () =>
 			Utilities.Charset.UTF_8
 		)
 	);
+};
 export { keyDigest };
