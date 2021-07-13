@@ -48,6 +48,7 @@
  */
 
 const gasRunServer = fnx => (...args) => {
+	// @ts-ignore
 	const argsClean = args.map(ar => JSON.parse(ar));
 	const [fn, ...cleanArgs] = argsClean;
 

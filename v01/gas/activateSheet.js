@@ -4,7 +4,7 @@
  * @param {string} sheetName
  */
 
-const activateSheet = sheetName => {
+export const activateSheet = sheetName => {
 	SpreadsheetApp.getActive()
 		.getSheetByName(sheetName)
 		.activate();
