@@ -11,12 +11,24 @@
  */
 
 const selectAddOptions = (select, elements, position) => {
-	elements.forEach(([value, text], i) => {
+	elements.forEach(([value, text, toDataSet], i) => {
 		const opt = document.createElement('option');
 		opt.value = String(value);
 		opt.text = String(text);
 		select.options.add(opt, i + position - 1);
+
+		// 1.
+		if (toDataSet) {
+			select.options[
+				i + position - 1
+			].dataset.custom = JSON.stringify(toDataSet);
+		}
 	});
 };
 
 export { selectAddOptions };
+
+/**
+ * 1.) Opcjonalnie mogę dodać dowolny obiekt do zapisania bezpośrednio
+ * 		w dataSet.custom
+ */
