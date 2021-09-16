@@ -8,7 +8,7 @@
  * funkcja zwraca oryginalną tablicę
  *
  * @example
- * replaceC([1, 2, 3], 0, 'A') // -> ['A', 2, 3]
+ * replace([1, 2, 3], 0, 'A') // -> ['A', 2, 3]
  *
  * @param {array} arr
  * @param {number} index
@@ -20,6 +20,7 @@ const replace = (arr, index, element) => {
 	if (index >= 0 && index < arr.length) {
 		return [...arr.slice(0, index), element, ...arr.slice(index + 1)];
 	}
+
 	return arr;
 };
 

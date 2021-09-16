@@ -11,7 +11,7 @@ import { paste } from './paste';
  * @param {Array[]} arr2d Tablica z danymi
  * @param {String} sheetName Nazwa arkusza
  * @param {String} fileId Opcjonalny ID pliku w którym znajduje się arkusz
- * @returns {sheetObj} Obiekt sheet do dalszej modyfikacji
+ * @returns {GoogleAppsScript.Spreadsheet.Sheet} Obiekt sheet do dalszej modyfikacji
  */
 
 const appendRowsWithData = (arr2d, sheetName, fileId) => {

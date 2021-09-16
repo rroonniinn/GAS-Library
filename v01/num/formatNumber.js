@@ -6,9 +6,14 @@
  * @param {number} fractures Opcjonalna liczba miejsc po przecinku. Domyślnie 2
  * @returns {string}
  */
-export const formatNumber = (num, fractures = 2) =>
-	num
+export const formatNumber = (num, fractures = 2) => {
+	if (typeof num !== 'number') {
+		return '0.00';
+	}
+
+	return num
 		.toFixed(fractures)
 		.toString()
 		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 		.replace('.', ',');
+};

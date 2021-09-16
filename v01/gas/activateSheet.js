@@ -10,4 +10,4 @@ export const activateSheet = sheetName =>
 		.getSheetByName(sheetName)
 		.activate();
 
-/* TODO: Możliwość przekazania Sheeta dorobić */
+/* TODO: Możliwość przekazania Sheet-a dorobić */
