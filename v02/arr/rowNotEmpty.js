@@ -1,5 +1,5 @@
 /**
- * Funkcja wykorzysytwana jako callback do filtru dla tablic 2d
+ * Funkcja wykorzystywana jako callback do filtru dla tablic 2d
  * Zwraca wiersze, które mają minimum jedną komórkę wypełnioną
  * @param {array} row Wiersz przekazany do filtru
  */

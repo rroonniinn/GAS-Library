@@ -1,6 +1,6 @@
 /**
  * Zwraca zawartość aktualnie zaznaczonej komórki w arkuszu.
- * @returns {*}
+ * @returns {string}
  */
 
 const getCurrentCellVal = () =>
