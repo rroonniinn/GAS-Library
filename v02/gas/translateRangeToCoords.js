@@ -1,5 +1,4 @@
-import { letterToColumn as toColumn } from './../../v01/gas/letterToColumn';
-
+import { letterToColumn as toColumn } from '../../v01/gas/letterToColumn';
 
 /**
  * Przyjmując range jako string (np. A1 lub A1:C2) zwraca obiekt z
@@ -35,4 +34,4 @@ const translateRangeToCoords = str => {
 	};
 };
 
-export {translateRangeToCoords}
+export { translateRangeToCoords };

@@ -1,5 +1,5 @@
 /**
- * Sprawdza czy przekazana wartośc jest obiektem
+ * Sprawdza czy przekazana wartość jest obiektem
  * EmbeddedChart. Weryfikuje czy dostępna jest
  * na nim metoda .getChartId
  *

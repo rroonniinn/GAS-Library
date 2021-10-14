@@ -1,8 +1,8 @@
 /* eslint-disable complexity */
 
 /**
- * Zwraca połączone dwie tablice lub każdą z osobna jeśli druga jest niezdefinowana
- * W przypadku obu niezdefiniowanych zwraca null
+ * Zwraca połączone dwie tablice lub każdą z osobna jeśli druga jest
+ * niezdefiniowana. W przypadku obu niezdefiniowanych zwraca null
  *
  * @param {Array|undefined} arrA Tablica
  * @param {Array|undefined} arrB Tablica

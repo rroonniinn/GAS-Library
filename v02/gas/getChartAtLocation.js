@@ -3,7 +3,7 @@ import { columnToLetter } from './columnToLetter';
 import { getCharts } from './getCharts';
 
 /**
- * Callback do znalezienia wykresi znajdującego się w określonym miejscu
+ * Callback do znalezienia wykresu znajdującego się w określonym miejscu
  * @param {string} col
  * @param {number} row
  * @returns {(chart: GoogleAppsScript.Spreadsheet.EmbeddedChart) => Boolean}
