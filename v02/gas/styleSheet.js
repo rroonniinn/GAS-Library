@@ -27,7 +27,7 @@ import { isArray2d } from './isArray2d';
  */
 
 /**
- * String z zakresem komórek - np. A1, A1:B3, itp
+ * String z zakresem komórek - np. A1, A1:B3, itp.
  * @typedef {string} RangeString
  */
 
@@ -40,7 +40,7 @@ import { isArray2d } from './isArray2d';
  * @property {number} [fontSize] Wielkość czcionki w punktach
  * @property {'italic'|'normal'} [fontStyle] Styl czcionki
  * @property {'bold'|'normal'} [fontWeight] Grubość czcionki
- * @property {'number 0,00'|'number 0,0'|'number 0'|'money 0,00 zł'|'money 0 zł'|'money 0,00 $'|'money 0 $'|'money 0,00 €'|'money 0 €'|'percent 0,00'|'percent 0,0'|'percent 0'|'date yyyy-mm-dd'|'date yyyy-mm'|'date yy-mm-dd'} [fontFormatNum] Format numerów
+ * @property {'number plain'|'number 0,00'|'number 0,0'|'number 0'|'money 0,00 zł'|'money 0 zł'|'money 0,00 $'|'money 0 $'|'money 0,00 €'|'money 0 €'|'percent 0,00'|'percent 0,0'|'percent 0'|'date yyyy-mm-dd'|'date yyyy-mm'|'date yy-mm-dd'} [fontFormatNum] Format numerów
  * @property {'left'|'center'|'right'} [alignH] Wyrównanie w poziomie
  * @property {'top'|'middle'|'bottom'} [alignV] Wyrównanie w pionie
  * @property {'all'|'ver'|'hor'|'off'} [merge] Czy komórki mają być złączone i jak
@@ -95,6 +95,7 @@ const translation = {
 };
 
 const numberFormats = {
+	'number plain': '0',
 	'number 0,00': '#,##0.00',
 	'number 0,0': '#,##0.0',
 	'number 0': '#,##0',
