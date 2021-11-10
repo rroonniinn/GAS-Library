@@ -1,11 +1,9 @@
 /**
  * Zwraca zawartość aktualnie zaznaczonej komórki w arkuszu.
- * @returns {string}
+ * @returns {*}
  */
 
-const getCurrentCellVal = () =>
+export const getCurrentCellVal = () =>
 	SpreadsheetApp.getActiveSheet()
 		.getCurrentCell()
 		.getValue();
-
-export { getCurrentCellVal };
