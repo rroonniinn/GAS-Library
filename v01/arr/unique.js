@@ -5,5 +5,5 @@
  * @param {array} arr Tablica 1D z powtarzającymi się wartościami
  * @returns {array} Tablica tylko z unikatowymi wartościami (nie sortowana)
  */
-const unique = arr => [...new Set(arr)];
-export { unique };
+
+export const unique = arr => [...new Set(arr)];

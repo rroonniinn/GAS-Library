@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 /**
- * Zmienia numer kolumny na odpowiednią literę nagłowka (np. 1 na A).
+ * Zmienia numer kolumny na odpowiednią literę nagłówka (np. 1 na A).
  * Wzięte stąd: https://stackoverflow.com/questions/21229180/convert-column-index-into-corresponding-column-letter
  *
  * @param {Number} column Numer kolumny

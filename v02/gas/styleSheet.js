@@ -39,6 +39,7 @@ import { isArray2d } from './isArray2d';
  * @property {string} [fontFamily] Nazwa czcionki
  * @property {number} [fontSize] Wielkość czcionki w punktach
  * @property {'italic'|'normal'} [fontStyle] Styl czcionki
+ * @property {'underline'|'line-through'|'none'} [fontLine] Styl podkreślenia czcionki
  * @property {'bold'|'normal'} [fontWeight] Grubość czcionki
  * @property {'number plain'|'number 0,00'|'number 0,0'|'number 0'|'money 0,00 zł'|'money 0 zł'|'money 0,00 $'|'money 0 $'|'money 0,00 €'|'money 0 €'|'percent 0,00'|'percent 0,0'|'percent 0'|'date yyyy-mm-dd'|'date yyyy-mm'|'date yy-mm-dd'} [fontFormatNum] Format numerów
  * @property {'left'|'center'|'right'} [alignH] Wyrównanie w poziomie
@@ -63,7 +64,7 @@ import { isArray2d } from './isArray2d';
 
 /**
  * To na razie nie używane
- * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
+ * @typedef {'background'|'fontColor'|'fontFamily'|'fontSize'|'fontStyle'|'fontLine'|'fontWeight'|'fontFormat'|'alignH'|'alignV'|'showHyperlink'|'wrap'|'wrapType'|'textStyle'|'border'|'values'|'rowHeight'|'colWidth'} StylerOptions
  */
 
 /* ************************************** Właściwy kod **************************************************************** */
@@ -79,6 +80,7 @@ const translation = {
 	fontFamily: 'setFontFamily',
 	fontSize: 'setFontSize',
 	fontStyle: 'setFontStyle',
+	fontLine: 'setFontLine',
 	fontFormatNum: 'setNumberFormat',
 	fontWeight: 'setFontWeight',
 	alignH: 'setHorizontalAlignment',
