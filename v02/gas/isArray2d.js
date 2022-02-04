@@ -1,6 +1,6 @@
 import { isEmpty } from './isEmpty';
 /**
- * Weryfikuje czy przekazana wartośc jest tablicą 2d
+ * Weryfikuje czy przekazana wartość jest tablicą 2d
  *
  * @param {any} val Sprawdzana wartość
  * @returns {Boolean} true / false
