@@ -14,4 +14,4 @@ const showSidebar = (srcHtml, title) => {
 	SpreadsheetApp.getUi().showSidebar(ui);
 };
 
-export {showSidebar}
+export { showSidebar };

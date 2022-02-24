@@ -44,33 +44,31 @@
  *
  *
  * @param {Object<string, function>} fnx Obiekt z funkcjami z których może skorzystać front
+ * @param {string[]} views Tablica nazw funkcji które modyfikują wyświetlane dane w arkuszu
+ * @param {Function} saveMethod Callback / funkcja która ma być użyta do zapisania przysłanych ustawień
  * @returns {GasRunServer} Zunifikowany obiekt zwracany na front
  */
 
-const gasRunServer = fnx => (...args) => {
+export const gasRunServer = (fnx, views, saveMethod) => (...args) => {
 	// @ts-ignore
 	const argsClean = args.map(ar => JSON.parse(ar));
 	const [fn, ...cleanArgs] = argsClean;
 
-	console.log(
-		`Run async function: ${fn}`
-		// `Run async function: ${fn} with args: ${cleanArgs.join(', ')}`
-	);
+	console.log(`Run async function: ${fn}`);
 
 	const output = fnx[fn](...cleanArgs);
 
-	// console.log(`OutpUt from async function ${fn}:`, output);
-
 	const out = JSON.stringify(output);
+
+	// 1.
+	if (views.includes(fn)) {
+		saveMethod(args);
+	}
 
 	return out;
 };
 
-export { gasRunServer };
-
 /**
- * 1.) Aby obsłużyć ewentualny błąd w ramach funkcji (np. przekazanie
- * 		nazwy funkcji nie zdefiniowanej w obiekcie 'fnx') całość objęta jest
- * 		klauzulą try / catch. W przypadku błędu zwracany jest obiekt z flagą
- * 		success na false i treścią błędu jako out.
+ * 1.) Jeśli funkcja należy do tablicy widoków, wtedy wszystkie argumenty zostają
+ * zapisane przekazaną metodą (np. w propsach)
  */
