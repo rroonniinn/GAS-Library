@@ -19,7 +19,7 @@ const remove = (arr, index) => {
 			`Wrong argument type. Remove expects "number", got ${typeof index}`
 		);
 
-	if (index >= 0 && index < arr.length) {
+	if (index >= 0 && arr.length > index) {
 		return [...arr.slice(0, index), ...arr.slice(index + 1)];
 	}
 	return arr;
