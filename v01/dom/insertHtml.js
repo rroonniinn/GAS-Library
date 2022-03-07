@@ -8,7 +8,7 @@
  * @param {string|null} [html]
  */
 
-const insertHtml = (parent, html) => {
+export const insertHtml = (parent, html) => {
 	while (parent.firstChild) {
 		parent.removeChild(parent.firstChild);
 	}
@@ -17,5 +17,3 @@ const insertHtml = (parent, html) => {
 		parent.insertAdjacentHTML('beforeend', html);
 	}
 };
-
-export { insertHtml };

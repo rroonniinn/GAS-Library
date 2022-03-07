@@ -11,10 +11,11 @@
  */
 
 const selectAddOptions = (select, elements, position) => {
-	elements.forEach(([value, text, toDataSet], i) => {
+	elements.forEach(([value, text, toDataSet, selected], i) => {
 		const opt = document.createElement('option');
 		opt.value = String(value);
 		opt.text = String(text);
+		opt.selected = selected;
 		select.options.add(opt, i + position - 1);
 
 		// 1.
