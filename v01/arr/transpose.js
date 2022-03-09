@@ -18,13 +18,12 @@ const transpose = horArr =>
  * @returns {array[]}
  */
 
-function transpose2(matrix) {
-	return matrix.reduce(
+const transpose2 = matrix =>
+	matrix.reduce(
 		(prev, next) =>
 			next.map((item, i) => (prev[i] || []).concat(next[i])),
 		[]
 	);
-}
 
 export { transpose, transpose2 };
 
