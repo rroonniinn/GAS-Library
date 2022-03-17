@@ -20,8 +20,6 @@ const removeRowsFromSheet = (
 	const maxRow = sheet.getMaxRows();
 	const deleteHowMany = maxRow - frozenRows - howManyStays;
 
-	console.log('deleteHowMany', deleteHowMany);
-
 	if (deleteHowMany > 0) {
 		sheet.deleteRows(deleteFrom, deleteHowMany);
 	}

@@ -3,7 +3,7 @@
  * wypełniona wskazaną wartością. Jeśłi wartość nie podana, wtedy
  * wypełnieniem jest `null`. Jeśli wartość `len` nie podana - wtedy
  * zwraca pustą tablicę. Można swobodnie przekazać jako `val` inną
- * tablicęd.
+ * tablicę.
  *
  * @example
  * createArrOfLen(0); // -> []

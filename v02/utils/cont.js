@@ -1,4 +1,3 @@
-
 /**
  * Specyficzna funkcja używana w FP. Sprawdza czy wartość otrzymana
  * z poprzedniej funkcji jest truthy. Jeśli tak, to wykonuje funkcję
@@ -6,7 +5,7 @@
  * tylko z wartościami będącymi rezultatami customReturn (./customReturn)
  * @typedef {import('./customReturn').UltimateReturn} UltimateReturn
  * @param {Function} func Funkcja mająca się wykonać jeśli wartość
- * przekazana ma wartośc true w continueChain
+ * przekazana ma wartość true w continueChain
  * @returns {(val: UltimateReturn) => Function}
  */
 
