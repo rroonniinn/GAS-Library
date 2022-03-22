@@ -19,7 +19,7 @@ import { getSpreadsheet } from './getSpreadsheet';
 /**
  * Kopiuje arkusze które pasują do przekazanego callbacku z jednego
  * arkusza do drugiego. Nazwy pozostają takie same, chyba że już istnieje
- * taki arkusz - wtedy dokleja info 'Copy'. Jeśli arkusze były uktyte w
+ * taki arkusz - wtedy dokleja info 'Copy'. Jeśli arkusze były ukryty w
  * źródłowym pliku w nowym zostaną 'odkryte'
  *
  * @param {string|Spreadsheet|File} source Obiekt, id lub url

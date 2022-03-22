@@ -1,7 +1,7 @@
 /* eslint-disable max-params */
 
 /**
- * Kopiuje wkazany plik (ID) do wskazanego folderu jednocześnie zmienijąc mu nazwę.
+ * Kopiuje wskazany plik (ID) do wskazanego folderu jednocześnie zmieniając mu nazwę.
  * Zwraca id nowo utworzonego pliku
  *
  * @memberof Lib_Gas

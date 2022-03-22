@@ -3,6 +3,7 @@
  * Uwaga, zwraca obiekt folderu tylko pierwszego znalezionego folderu rodzica
  * (może być wiele)
  * @param {GoogleAppsScript.Spreadsheet.Spreadsheet} spreadsheet
+ * @returns {GoogleAppsScript.Drive.Folder}
  */
 
 const getContainingFolder = spreadsheet => {

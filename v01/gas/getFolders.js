@@ -4,9 +4,9 @@
  * @memberof Lib_Gas
  *
  * @param {string} id ID folderu
- * @param {string} [search] Querry do wyszukiwania folderów
+ * @param {string} [search] Query do wyszukiwania folderów
  * np. <tt>'title contains "Work"'</tt>. Jeśli jest przekazany to funkcja
- * zwraca tylko foldery spełniające warunek zawarty w querry.
+ * zwraca tylko foldery spełniające warunek zawarty w query.
  * Jeśli brak, to funkcja zwraca wszystkie foldery.
  * @returns {array} Tablica folderów
  */
