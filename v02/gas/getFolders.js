@@ -3,15 +3,16 @@ import { getFolder } from './getFolder';
 /**
  * Zwraca tablicę folderów znajdujących się ze wskazanym folderze
  * @param {string|GoogleAppsScript.Drive.Folder} folder ID, URL lub Folder
- * @param {string} [search] Opcjonalne Querry do wyszukiwania plików
+ * @param {string} [search] Opcjonalne Query do wyszukiwania plików
  * np. <tt>'title contains "__MACOSX"'</tt>. Dokumentacja do query
  * znajduje się tu: https://developers.google.com/drive/api/v2/ref-search-terms
  * Jeśli jest przekazany to funkcja
- * zwraca tylko pliki spełniające warunek zawarty w querry.
+ * zwraca tylko pliki spełniające warunek zawarty w query.
  * Jeśli brak, to funkcja zwraca wszystkie pliki z katalogu.
  * @returns {GoogleAppsScript.Drive.Folder[]} Tablica folderów
  */
-const getFolders = (folder, search) => {
+
+export const getFolders = (folder, search) => {
 	const rootFolder = getFolder(folder);
 
 	const files = !search
@@ -25,4 +26,3 @@ const getFolders = (folder, search) => {
 
 	return arr;
 };
-export { getFolders };

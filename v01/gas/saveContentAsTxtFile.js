@@ -8,9 +8,14 @@ import { addFileToFolder } from './addFileToFolder';
  * @param {string} content Zawartość pliku
  */
 const saveContentAsTxtFile = (fileName, folder, content) => {
-	const file = DriveApp.createFile(fileName, content, MimeType.PLAIN_TEXT);
+	const file = DriveApp.createFile(
+		fileName,
+		content,
+		// @ts-ignore
+		MimeType.PLAIN_TEXT
+	);
 	addFileToFolder(folder, file.getId());
-	DriveApp.removeFile(file); // usuwa z Driva
+	DriveApp.removeFile(file); // usuwa z Drive-a
 };
 
 export { saveContentAsTxtFile };

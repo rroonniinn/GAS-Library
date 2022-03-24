@@ -7,7 +7,6 @@ import { moveFiles } from '../../v01/gas/moveFiles';
 
 /**
  * Zapisuje na Drive plik JSON z danymi ze wskazanego arkusza
- *
  * @param {string} fileName Docelowa nazwa pliku json
  * @param {string} folderId Id folderu w którym ten plik ma wylądować
  * @param {string} srcSheetName Nazwa arkusza z danymi
