@@ -28,4 +28,5 @@ const getFiles = (folder, search) => {
 	console.log(`-- Files number: ${arr.length}`);
 	return arr;
 };
+
 export { getFiles };
