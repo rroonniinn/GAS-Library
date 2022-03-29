@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-params */
 import { addFileToFolder } from './addFileToFolder';
-import { removeFileFromFolder } from './removeFileFromFolder';
-import { removeFileFromRoot } from './removeFileFromRoot';
 
 /**
  * Przenosi pliki do wskazanego folderu (usuwając z folderu
@@ -18,9 +16,9 @@ const moveFiles = (files, targetFolder, existingFolder = null) => {
 	files.forEach(file => {
 		addFileToFolder(targetFolder, file);
 
-		existingFolder
-			? removeFileFromFolder(existingFolder, file)
-			: removeFileFromRoot(file);
+		// existingFolder
+		// 	? removeFileFromFolder(existingFolder, file)
+		// 	: removeFileFromRoot(file);
 	});
 
 	return files;

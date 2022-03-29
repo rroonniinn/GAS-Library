@@ -1,5 +1,6 @@
 /**
- * Usuwa plik z głownego katalogu Drive (plik może nadal znajodwać
+ * FUNKCJA USUNIĘTA PRZEZ GOOGLA! NIE UŻYWAĆ
+ * Usuwa plik z głównego katalogu Drive (plik może nadal znajdować
  * się w innych katalogach)
  *
  * @memberof Lib_Gas

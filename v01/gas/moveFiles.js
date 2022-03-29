@@ -19,11 +19,11 @@ const moveFiles = (files, targetFolderId, existingFolderId = null) => {
 		const fileId = file.getId();
 		addFileToFolder(targetFolderId, fileId);
 
-		if (existingFolderId) {
-			removeFileFromFolder(existingFolderId, fileId);
-		} else {
-			removeFileFromRoot(fileId);
-		}
+		// if (existingFolderId) {
+		// 	removeFileFromFolder(existingFolderId, fileId);
+		// } else {
+		// 	removeFileFromRoot(fileId);
+		// }
 	});
 
 	return files;

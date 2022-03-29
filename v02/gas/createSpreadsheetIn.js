@@ -15,7 +15,7 @@ const createSpreadsheetIn = (parent, newFileName) => {
 	newSpreadsheet.setSpreadsheetLocale('pl');
 
 	addFileToFolder(parent, newFileId);
-	DriveApp.removeFile(DriveApp.getFileById(newFileId));
+	// DriveApp.removeFile(DriveApp.getFileById(newFileId));
 	return newSpreadsheet;
 };
 

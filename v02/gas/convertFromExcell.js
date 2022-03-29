@@ -1,16 +1,14 @@
+import { addFileToFolder } from './addFileToFolder';
 import { getFiles } from './getFiles';
 
-import { addFileToFolder } from './addFileToFolder';
-import { removeFileFromRoot } from '../../v01/gas/removeFileFromRoot';
-
 /**
- * Konwertuje plik excella na Google Sheets w wskazanym katalogu, domyślnie
+ * Konwertuje plik excel-a na Google Sheets w wskazanym katalogu, domyślnie
  * je usuwając (parametr remove za to odpowiada).
- * Wymaga włączenia zaawasowanych metod (Drive)
+ * Wymaga włączenia zaawansowanych metod (Drive)
  * Inspirowane tym: https://www.labnol.org/code/20500-convert-microsoft-excel-xlsx-to-google-spreadsheet
  *
  * @param {string | GoogleAppsScript.Drive.Folder} folder  ID, URL lub Folder
- * @param {boolean} [remove=true] Usuwać czy nie pliki excella
+ * @param {boolean} [remove=true] Usuwać czy nie pliki excel-a
  */
 
 const convertFromExcell = (folder, remove = true) => {
@@ -28,7 +26,7 @@ const convertFromExcell = (folder, remove = true) => {
 		});
 
 		addFileToFolder(folder, newFile.id);
-		removeFileFromRoot(newFile.id);
+		// removeFileFromRoot(newFile.id);
 
 		if (remove) {
 			file.setTrashed(true);

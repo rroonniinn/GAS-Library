@@ -15,7 +15,7 @@ const saveContentAsTxtFile = (fileName, folder, content) => {
 		MimeType.PLAIN_TEXT
 	);
 	addFileToFolder(folder, file.getId());
-	DriveApp.removeFile(file); // usuwa z Drive-a
+	// DriveApp.removeFile(file); // usuwa z Drive-a
 };
 
 export { saveContentAsTxtFile };

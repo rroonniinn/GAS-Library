@@ -8,5 +8,8 @@
 		"latex",
 		"plaintext",
 		"javascript"
+	],
+	"spellright.ignoreFiles": [
+		"v02/gas/convertFromExcell.js"
 	]
 }

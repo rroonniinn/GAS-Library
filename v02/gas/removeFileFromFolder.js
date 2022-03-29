@@ -1,7 +1,8 @@
-import { getFolder } from './getFolder';
 import { getFile } from './getFile';
+import { getFolder } from './getFolder';
 
 /**
+ * FUNKCJA USUNIĘTA PRZEZ GOOGLA! NIE UŻYWAĆ
  * Usuwa plik z katalogu (plik może nadal znajdować
  * się w innych katalogach)
  * @param {string|GoogleAppsScript.Drive.Folder} folder ID, URL lub Folder katalogu z którego ma być usunięty plik

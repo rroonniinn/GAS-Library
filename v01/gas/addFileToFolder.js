@@ -7,7 +7,8 @@
  */
 
 const addFileToFolder = (folderId, fileId) => {
-	DriveApp.getFolderById(folderId).addFile(DriveApp.getFileById(fileId));
+	// @ts-ignore
+	DriveApp.getFolderById(folderId).moveTo(DriveApp.getFileById(fileId));
 };
 
 export { addFileToFolder };
