@@ -11,20 +11,23 @@
  */
 
 const selectAddOptions = (select, elements, position) => {
-	elements.forEach(([value, text, toDataSet, selected], i) => {
-		const opt = document.createElement('option');
-		opt.value = String(value);
-		opt.text = String(text);
-		opt.selected = selected;
-		select.options.add(opt, i + position - 1);
+	elements.forEach(
+		([value, text, toDataSet, isSelected, isDisabled], i) => {
+			const opt = document.createElement('option');
+			opt.value = String(value);
+			opt.text = String(text);
+			opt.selected = isSelected;
+			opt.disabled = isDisabled;
+			select.options.add(opt, i + position - 1);
 
-		// 1.
-		if (toDataSet) {
-			select.options[
-				i + position - 1
-			].dataset.custom = JSON.stringify(toDataSet);
+			// 1.
+			if (toDataSet) {
+				select.options[
+					i + position - 1
+				].dataset.custom = JSON.stringify(toDataSet);
+			}
 		}
-	});
+	);
 };
 
 export { selectAddOptions };
