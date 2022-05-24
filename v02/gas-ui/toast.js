@@ -1,5 +1,5 @@
 /**
- * Wyświetla toasta :)
+ * Wyświetla toast-a :)
  *
  * @param {String} msg Wiadomość
  * @param {String} [tittle='Alert'] Opcjonalny tytuł
